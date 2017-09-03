@@ -1,5 +1,7 @@
 <view  class='main' wx:for="{{lists}}" wx:for-index="index" wx:key="id">
-  <view class='list'>
+
+ <navigator url="../talk/talk">
+       <view class='list'>
     <view wx:if="{{item.state==1}}">
       <view class='circle'></view>  
     </view>
@@ -14,4 +16,6 @@
         <image src='../../image/del.png' class='del_img'></image>
     </view> 
   </view>
+  </navigator>
+  
 </view>

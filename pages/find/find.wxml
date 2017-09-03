@@ -3,16 +3,18 @@
   <input type='text' placeholder="搜索"class='seekInp'></input>
 </view>
 <view>
+<navigator url="../creation/creation">
   <view class='add'>
-  <view class='add_content'>
-    <image src='../../image/add.png' class='add_img'></image>
-    <text class='add_msg'>创建一个新的聊天室</text>
-    <image src='../../image/path.png' class='path_img'></image>
+    <view class='add_content'>
+      <image src='../../image/add.png' class='add_img'></image>
+      <text class='add_msg'>创建一个新的聊天室</text>
+      <image src='../../image/path.png' class='path_img'></image>
+    </view>  
   </view>
-    
-  </view>
+  </navigator>
 </view>
 <view  class='main' wx:for="{{lists}}" wx:for-index="index" wx:key="id">
+<navigator url="../talk/talk">
   <view class='list'>
     <view wx:if="{{item.state==1}}">
       <view class='circle'></view>  
@@ -29,4 +31,5 @@
         <view class='list_r'>＜100米 </view>
     
   </view>
+</navigator>
 </view>

@@ -8,4 +8,6 @@ page{background: #f0f0f0;}
 .sel_box{margin-top: 30rpx;}
 .btn{width: 690rpx;height: 88rpx;margin-top: 30rpx; font-size: 36rpx;}
 .colors{background-color:#94db93; color: #ffffff;}
+.set_imgs{width: 19rpx;height: 31rpx;margin: 30rpx 25rpx;}
 .btn_hover{background-color: #008B00}
+.fr{float: right;}

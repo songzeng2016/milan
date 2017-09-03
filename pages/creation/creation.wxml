@@ -1,7 +1,12 @@
 <!--creation.wxml-->
 <view class="classname">
   <input class="chat_name" type="text" placeholder="聊天室名称" placeholder-style='color:#000000'/>
-  <view class="chat_name chat_add" hover-class='view_hover'>聊天室位置  <text class='add_for'>></text></view>
+  <view class="chat_name chat_add" hover-class='view_hover'>
+    <text> 聊天室位置</text>
+    <image src='../../image/mine_path.png' class='set_imgs fr'></image>
+
+  </view>
+ 
 </view>
 <view class='bottom'>
   <view class='hint'>发布包含时政、盗版、低俗、色情、暴力、引诱等内容，
