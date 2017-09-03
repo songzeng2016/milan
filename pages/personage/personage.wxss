@@ -1,0 +1,16 @@
+page{background: #ebebeb;}
+.userinfo {height: 165rpx;background: #fff;margin-top: 30rpx; }
+.userinfo-avatar { width: 128rpx;height: 128rpx;margin: 20rpx;}
+.userinfo-nickname {height: 100rpx; color: #aaa;vertical-align: middle; display: inline-block;padding-bottom: 100rpx;}
+.usermotto { margin-top: 40rpx;background: #fff;height: 100rpx;font-size: 30rpx;}
+.mine_meg{margin: 200rpx 0; }
+.text_name{font-size: 32rpx;color: #000000;height: 60rpx;line-height: 60rpx;margin-top: 30rpx;}
+.text_msg{font-size: 26rpx;color: #a9a9a9;height: 60rpx;line-height: 60rpx; overflow:hidden;text-overflow:ellipsis;white-space:nowrap; }
+.set_font{font-size: 30rpx;line-height: 100rpx;display: inline-block;}
+.addr{display: inline-block;margin: 0 50rpx 0 30rpx; }
+.btn{width: 690rpx;height: 88rpx;margin-top: 30rpx; font-size: 36rpx;}
+.colors{background-color:#008B00; color: #ffffff;}
+.btn_hover{background-color: #94db93}
+.fr{float: right;}
+.fl{float: left;}
+.disply{display: inline-block;}

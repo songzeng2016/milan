@@ -5,7 +5,9 @@
     "pages/find/find",
     "pages/mine/mine",
     "pages/index/index",
-    "pages/logs/logs"
+    "pages/logs/logs",
+    "pages/personage/personage",
+    "pages/report/report"
   ],
   "window": {
     "backgroundTextStyle": "light",
