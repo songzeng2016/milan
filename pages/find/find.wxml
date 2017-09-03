@@ -1,0 +1,32 @@
+<view class="top">
+  <icon class="seekIcon" type="search" size="14"></icon>
+  <input type='text' placeholder="搜索"class='seekInp'></input>
+</view>
+<view>
+  <view class='add'>
+  <view class='add_content'>
+    <image src='../../image/add.png' class='add_img'></image>
+    <text class='add_msg'>创建一个新的聊天室</text>
+    <image src='../../image/path.png' class='path_img'></image>
+  </view>
+    
+  </view>
+</view>
+<view  class='main' wx:for="{{lists}}" wx:for-index="index" wx:key="id">
+  <view class='list'>
+    <view wx:if="{{item.state==1}}">
+      <view class='circle'></view>  
+    </view>
+    
+    <image src='{{item.imgurl}}' class='list_img fl'></image>
+    <view class='fl list_msg'>
+        <view class='text_name'>{{item.name}}({{item.num}})</view>
+        <!-- <view class='text_msg '>
+          <view class='flow'>{{item.msg}}</view>
+        </view> -->
+    </view>
+    
+        <view class='list_r'>＜100米 </view>
+    
+  </view>
+</view>

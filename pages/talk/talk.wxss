@@ -1,0 +1,143 @@
+/* pages/talk/talk.wxss */
+
+page, .wrapper {
+    width: 100%;
+    height: 100%;
+}
+
+.wrapper {
+    position: relative;
+    background: #e8e8e8;
+}
+
+.info {
+    position: fixed;
+    top: 20rpx;
+    right: 0;
+    width: 100rpx;
+    height: 50rpx;
+    padding: 7rpx 16rpx;
+    border-radius: 10rpx 0 0 10rpx;
+    background: white;
+}
+
+.info image {
+    width: 57rpx;
+    height: 40rpx;
+}
+
+.list-wrapper {
+    width: 100%;
+    padding: 18rpx;
+}
+
+.list {
+    display: flex;
+    width: 100%;
+    margin: 23rpx 0;
+    clear: both;
+}
+
+.list image, .list video {
+    width: 273rpx;
+    border-radius: 10rpx;
+}
+
+.list video {
+    height: 156rpx;
+}
+
+.list image {
+    height: 128rpx;
+}
+
+.message {
+    border-radius: 10rpx;
+}
+
+.message-list {
+    justify-content: center;
+    padding: 0 15rpx;
+}
+
+.my-list {
+    justify-content: flex-end;
+}
+
+.message-list .message {
+    padding: 10rpx 14rpx;
+    background: #ccc;
+    font-size: 19rpx;
+    color: #fff;
+    text-align: center;
+}
+
+.my-list .message, .other-list .message {
+    height: 75rpx;
+    padding: 0 19rpx;
+    line-height: 75rpx;
+    font-size: 30rpx;
+    color: #000;
+}
+
+.my-list .avatar {
+    order: 1;
+}
+
+.my-list .message {
+    margin-right: 17rpx;
+    background: #a0e75a;
+}
+
+.other-list .message {
+    background: #fff;
+}
+
+.other-info {
+    display: flex;
+    flex-direction: column;
+    margin-left: 17rpx;
+}
+
+.other-info .name {
+    margin-bottom: 9rpx;
+    font-size: 20rpx;
+    color: #666;
+}
+
+.avatar {
+    width: 75rpx;
+    height: 75rpx;
+    background: #448aca;
+}
+
+/* 输入区 */
+
+.panel {
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    background: #f7f7fa;
+}
+
+.operation {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    height: 98rpx;
+    padding: 17rpx 12rpx;
+}
+
+.operation image {
+    width: 53rpx;
+    height: 53rpx;
+    margin: 0 10rpx;
+}
+
+.operation input {
+    width: 530rpx;
+    height: 60rpx;
+    border-radius: 10rpx;
+    background: #fff;
+}

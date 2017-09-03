@@ -1,0 +1,11 @@
+/* creation.wxss */
+page{background: #f0f0f0;}
+.chat_name{height: 90rpx;width: 100%;background: #ffffff;margin: 40rpx 0; padding: 0 30rpx; border-top: solid 2rpx #c7c7c7; border-bottom: solid 2rpx #c7c7c7; font-size: 30rpx;}
+.chat_add{line-height: 90rpx;}
+.add_for{display: inline-block; float:right;padding-right: 50rpx;color: #000000;}
+.view_hover{background-color: #E5E5E5;}
+.bottom{padding: 30rpx;font-size: 26rpx;color: #999999;line-height: 50rpx;}
+.sel_box{margin-top: 30rpx;}
+.btn{width: 690rpx;height: 88rpx;margin-top: 30rpx; font-size: 36rpx;}
+.colors{background-color:#94db93; color: #ffffff;}
+.btn_hover{background-color: #008B00}

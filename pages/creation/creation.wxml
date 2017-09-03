@@ -1,0 +1,14 @@
+<!--creation.wxml-->
+<view class="classname">
+  <input class="chat_name" type="text" placeholder="聊天室名称" placeholder-style='color:#000000'/>
+  <view class="chat_name chat_add" hover-class='view_hover'>聊天室位置  <text class='add_for'>></text></view>
+</view>
+<view class='bottom'>
+  <view class='hint'>发布包含时政、盗版、低俗、色情、暴力、引诱等内容，
+将被封停聊天室和账号。</view>
+  <checkbox class='sel_box'>我已阅读并同意《XXXX》
+</checkbox>
+</view> 
+<button hover-class='btn_hover' class='btn colors' >确定</button>
+<button class='btn'>取消</button>
+
