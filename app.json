@@ -22,19 +22,19 @@
         "pagePath": "pages/index/index",
         "text": "附近",
         "iconPath": "image/index.png",
-        "selectedIconPath": "image/index.png"
+        "selectedIconPath": "image/indexing.png"
       },
       {
         "pagePath": "pages/find/find",
         "text": "发现",
-        "iconPath": "image/finding.png",
+        "iconPath": "image/find.png",
         "selectedIconPath": "image/finding.png"
       },
       {
         "pagePath": "pages/mine/mine",
         "text": "我的",
         "iconPath": "image/mine.png",
-        "selectedIconPath": "image/mine.png"
+        "selectedIconPath": "image/mineing.png"
       }
     ],
     "backgroundColor": "#fff",
