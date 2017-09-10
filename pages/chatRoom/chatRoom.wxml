@@ -1,39 +1,37 @@
-<view class='top'>  
+<view class='top'>
   <view class='lists display'>
     <view class='list'>
       <image src='../../image/1.jpg' class='list_img'></image>
       <view class="list_name">aaa</view>
-    </view> 
+    </view>
     <view class='list'>
       <image src='../../image/1.jpg' class='list_img'></image>
       <view class="list_name">aaa</view>
     </view>
   </view>
   <view class="display">
-      <image src='../../image/add2.png' class='list_img_add'></image>
-      <!-- <view class="vacancy">111</view> -->
+    <image src='/image/add2.png' class='list_img_add'></image>
+    <!-- <view class="vacancy">111</view> -->
   </view>
-  
-
-    
   <view class="more">聊天室成员列表 ></view>
 </view>
-<view class="empty"></view>
-<view class="bottom">
-  <view class='content'> 
-    <text> 聊天室名称</text>
-     <image src='../../image/mine_path.png' class='set_imgs fr'></image>
-    <text class= "sc_name fr"> 互联网技术讨论群</text>
-   </view>
-   <view class='content'> 
-    <text> 聊天室LOGO</text>
-     <image src='../../image/mine_path.png' class='set_imgs fr'></image>
-   </view>
-   <view class='intro'> 
-    <text class="sc_intro display">聊天室简介</text>
-     <image src='../../image/mine_path.png' class='set_imgs fr'></image>
-     <view class="sc_name sc_intros">这是南京鼓楼饭店</view>
-    </view>
-</view>
-<button hover-class='btn_hover' class='btn colors' >确定</button>
 
+<view class="empty"></view>
+
+<view class="bottom">
+  <view class='content'>
+    <text> 聊天室名称</text>
+    <image src='/image/mine_path.png' class='set_imgs fr'></image>
+    <text class="sc_name fr"> {{roomInfo.chatroom_name}}</text>
+  </view>
+  <view class='content'>
+    <text> 聊天室LOGO</text>
+    <image src='/image/mine_path.png' class='set_imgs fr'></image>
+  </view>
+  <view class='intro'>
+    <text class="sc_intro display">聊天室简介</text>
+    <image src='/image/mine_path.png' class='set_imgs fr'></image>
+    <view class="sc_name sc_intros">{{roomInfo.chatroom_desc}}</view>
+  </view>
+</view>
+<button hover-class='btn_hover' class='btn colors' bindtap='signOutRoom' data-id='{{roomInfo.chatroom_id}}'>退出聊天室</button>

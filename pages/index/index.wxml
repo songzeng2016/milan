@@ -2,18 +2,18 @@
 
  <navigator url="../talk/talk">
        <view class='list'>
-    <view wx:if="{{item.state==1}}">
+    <view wx:if="{{item.ismanage === 1}}">
       <view class='circle'></view>  
     </view>
     
-    <image src='{{item.imgurl}}' class='list_img fl'></image>
+    <image src='{{item.chatroom_logo}}' class='list_img fl'></image>
     <view class='fl list_msg'>
-        <view class='text_name'>{{item.name}}</view>
-        <view class='text_msg '>{{item.msg}}</view>
+        <view class='text_name'>{{item.chatroom_name}}</view>
+        <view class='text_msg '>{{item.chatroom_name}}</view>
     </view>
      <view class='disply fr list_r'>
-        <view>{{item.time}}</view>
-        <image src='../../image/del.png' class='del_img'></image>
+        <view>22:20</view>
+        <image src='/image/del.png' class='del_img' catchtap='deleteChatRoom' data-id='{{item.id}}'></image>
     </view> 
   </view>
   </navigator>

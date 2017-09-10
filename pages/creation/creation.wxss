@@ -1,6 +1,6 @@
 /* creation.wxss */
 page{background: #f0f0f0;}
-.chat_name{height: 90rpx;width: 100%;background: #ffffff;margin: 40rpx 0; padding: 0 30rpx; border-top: solid 2rpx #c7c7c7; border-bottom: solid 2rpx #c7c7c7; font-size: 30rpx;}
+.chat_name{height: 90rpx;width: 100%;background: #ffffff;margin: 40rpx 0; padding: 0 30rpx; box-sizing: border-box; border-top: solid 2rpx #c7c7c7; border-bottom: solid 2rpx #c7c7c7; font-size: 30rpx;}
 .chat_add{line-height: 90rpx;}
 .add_for{display: inline-block; float:right;padding-right: 50rpx;color: #000000;}
 .view_hover{background-color: #E5E5E5;}

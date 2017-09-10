@@ -1,20 +1,29 @@
 //app.js
-
 import wc from '/utils/util.js'
 
 App({
   onLaunch: function () {
+    const that = this
     // 展示本地存储能力
     var logs = wx.getStorageSync('logs') || []
     logs.unshift(Date.now())
     wx.setStorageSync('logs', logs)
 
-    // 登录
+    // 登录 获取 openId
     wx.login({
       success: res => {
         // 发送 res.code 到后台换取 openId, sessionKey, unionId
+        let data = {
+          Action: 'GetWeiXinOpenID',
+          loginCode: res.code
+        }
+
+        that.wc.get(data, (json) => {
+          console.log(json)
+        })
       }
     })
+
     // 获取用户信息
     wx.getSetting({
       success: res => {
@@ -39,5 +48,6 @@ App({
   globalData: {
     userInfo: null
   },
-  wc: new wc()
+  wc: new wc(),
+  openId: 1
 })

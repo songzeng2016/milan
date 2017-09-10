@@ -1,7 +1,7 @@
 // pages/find/find.js
 const app = getApp()
-const { wc } = app
-const { data, code, success } = wc
+const { wc, openId } = app
+const { data, isSuccess, success } = wc
 
 Page({
 
@@ -19,19 +19,47 @@ Page({
     ],
   },
 
-  /**
-   * 生命周期函数--监听页面加载
-   */
-  onLoad: function (options) {
-    let data = {
-      Action: 'GetChatroomList',
+  // 删除聊天室
+  deleteChatRoom: function (e) {
+    console.log(e.currentTarget.dataset.id)
+    const that = this
+    let getData = {
+      Action: 'DoDelUserChatroom',
+      OpenID: openId,
+      ID: e.currentTarget.dataset.id
+    }
+
+    wc.get(getData, (json) => {
+      if (json[isSuccess] === success) {
+        wc.showToast(['删除成功'])
+      }
+    }, true)
+  },
+
+  // 获取聊天室列表
+  getLists: function () {
+    const that = this
+    let getData = {
+      Action: 'GetUserChatroomList',
+      OpenId: openId,
       pageSize: 20,
       pageIndex: 1
     }
 
-    wc.get(data, (json) => {
-
+    wc.get(getData, (json) => {
+      if (json[isSuccess] === success) {
+        that.setData({
+          lists: json[data]
+        })
+      }
     })
+  },
+
+  /**
+   * 生命周期函数--监听页面加载
+   */
+  onLoad: function (options) {
+    // this.getLists()
   },
 
   /**
@@ -45,7 +73,7 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-
+    this.getLists()
   },
 
   /**

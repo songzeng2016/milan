@@ -1,30 +1,31 @@
 // 定义常量
 const IMGURL = 'https://sp.yangchengtech.com'
 const HOST = `${IMGURL}/milian/Handler/Handler.ashx`
-const [DATA, CODE, SUCCESSCODE, MESSAGE] = ['data', 'returnCode', '10000', 'returnMsg']
+const [DATA, IsSuccess, SUCCESS, MESSAGE] = ['Data', 'IsSuccess', 'true', 'returnMsg']
 
 class wc {
   constructor() {
     this.host = HOST
     this.imgUrl = IMGURL
     this.data = DATA
-    this.code = CODE
-    this.success = SUCCESSCODE
+    this.isSuccess = IsSuccess
+    this.success = SUCCESS
     this.message = MESSAGE
   }
 
-  get(data, success) {
-    // this.showLoading()
+  get(data, successed, showLoading) {
+    showLoading = showLoading || false
+    showLoading && this.showLoading()
     wx.request({
       url: this.host,
       data: data || {},
       success: (res) => {
         // this.hideLoding()
-        typeof (success) === 'function' && success(res.data)
+        typeof (successed) === 'function' && successed(res.data)
       },
       complete: (res) => {
-        // if (res.data[this.code] === this.success) {
-        //   this.hideLoding()
+        // if (res.data[this.isSuccess] === this.success) {
+        //   showLoading && this.hideLoding()
         // }
 
         // if (res.data[this.code] !== this.success && res.data[this.code] !== parseInt(this.success)) {
