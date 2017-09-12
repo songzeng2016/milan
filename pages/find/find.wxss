@@ -11,7 +11,7 @@
 .text_name{font-size: 32rpx;color: #000000;height: 50rpx;line-height: 50rpx;}
 .text_msg{font-size: 26rpx;color: #a9a9a9;height: 40rpx;line-height: 40rpx;  }
 .flow{overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
-.list_msg{margin:35rpx 20rpx; width: 480rpx; }
+.list_msg{margin:35rpx 20rpx; width: 470rpx; }
 
 .list_r{ padding-top: 45rpx; font-size: 22rpx;color: #999999;}
 .circle{width: 20rpx;height: 20rpx;background-color: red; border-radius: 50%;position: absolute;left: 100rpx;top: 10rpx;}

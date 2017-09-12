@@ -1,47 +1,47 @@
 <!--pages/talk/talk.wxml-->
 <view class='wrapper'>
 
-    <!-- 群信息 -->
-    <view class='info' bindtap='navToChatRoom' data-id='{{id}}'>
-        <image src='/image/contact1.png'></image>
-    </view>
+  <!-- 群信息 -->
+  <view class='info' bindtap='navToChatRoom' data-id='{{id}}'>
+    <image src='/image/contact1.png'></image>
+  </view>
 
-    <!-- 聊天列表 -->
-    <view class='list-wrapper'>
-        <block wx:for='{{talk}}' wx:key='this'>
+  <!-- 聊天列表 -->
+  <view class='list-wrapper'>
+    <block wx:for='{{talk}}' wx:key='this'>
 
-            <!-- 提示消息 -->
-            <view wx:if='{{item.mType === "message"}}' class='list message-list'>
-                <text class='message'>{{item.message}}</text>
-            </view>
+      <!-- 提示消息 -->
+      <view wx:if='{{item.mType === "message"}}' class='list message-list'>
+        <text class='message'>{{item.message}}</text>
+      </view>
 
-            <!-- 我的聊天记录 -->
-            <view wx:elif='{{item.isMe}}' class='list my-list'>
-                <view class='avatar'></view>
-                <text class='message'>{{item.message}}</text>
-            </view>
+      <!-- 我的聊天记录 -->
+      <view wx:elif='{{item.isMe}}' class='list my-list'>
+        <view class='avatar' bindtap='navToPersonage' data-open-id='{{item.openId}}'></view>
+        <text class='message'>{{item.message}}</text>
+      </view>
 
-            <!-- 别人的聊天记录 -->
-            <view wx:else class='list other-list'>
-                <view class='avatar'></view>
-                <view class='other-info'>
-                    <text class='name'>{{item.name}}</text>
-                    <text wx:if='{{item.mType === "text"}}' class='message'>{{item.message}}</text>
-                    <image wx:elif='{{item.mType === "img"}}' src='{{item.src}}'></image>
-                    <video wx:elif='{{item.mType === "video"}}'></video>
-                </view>
-            </view>
-
-        </block>
-    </view>
-
-    <!-- 键盘区域 -->
-    <view class='panel'>
-        <view class='operation'>
-            <image src='/image/record1.png'></image>
-            <input></input>
-            <image src='/image/emoj1.png'></image>
-            <image src='/image/add1.png'></image>
+      <!-- 别人的聊天记录 -->
+      <view wx:else class='list other-list'>
+        <view class='avatar' bindtap='navToPersonage' data-open-id='{{item.openId}}'></view>
+        <view class='other-info'>
+          <text class='name'>{{item.name}}</text>
+          <text wx:if='{{item.mType === "text"}}' class='message'>{{item.message}}</text>
+          <image wx:elif='{{item.mType === "img"}}' src='{{item.src}}'></image>
+          <video wx:elif='{{item.mType === "video"}}'></video>
         </view>
+      </view>
+
+    </block>
+  </view>
+
+  <!-- 键盘区域 -->
+  <view class='panel'>
+    <view class='operation'>
+      <image src='/image/record1.png'></image>
+      <input></input>
+      <image src='/image/emoj1.png'></image>
+      <image src='/image/add1.png'></image>
     </view>
+  </view>
 </view>

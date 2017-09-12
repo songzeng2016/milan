@@ -2,9 +2,9 @@
   <view class="userinfo">
     <button wx:if="{{!hasUserInfo && canIUse}}" class="mine_meg" open-type="getUserInfo" bindgetuserinfo="getUserInfo"> 获取头像昵称 </button>
     <block wx:else>
-      <image src='../../image/1.jpg' class='userinfo-avatar fl'></image>
+      <image src='{{userInfo.headimgurl}}' class='userinfo-avatar fl'></image>
       <view class='fl list_msg'>
-          <view class='text_name'>小帅哥</view>
+          <view class='text_name'>{{userInfo.nickname}}</view>
           <view class='text_msg '>微信号：123fty</view>
       </view>
        
@@ -12,7 +12,7 @@
   </view>
   <view class="usermotto">
       <text class="addr">地区:</text>
-     <text class="set_font">毛里求斯</text>
+     <text class="set_font">{{userInfo.province}} {{userInfo.city}}</text>
   </view>
   <button hover-class='btn_hover' class='btn colors' >私聊</button>
   <button class='btn'>举报</button>

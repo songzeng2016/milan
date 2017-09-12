@@ -21,6 +21,12 @@ Page({
     wc.navigateTo('/pages/chatRoom/chatRoom?id=' + data.id)
   },
 
+  // 跳转到个人资料页面
+  navToPersonage: function (e) {
+    let data = e.currentTarget.dataset
+    wc.navigateTo('/pages/personage/personage?openId=' + openId)
+  },
+
   /**
    * 生命周期函数--监听页面加载
    */
