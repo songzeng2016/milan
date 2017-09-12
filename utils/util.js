@@ -55,6 +55,10 @@ class wc {
     wx.navigateTo({ url })
   }
 
+  switchTab(url) {
+    wx.switchTab({ url })
+  }
+
   navigateBack(delta) {
     wx.navigateBack({
       delta: delta || 1

@@ -37,6 +37,9 @@ Page({
     wc.get(data, (json) => {
       if (json[isSuccess] === success) {
         wc.showToast(['创建成功'])
+        setTimeout(() => {
+          wc.navigateBack()
+        }, 2000)
       }
     }, true)
   },

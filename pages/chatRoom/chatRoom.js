@@ -24,6 +24,9 @@ Page({
     wc.get(getData, (json) => {
       if (json[isSuccess] === success) {
         wc.showToast(['退出成功'])
+        setTimeout(() => {
+          wc.switchTab('/pages/index/index')
+        }, 2000)
       }
     }, true)
   },
