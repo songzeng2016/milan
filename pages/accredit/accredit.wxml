@@ -1,7 +1,0 @@
-<view class="hint_content"> 
- <view >
-    <image class="hint_logo" src="../../image/icon_fail.png"></image>
-    <view class="hint_size">小程序需要授权后才可以使用哦~</view>
-  </view>
-</view>
-<button class="hint_btn" bindtap="goDetail" hover-class="informBtnActs" hover>去授权</button>

@@ -1,4 +1,0 @@
-/*顶部切换组件样式*/
-.switch_wrap{ height: 88rpx; background: #fff;display: flex; display: -webkit-flex; color: #353535; font-size: 30rpx;box-shadow:0 2rpx 10rpx 0 rgba(0,0,0,0.15);position: fixed;width: 100%;left: 0; top: 0; z-index: 10;}
-.switch_selItemAct,.switch_selItem{ flex: 1;-webkit-flex:1;text-align: center; line-height:88rpx; height: 88rpx;  box-sizing: border-box; }
-.switch_selItemAct{ color: #09bb07; border-bottom: 3rpx solid #09bb07;}

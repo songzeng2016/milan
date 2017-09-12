@@ -1,105 +1,15 @@
-/* app.wxss */
+/**app.wxss**/
 
+.container {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    padding: 200rpx 0;
+    box-sizing: border-box;
+}
 
-/*  setction 1  样式重置 -------------------------------------------------------------------*/
-image::after{ border: none;}
-button::after{ border: none;}
-button{ padding: 0; text-align: center; background-color: #fff; box-sizing: border-box; -webkit-box-sizing: border-box;}
-
-
-/*   section 2 公用样式 --------------------------------------------------------------------*/
-/* 按钮样式  */
-.btn{display: inline-block; height: 88rpx; line-height: 88rpx;font-size: 30rpx; border-radius: 4rpx; color: #fff;  box-shadow:0px 2px 8px 1px rgba(9,166,7,0.25);padding: 0 40rpx; box-sizing: border-box; -webkit-box-sizing: border-box; }
-.btn_block{ display: block; width: 100%; }
-.btn_primary{background: #09bb07;}
-.btn_primaryAct{background:#0ab007;}
-.btn_danger{ background: #ff3333}
-.btn_warning{ background: #ff9500;}
-
-.btn_sm{ height: 60rpx; line-height: 60rpx; padding:0 25rpx; }
-.btn_xs{ }
-
-/* 字体样式 */
-.FB{ font-weight: bold;}
-
-/* 颜色 */
-.color_theme{ color: #09bb07}   /* 主题颜色 :绿色 */
-.color_important{ color: #000;} 
-.color_primary{ color: #333;}   /* 常规的颜色 */
-.color_sub{ color: #999;}
-.color_danger{color: #ff3333;}  /* 红色的文字 */
-
-/* 布局流相关 定位、弹性盒子 */
-.FL{ float: left;}
-.FR{ float: right;}
-.clear{ clear: both;}
-.clearfix{zoom:1;}  
-.clearfix::after{visibility:hidden;display:block;font-size:0;content:" ";clear:both;height:0;}
-.flex{ display: flex; display: -webkit-flex;}
-.flex_1{ -webkit-box-flex: 1;  -webkit-flex: 1;  flex: 1;}   /* 直接孩子 flex:1 */
-.flexVer{ -webkit-align-items: center;  align-items: center;}  /* 垂直居中 */
-.flexHor{  -webkit-justify-content:space-around;  justify-content:space-around;}  /* 水平居中 */
-.flexJust_bet{ -webkit-box-pack: justify;  -webkit-justify-content: space-between;  -ms-flex-pack:justify ;  justify-content: space-between;}  /*  两端对齐*/
-
-.show{ display: block;}
-.hide{ display: none;}
-
-/* 间距 内边距*/
-.ML10{ margin-left: 10rpx;}.ML20{ margin-left: 20rpx;}.ML30{ margin-left: 30rpx;}.ML40{ margin-left: 40rpx;}
-.MR10{ margin-right: 10rpx;}.MR20{ margin-right: 20rpx;}.MR30{ margin-right: 30rpx;}.MR40{ margin-right: 40rpx;}
-.MT10{ margin-top: 10rpx;}.MT20{ margin-top: 20rpx;}.MT30{ margin-top: 30rpx;}.MT40{ margin-top: 40rpx;}
-.MB10{ margin-bottom: 10rpx;}.MB20{ margin-bottom: 20rpx;}.MB30{ margin-bottom: 30rpx;}.MB40{ margin-bottom: 40rpx;}
-.PL10{padding-left: 10rpx;}.PL20{padding-left: 20rpx;}.PL30{padding-left: 30rpx;}.PL40{padding-left: 40rpx;}
-.PR10{ padding-right: 10rpx;}.PR20{ padding-right: 20rpx;}.PR30{ padding-right: 30rpx;}.PR40{ padding-right: 40rpx;}
-.PT10{ padding-top: 10rpx;}.PT20{ padding-top: 20rpx;}.PT30{ padding-top: 30rpx;}.PT40{ padding-top: 40rpx;}
-.PB10{ padding-bottom: 10rpx;}.PB20{ padding-bottom: 20rpx;}.PB30{ padding-bottom: 10rpx;}.PB40{ padding-bottom: 40rpx;}
-
-
-/*   section 3  页面中的复用率高的样式  -------------------------------------------*/
-/* 返回到首页 */
-.to_index{position: fixed; right: 20rpx; bottom: 100rpx; z-index: 99; opacity: 0.6;}
-.to_indexAct{opacity: 1;}
-.to_indexImg{  width: 219rpx; height: 94rpx;}
-
- /* 列表--已经到底了提示*/
-.to_lower{font-size: 30rpx; color: #969996; text-align: center; height: 40rpx; line-height: 40rpx; padding: 20rpx 0; } 
-/*  列表--数据加载中 提示 */
-.onloadingWrap{ text-align: center;font-size: 28rpx; color: #333; line-height: 40rpx; height:40rpx; padding: 20rpx 0; position: relative;}
-.onloadingImg{ width:40rpx; height: 40rpx;  vertical-align: top; position: relative; top: 0rpx;  }
-/* 列表  管理 圆形发布按钮 */
-.publishBtn{ background: #09bb07; color: #fff; width: 90rpx; height: 90rpx; border-radius: 50%; position: fixed; right: 30rpx; bottom: 90rpx; box-shadow: 0 4rpx 12rpx  rgba(0,0,0,0.3); z-index: 99; font-size: 24rpx; line-height: 90rpx; text-align: center; }
-.publishBtnAct{background:#0ab007}
-
-/* */
-
-
-/*  section 4  组件样式  --------------------------------------------------------*/
-/* 组件前缀：
-    de_ban_       //详情页的轮播 1：1
-    de_comItem_   //详情页的 评论
-    de_sha_       //详情页的 分享
-    de_shaImg_    //详情页分享图片
-
-    sup_item_     //供应 列表
-    pur_item_     //采购 列表
-    act_item_     //活动 列表
-
-    switch_       //顶部的 tab切换（管理页面/查询/发布/排行/…）
-    no_           //列表页没有数据的 提示 （logo+文字提示）
-
-*/
-@import 'components/deBanner/deBanner.wxss';
-@import 'components/deComItem/deComItem.wxss';
-@import 'components/deShare/deShare.wxss';
-@import 'components/deShareImg/deShareImg.wxss';
-
-@import 'components/supItem/supItem.wxss';
-@import 'components/purItem/purItem.wxss';
-@import 'components/actItem/actItem.wxss';
-
-@import 'components/switch/switch.wxss';
-@import 'components/noData/noData.wxss';
-@import 'components/loading/loading.wxss';
-
-
-
+view, text {
+    box-sizing: border-box;
+}

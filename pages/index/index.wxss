@@ -1,11 +1,12 @@
-/* sel */
-.ind_sel{ height: 40px; padding-top:5px; background: #333;display: flex; display: -webkit-flex; color: #fff; font-size: 15px; position: absolute; left: 0; top: 0; width: 100%; z-index: 9;}
-.ind_selLi,.ind_selLiSel{ flex: 1;-webkit-flex:1;text-align: center; margin: 0 10px; line-height:30px; height: 30px; border-radius: 15px; }
-.ind_selLiSel{ background: #09bb07;}
-.ind_mapWrap{ position: absolute; left: 0; top: 0; width: 100%; height: 100%; padding-top: 45px;  box-sizing: border-box; -webkit-box-sizing: border-box;}
-.indmapCon{ width: 100%; height: 100%;  }
-/*  正在加载中 */
-.ind_load{ position: absolute; left: 0; top: 0;  width: 100%; height: 100%; z-index: 9; background: #fff; text-align: center; color: #444; display: table;}
- .ind_loadCon{ display: table-cell; vertical-align: middle; padding-bottom: 40px;}
-.ind_loadTitle{  font-size: 16px; font-weight: bold; line-height: 30px;}
-.ind_loadTxt{ font-size: 12px; }
+
+.list{height: 122rpx;border-bottom: 2rpx solid #eeeeee;padding: 0 30rpx; position: relative;}
+.list_img{height: 90rpx;width: 90rpx;padding-top: 15rpx;}
+.text_name{font-size: 32rpx;color: #000000;height: 50rpx;line-height: 50rpx;}
+.text_msg{font-size: 26rpx;color: #a9a9a9;height: 40rpx;line-height: 40rpx; overflow:hidden;text-overflow:ellipsis;white-space:nowrap; }
+.list_msg{margin:15rpx 20rpx; width: 480rpx; }
+.del_img{width: 26rpx;height: 34rpx;padding:20rpx 0 0 20rpx;}
+.list_r{ padding-top: 15rpx; font-size: 22rpx;color: #999999;}
+.circle{width: 20rpx;height: 20rpx;background-color: red; border-radius: 50%;position: absolute;left: 100rpx;top: 10rpx;}
+.fr{float: right;}
+.fl{float: left;}
+.disply{display: inline-block;}

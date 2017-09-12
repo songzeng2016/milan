@@ -1,101 +1,47 @@
 {
-  "pages":[
+  "pages": [
     "pages/index/index",
-    "pages/queryList/queryList",
-    "pages/publish/publish",
-    "pages/supplySeek/supplySeek",
-    "pages/supplyDetail/supplyDetail",
-    "pages/supplyManage/supplyManage",
-    "pages/supplyNearList/supplyNearList",
-    "pages/purchaseDetail/purchaseDetail",
-    "pages/purchaseManage/purchaseManage",
-    "pages/purchaseNearList/purchaseNearList",
-    "pages/purchaseSeek/purchaseSeek",
+    "pages/talk/talk",
+    "pages/creation/creation",
+    "pages/find/find",
     "pages/mine/mine",
-    "pages/update/update",
-    "pages/purchaseUpdate/purchaseUpdate",
-    "pages/upreport/upreport",
-    "pages/advice/advice",
-    "pages/aboutus/aboutus",
-    
-    "pages/meetlist/meetlist",
-    "pages/meetbook/meetbook",
-    "pages/booklist/booklist",
-    "pages/mybook/mybook",
-   
-    "pages/noticeList/noticeList",
-    "pages/noticeDetail/noticeDetail",
-    
-    "pages/informList/informList",
-    "pages/informDetail/informDetail",
-    "pages/informPublish/informPublish",
-    "pages/informLeaveMsg/informLeaveMsg",
-
-    "pages/bookgoods/bookgoods",
-
-    "pages/sku/sku",
-    
+    "pages/logs/logs",
+    "pages/personage/personage",
     "pages/report/report",
-    "pages/commentList/commentList",
-    "pages/goBack/goBack",
-    "pages/businessCredit/businessCredit",
-    "pages/activityDetail/activityDetail",
-    "pages/activityRelease/activityRelease",
-    "pages/activityUpdate/activityUpdate",
-    "pages/activityList/activityList",
-    "pages/activityJoin/activityJoin",
-    "pages/activityPublish/activityPublish",
-    "pages/activityLocation/activityLocation",
-    "pages/activitySign/activitySign",
-    "pages/activityEnroll/activityEnroll",
-    "pages/activitySignHint/activitySignHint",
-    "pages/activitySignList/activitySignList",
-
-    "pages/rankList/rankList",
-    "pages/rankInstruct/rankInstruct",
-    "pages/serviceProcess/serviceProcess",
-    "pages/accredit/accredit"
-
+    "pages/chatRoom/chatRoom",
+    "pages/synopsis/synopsis",
+    "pages/groupName/groupName"
   ],
-  "window":{
-    "backgroundTextStyle":"dark",
-    "navigationBarBackgroundColor": "#333",
-    "navigationBarTitleText": "网库云采购",
-    "navigationBarTextStyle":"white",
-    "backgroundColor": "#fff",
-    "enablePullDownRefresh": true
+  "window": {
+    "backgroundTextStyle": "light",
+    "navigationBarBackgroundColor": "#393a3f",
+    "navigationBarTitleText": "觅萝",
+    "navigationBarTextStyle": "white"
   },
   "tabBar": {
-   "list": [{
-      "pagePath": "pages/index/index",
-      "text": "附近",
-       "iconPath": "image/nav_ind.png",
-      "selectedIconPath": "image/nav_indAct.png"
-    },{
-      "pagePath": "pages/queryList/queryList",
-      "text": "查询",
-       "iconPath": "image/nav_query.png",
-      "selectedIconPath": "image/nav_queryAct.png"
-    },{
-      "pagePath": "pages/rankList/rankList",
-      "text": "排行榜",
-      "iconPath": "image/nav_rank.png",
-      "selectedIconPath": "image/nav_rankAct.png"
-    },{
-      "pagePath": "pages/publish/publish",
-      "text": "发布",
-       "iconPath": "image/nav_publish.png",
-      "selectedIconPath": "image/nav_publishAct.png"
-    },{
-      "pagePath": "pages/mine/mine",
-      "text": "我的",
-       "iconPath": "image/nav_my.png",
-      "selectedIconPath": "image/nav_myAct.png"
-    }],
-"backgroundColor": "#fff",
-"color": "#807c7a",
-"selectedColor": "#09bb07",
-"borderStyle": "black"
-
+    "list": [
+      {
+        "pagePath": "pages/index/index",
+        "text": "附近",
+        "iconPath": "image/index.png",
+        "selectedIconPath": "image/indexing.png"
+      },
+      {
+        "pagePath": "pages/find/find",
+        "text": "发现",
+        "iconPath": "image/find.png",
+        "selectedIconPath": "image/finding.png"
+      },
+      {
+        "pagePath": "pages/mine/mine",
+        "text": "我的",
+        "iconPath": "image/mine.png",
+        "selectedIconPath": "image/mineing.png"
+      }
+    ],
+    "backgroundColor": "#fff",
+    "color": "#807c7a",
+    "selectedColor": "#09bb07",
+    "borderStyle": "black"
   }
 }

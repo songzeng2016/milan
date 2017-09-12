@@ -1,3 +1,0 @@
-.load_Wrap{ padding-top: 100rpx; text-align: center;}
-.load_img{width: 136rpx; height: 185rpx;}
-.load_txt{font-size: 28rpx;color: #333;text-align: center; line-height: 40rpx; margin-top: -20rpx;}

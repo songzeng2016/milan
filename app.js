@@ -1,157 +1,70 @@
 //app.js
-import { domain } from 'utils/domain';
-import { mapUtil } from 'utils/mapUtil'
-import { validater } from 'utils/validater'
-import { GPS } from 'utils/gps'
-import { formatDate,formatHour,formatWeek,hourCompare ,getDateName} from 'utils/util'
-import {Touches} from './utils/Touches.js'
+import wc from '/utils/util.js'
+
 App({
-  onLaunch: function (e) {
-    this.globalData.shareTicket = e.shareTicket;
-    this.getLoginInfo();
-  },
-  formatWeek : formatWeek,
-  formatHour : formatHour,
-  formatDate : formatDate,
-  hourCompare: hourCompare,
-  getDateName : getDateName,
-  mapUtil: mapUtil,
-  validater: validater,
-  GPS: GPS,
-  globalData:{
-    position: {
-      latitude: null,
-      longitude: null
-    },
-    openGId:'',
-    shareTicket: ''
-  },
-  //2017/5/23增加
-  Touches: new Touches(),
-  getLoginInfo:function(cb){
-    var that = this;
-    var loginKey = wx.getStorageSync('login_key');
-    if(!!loginKey){
-      var userId = wx.getStorageSync('login_key').split("_")[2] || 0;
-      that.collectPhoneInfo(userId);
-      that.shareTicket(userId);
-       wx.request({
-         url: domain + '/login/check',
-          data: {key:loginKey},
-          method: 'GET', 
-          success: function(res){
-            if(res.data.status != 1){//登陆校验失败
-              that.login();
-            }
-          },
-          fail: function() {
-            wx.showToast({
-              title: '登录验证失败!',
-              mask:true,
-              icon: 'loading',
-              duration: 1000
-            });
-            return false; 
-          }
-        });
-    }else{
-      that.login();
-    }
-  },
-  login:function(){
+  onLaunch: function () {
+    const that = this
+    // 展示本地存储能力
+    var logs = wx.getStorageSync('logs') || []
+    logs.unshift(Date.now())
+    wx.setStorageSync('logs', logs)
+
+    // 登录 获取 openId
     wx.login({
-      success: function(res){
-        // success
-        wx.request({
-          url: domain + '/login',
-          data: {code:res.code},
-          method: 'GET', 
-          success: function(res){
-            // success
-            if(res.data.status==1){
-              //保存缓存
-              var loginKey = res.data.value;
-              wx.setStorageSync('login_key', loginKey)
-              var userId = loginKey.split("_")[2] || 0;
-              that.collectPhoneInfo(userId);
-              that.shareTicket(userId);
-            }else{
-               wx.showToast({ //返回状态码不是1，后台报错或者判断问题
-                  title: '登录失败!',
-                  mask:true,
-                  icon: 'loading',
-                  duration: 1000
-                });
-                return false;
-            }
-          },
-          fail: function () {   // 后台登录失败
-             wx.showToast({
-                title: '登陆出错，请重启后尝试!',
-                mask:true,
-                icon: 'loading',
-                duration: 1000
-            });
-            return false;
-          }
-        })
-      },
-      fail: function() {//调用微信登录失败，一般跟网络有关
-        // fail
-        wx.showToast({
-            title: '微信登陆失败，请重启后尝试!',
-            mask:true,
-            icon: 'loading',
-            duration: 1000
-        });
-        return false;
-      }
-    });//用户登录结束
-  },
-  shareTicket(id){
-    var that = this;
-    var shareTicket = that.globalData.shareTicket;
-    if (!shareTicket) {
-      return;
-    }
-    wx.getShareInfo({
-      shareTicket: shareTicket,
-      complete(res) {
-        if (res.errMsg.indexOf("fail") > -1) {
-          return;
+      success: res => {
+        // 发送 res.code 到后台换取 openId, sessionKey, unionId
+        let data = {
+          Action: 'GetWeiXinOpenID',
+          loginCode: res.code
         }
-        var { encryptedData, iv } = res;
-        wx.request({
-          url: domain + '/users/' + id + '/decryptedgroup',
-          data: { encryptedData: encryptedData, iv: iv },
-          success(res) {
-            if (!!res.data.decryptedData) {
-                that.globalData.openGId = res.data.decryptedData.openGId || '';
-            }
-          },
-          fail(res) {
-            console.log("失败了");
-          }
-        });
-      }
-    });
-  },
-  collectPhoneInfo:function(id){//统计用户机型
-    wx.getSystemInfo({
-      success: function(res) {
-        res.userId = id;
-        wx.request({
-          url: domain + '/phoneinfos',
-          data: res,
-          method: 'PUT', 
-          success: function(res){
-            if(res.data.status==1){
-              console.log("update phoneinfo success");
-            }
-          }
+
+        that.wc.get(data, (json) => {
+          wx.setStorageSync('openId', json.result)
+          // that.openId = json.result
         })
       }
     })
-  }
-});
 
+    // 获取用户信息
+    wx.getSetting({
+      success: res => {
+        if (res.authSetting['scope.userInfo']) {
+          // 已经授权，可以直接调用 getUserInfo 获取头像昵称，不会弹框
+          wx.getUserInfo({
+            success: res => {
+              // 可以将 res 发送给后台解码出 unionId
+              this.globalData.userInfo = res.userInfo
+
+              let userInfo = res.userInfo
+              let getData = {
+                Action: 'CheckUser',
+                openid: wx.getStorageSync('openId'),
+                nickName: userInfo.nickName,
+                avatarUrl: userInfo.avatarUrl,
+                gender: userInfo.gender, //性别 0：未知、1：男、2：女
+                province: userInfo.province,
+                city: userInfo.city,
+                country: userInfo.country
+              }
+
+              that.wc.get(getData, (json) => {
+
+              })
+
+              // 由于 getUserInfo 是网络请求，可能会在 Page.onLoad 之后才返回
+              // 所以此处加入 callback 以防止这种情况
+              if (this.userInfoReadyCallback) {
+                this.userInfoReadyCallback(res)
+              }
+            }
+          })
+        }
+      }
+    })
+  },
+  globalData: {
+    userInfo: null
+  },
+  wc: new wc(),
+  openId: 1
+})

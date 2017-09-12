@@ -1,6 +1,0 @@
-.de_shaImg_wrap{ position: fixed; left: 0; top: 0; width: 100%; background: rgba(0,0,0,0.8);  height: 100%; z-index: 99; box-sizing: border-box; -webkit-box-sizing: border-box; padding: 40rpx;} 
-.de_shaImg_con{ height: 100%; box-sizing: border-box; -webkit-box-sizing: border-box;}
-.de_shaImg_img{ display: block; width: 100%; margin-bottom: 40rpx; border-radius: 10rpx; background: #EDEDED; background-image: url(https://p.youpin114.com/image/loading.gif); background-repeat:no-repeat ; background-position-x: center; background-position-y: center;}
-.de_shaImg_txt{ color: #ddd; font-size: 24rpx; text-align: center; line-height: 40rpx; margin-top: 20rpx;}
-.QR_iconClose{ position: fixed; right: 5rpx; top:5rpx; width: 50rpx; height: 50rpx; z-index: 99; padding: 20rpx; }
-.QR_iconCloseImg{ width: 50rpx; height: 50rpx;}

@@ -1,7 +1,0 @@
-.a_content{text-align: center;}
-.a_logo{height: 201rpx;margin-top: 150rpx;width: 322rpx; }
-.a_btn {background-color: #09bb07; width: 380rpx;height: 88rpx;line-height:88rpx;color: #ffffff;box-shadow:0px 2px 8px 1px rgba(9,166,7,0.25);margin-top: 190rpx;}
-.a_size{font-size: 28rpx;color: #333;margin-top: 20rpx;text-align: center; line-height: 40rpx;}
-.a_btnAct{ background: #0ab007; color: #FFFFFF;}
-
-button::after{ border: none;}

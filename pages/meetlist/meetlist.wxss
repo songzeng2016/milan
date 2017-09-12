@@ -1,9 +1,0 @@
-/* pages/meetlist/meetlist.wxss */
-
-.met_my{ height: 56px; background: #f1f2f6; color: #09ba07; text-align:center; font-size: 14px;}
-.met_myImg{ width: 20px; height: 20px; margin: 8px auto 2px;} 
-.met_item{  border-bottom: 1px solid #efefef; }
-.met_liCon{height: 48px; line-height: 48px; width: 100%; text-align: center;position: relative;}
-.met_liTxt{ font-size:14px;  }
-.met_liImg{ width: 7px; height: 14px; position: absolute; right:12px; top: 16px;}
-

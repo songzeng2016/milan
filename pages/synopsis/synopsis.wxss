@@ -1,0 +1,8 @@
+page{background: #ebebeb;margin:  0 auto;}
+.top{font-size: 26rpx;height: 80rpx;line-height: 80rpx; color: #999999; padding-left: 20rpx;}
+.btn{width: 690rpx;height: 88rpx;margin-top: 20rpx; font-size: 36rpx;}
+.colors{background-color:#94db93; color: #ffffff;}
+.btn_hover{background-color: #008B00}
+.fr{float: right;}
+.fl{float: left;}
+.ad_popArea{ width: 100%; height:400rpx;font-size:26rpx;padding: 8rpx; box-sizing: border-box; -webkit-box-sizing: border-box; line-height: 40rpx; color: #333; background: #fff; padding: 20rpx; font-weight: bold;}

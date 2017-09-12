@@ -1,6 +1,0 @@
-/* pages/purchaseNearList/purchaseNearList.wxss */
-.scrollWrap{ height: 100%; position:  absolute; left: 0; top: 0; width: 100%;}
-.scrollCon{ height: 100%;}
-/*采购 列表Begin*/
-.pur_item{ margin: 0 20rpx; padding: 30rpx 0; border-bottom: 1px solid #ebebeb;}
-/*采购 列表 :end*/

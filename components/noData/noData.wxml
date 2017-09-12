@@ -1,5 +1,0 @@
-<template name="noData">
-   <view class="no_noneLogo">
-      <image class="no_noneLogo_img" src="../../image/act_logo.png"></image>
-    </view>
-</template>
