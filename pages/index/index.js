@@ -1,6 +1,7 @@
 // pages/find/find.js
 const app = getApp()
-const { wc, openId } = app
+const { wc } = app
+let { openId } = app
 const { data, isSuccess, success } = wc
 
 Page({
@@ -17,6 +18,11 @@ Page({
       { id: "005", imgurl: "../../image/1.jpg", state: 2, name: '一季花开、一季花落', msg: '爱你、给你我生命所有的美好、然后退场、让万花筒灿烂你的眼瞳。', time: '23:15' },
       { id: "006", imgurl: "../../image/1.jpg", state: 1, name: '一季花开、一季花落', msg: '的思维习惯和行为习惯，从而在自相矛盾的大道理中无法前行。', time: '23:15' }
     ],
+  },
+
+  // 进入聊天室
+  navToTalk: function (e) {
+    wc.navigateTo('/pages/talk/talk')
   },
 
   // 删除聊天室
@@ -59,6 +65,7 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    openId = wx.getStorageSync('openId')
     // this.getLists()
   },
 

@@ -19,7 +19,8 @@ App({
         }
 
         that.wc.get(data, (json) => {
-          console.log(json)
+          wx.setStorageSync('openId', json.result)
+          // that.openId = json.result
         })
       }
     })

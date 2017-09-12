@@ -1,6 +1,7 @@
 // creation.js
 const app = getApp()
-const { wc, openId } = app
+const { wc } = app
+let { openId } = app
 const { data, isSuccess, success } = wc
 
 Page({
@@ -22,6 +23,12 @@ Page({
   // 创建聊天室
   addChatRoom: function () {
     const that = this
+
+    if (!that.data.chatroom_name) {
+      wc.showModal('名称不能为空')
+      return
+    }
+
     let data = wc.extend(that.data, {
       Action: 'AddChatroom',
       OpenID: openId
@@ -38,6 +45,7 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    openId = wx.getStorageSync('openId')
     const that = this
     // 获取 GPS 位置
     wx.getLocation({

@@ -1,6 +1,7 @@
 // pages/chatRoom/chatRoom.js
 const app = getApp()
-const { wc, openId } = app
+const { wc } = app
+let { openId } = app
 const { data, isSuccess, success } = wc
 
 Page({
@@ -31,6 +32,7 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    openId = wx.getStorageSync('openId')
     const that = this
     let getData = {
       Action: 'GetChatroomDetail',

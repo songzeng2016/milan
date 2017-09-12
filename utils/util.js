@@ -35,6 +35,26 @@ class wc {
     })
   }
 
+  setStorage(key, data) {
+    wx.setStorage({
+      key,
+      data,
+    })
+  }
+
+  getStorage(key, successed) {
+    wx.getStorage({
+      key,
+      success: (res) => {
+        typeof (successed) === 'function' && successed(res.data)
+      }
+    })
+  }
+
+  navigateTo(url) {
+    wx.navigateTo({ url })
+  }
+
   navigateBack(delta) {
     wx.navigateBack({
       delta: delta || 1
