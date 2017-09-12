@@ -47,7 +47,9 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-  
+    var updateId = options.id;
+    this.data.updateId = updateId//设置在page里都可以进行调用  
+    console.log(updateId)
   },
 
   /**
