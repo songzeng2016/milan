@@ -16,8 +16,9 @@ Page({
   },
 
   // 跳转到详情页面
-  navToChatRoom: function(e) {
-    wc.navigateTo('/pages/chatRoom/chatRoom')
+  navToChatRoom: function (e) {
+    let data = e.currentTarget.dataset
+    wc.navigateTo('/pages/chatRoom/chatRoom?id=' + data.id)
   },
 
   /**
@@ -25,6 +26,12 @@ Page({
    */
   onLoad: function (options) {
     openId = wx.getStorageSync('openId')
+    const that = this
+    let id = options.id
+
+    that.setData({
+      id
+    })
   },
 
   /**

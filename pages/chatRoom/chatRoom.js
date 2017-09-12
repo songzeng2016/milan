@@ -33,16 +33,29 @@ Page({
    */
   onLoad: function (options) {
     openId = wx.getStorageSync('openId')
+    let id = options.id
     const that = this
     let getData = {
       Action: 'GetChatroomDetail',
-      ID: 6
+      ID: id
     }
 
     wc.get(getData, (json) => {
       if (json[isSuccess] === success) {
         that.setData({
           roomInfo: json[data]
+        })
+      }
+    })
+
+    let getUserData = {
+      Action: 'GetChatroomUsers',
+      ID: 6
+    }
+    wc.get(getUserData, (json) => {
+      if (json[isSuccess] === success) {
+        that.setData({
+          userList: json[data]
         })
       }
     })

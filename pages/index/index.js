@@ -22,7 +22,8 @@ Page({
 
   // 进入聊天室
   navToTalk: function (e) {
-    wc.navigateTo('/pages/talk/talk')
+    let data = e.currentTarget.dataset
+    wc.navigateTo('/pages/talk/talk?id=' + data.id)
   },
 
   // 删除聊天室
