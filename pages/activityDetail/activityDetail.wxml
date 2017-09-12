@@ -1,0 +1,200 @@
+<!-- 组件的引入  -->
+<import src="/components/deBanner/deBanner.wxml" />
+<import src="/components/deComItem/deComItem.wxml" />
+<import src="/components/deShareImg/deShareImg.wxml" />
+<view class="de_Wrap">
+  <scroll-view class="de_Con" scroll-y="true" bindscrolltolower="scrollToLowerFn">
+
+    <!-- 轮播图 -->
+    <!--<template is="deBanner" data="{{bannerImgs}}"></template>-->
+
+    <view class="de_ban_wrap">
+      <swiper class="de_ban_con" circular="true" autoplay="true" interval="3000" duration="200" indicator-dots="true" bindtap="previewImgs" wx:if="{{activity.imgList.length > 0}}">
+        <swiper-item wx:for="{{activity.imgList }}" wx:key="*this">
+          <image class="de_ban_img" src="{{item.imgUrl}}"></image>
+        </swiper-item>
+      </swiper>
+      <image class="de_ban_bg" src="../../image/supDe_bg.png"></image>
+    </view>
+
+    <view class="act_BckTime" wx:if="{{activity.timeStatus == 1}}">
+      <image src="../../image/act_Time.png" class="act_Bckimg"></image>
+      <view class="act_Bcksize">
+        <text class="act_text1 FL">距离活动开始还有 </text>
+        <text class="act_text2 FL">{{activity.timeDiff}}</text>
+      </view>
+    </view>
+    <!-- 状态一 活动结束 正在进行中-->
+    <view class="act_BckTime1" wx:else>
+      <image src="../../image/act_TimeNo.png" class="act_Bckimg" wx:if="{{activity.timeStatus == 3}}"></image>
+      <image src="../../image/act_Time.png" class="act_Bckimg" wx:else></image>
+      <view class="act_Bcksize1">
+        <text class="act_Bcksize_text1" wx:if="{{activity.timeStatus == 3}}">活动已结束</text>
+        <text class="act_Bcksize_text1" wx:if="{{activity.timeStatus == 2 && activity.timeDiff == 0}}">活动正在进行中</text>
+      </view>
+    </view>
+
+    <!--  标题 B  -->
+    <view class="de_Txt">
+      <view class="de_Txt_tit FontBold">{{activity.title}}</view>
+      <view class="de_Txt_sub">
+        <view class="FL font_Size">
+          <image class="de_comp_pv" src="../../image/sup_De_eye.png"></image>{{activity.viewCount || '1'}}
+        </view>
+        <text class="FR font_Size">已有{{joinCount || 0}}人报名</text>
+      </view>
+      <view class="border_line"></view>
+    </view>
+
+
+    <!-- 活动信息 -->
+    <view class="activity">
+      <view class="activity_time activity_line clearfix">
+        <image class="FL" src="../../image/act_times.png"></image>
+        <text class="activity_size">{{activity.startTimeStr}} ~ {{activity.endTimeStr}}</text>
+      </view>
+      <view class="activity_add activity_line clearfix">
+        <image class="FL" src="../../image/act_add.png"></image>
+        <text class="activity_size_add">{{activity.address || ''}}</text>
+        <view class="de_Txt_disR" bindtap="toMapLocation">
+          <image class="de_Txt_dis_pos" src="../../image/sup_De_pos.png"></image>
+          <text class="de_Txt_dis_txt">去现场</text>
+        </view>
+      </view>
+      <view class="activity_tel activity_line clearfix">
+        <image class="FL" src="../../image/act_phone.png"></image>
+        <text class="activity_size">{{activity.telephone || ''}}</text>
+      </view>
+      <view class="classname" wx:if="{{showMore}}">
+        <view class="activity_tel activity_line clearfix" wx:if="{{activity.email}}">
+          <image class="FL" src="../../image/act_eml.png"></image>
+          <text class="activity_size">{{activity.email || ''}}</text>
+        </view>
+        <view class="activity_tel activity_line clearfix" wx:if="{{activity.sponsors && activity.sponsors.length > 0}}">
+          <image class="FL" src="../../image/act_host.png"></image>
+          <view class="activity_size_position">
+            <text class="activity_size" wx:for="{{activity.sponsors}}" wx:key="*this">{{item}}</text>
+          </view>
+        </view>
+        <view class="activity_tel activity_line clearfix" wx:if="{{activity.undertakers && activity.undertakers.length > 0}}">
+          <image class="FL" src="../../image/act_undertake.png"></image>
+          <view class="activity_size_position">
+            <text class="activity_size" wx:for="{{activity.undertakers}}" wx:key="*this">{{item}}</text>
+          </view>
+        </view>
+      </view>
+    </view>
+
+    <!-- 显示更多 -->
+    <view class="actDel" bindtap="switchShowMore" wx:if="{{activity.sponsors && activity.sponsors.length > 0 && activity.undertakers && activity.undertakers.length > 0}}">
+      <image src="../../image/actDel_pull.png" class="actDel_pull" wx:if="{{!showMore}}"></image>
+      <image src="../../image/act_push.png" class="actDel_pull" wx:if="{{showMore}}"></image>
+    </view>
+
+
+    <!-- 活动详情 -->
+    <view class="de_Attr" wx:if="{{activity.description}}">
+      <view class="de_AttrTit">
+        <text class="FL FB">活动详情</text>
+      </view>
+      <view class="de_proTxt">{{activity.description || ''}}</view>
+    </view>
+
+
+    <!-- 用户评论 -->
+    <view class="review">
+
+      <view class="de_Attr">
+        <view class="de_AttrTit">
+          <text class="FL FB">用户评论({{commentCount||0}})</text>
+          <navigator class="FR act_sort" hover-class="color_theme" wx:if="{{commentCount > 5}}" url="../commentList/commentList?fkId={{activity.id}}&type=4">查看更多
+            <image class="de_AttrTitArowR" src="../../image/mine_arowR.png"></image>
+          </navigator>
+        </view>
+      </view>
+
+      <view class="act_UserDetWrap">
+        <view class="act_UserDet" wx:if="{{commentLists != null && commentLists.length > 0}}" wx:for="{{commentLists}}" wx:key="id">
+          <template is="deComItem" data="{{item,userInfo}}"></template>
+        </view>
+      </view>
+      <view class="de_comNoCon" wx:if="{{commentLists == null || commentLists.length <= 0}}">
+        <view class="de_comNoTxt">暂时无人评论</view>
+        <button class="de_comNoBtn" type="default" catchtap="triggerComtFn">赶紧抢占沙发</button>
+      </view>
+    </view>
+
+    <!-- 已经到底了 -->
+    <view class="to_lower" wx:if="{{isToLower}}">
+      已经到底了~~
+    </view>
+  </scroll-view>
+
+  <!-- 返回首页 -->
+  <navigator class="to_index" hover-class="to_indexAct" open-type="switchTab" url="../index/index">
+    <image class="to_indexImg" src="../../image/toIndex.png"></image>
+  </navigator>
+
+  <!-- line7 -->
+  <view class="de_foot">
+
+    <!-- 分享 -->
+    <view class="de_ftItem de_ftShare" hover-class="de_ftGrayAct" bindtap="genShareImg">
+      <view class="de_ftImgCon">
+        <image class=" de_ftImg de_ftShareImg" src="../../image/supDe_share.png"></image>
+      </view>
+      <view class="de_ftTxt">二维码</view>
+    </view>
+
+    <!-- 评论 -->
+    <view class="de_ftItem " catchtap="triggerComtFn">
+      <view class="de_ftImgCon">
+        <image class=" de_ftImg de_ftcommentImg" src="../../image/supDe_comment.png"></image>
+      </view>
+      <view class="de_ftTxt">评论</view>
+    </view>
+
+    <!-- 报名 new静态的-->
+    <view class="de_ftItem de_ftItemTel {{activity.timeStatus == 3 ? 'de_ftItemTel2' : ''}}">
+      <view class="de_ftItemTelCon" hover-class="none" bindtap="joinActivity">
+        <!-- 状态一 我要报名 -->
+        <image wx:if="{{activity.timeStatus == 1 && !isJoined}}" class="de_ftItemTelL_signUp" src="../../image/actDel_signUp.png"></image>
+        <text wx:if="{{activity.timeStatus == 1 && !isJoined}}">我要报名</text>
+        <!-- 状态二 已报名 -->
+        <text wx:if="{{activity.timeStatus == 1 && isJoined}}">已报名</text>
+        <!-- 状态三 已报名 去签到 -->
+        <text wx:if="{{activity.timeStatus == 2 && isSign}}">已签到</text>
+        <text wx:if="{{activity.timeStatus == 2 && !isSign && isJoined}}">已报名，请现场扫码签到</text>
+        <!-- 状态四 未报名 -->
+        <text wx:if="{{activity.timeStatus == 2 && !isSign && !isJoined}}">未报名，可现场扫码签到</text>
+        <!-- 状态四 活动结束 -->
+        <view wx:if="{{activity.timeStatus == 3 && isSign}}">已签到</view>
+        <view wx:if="{{activity.timeStatus == 3 && !isSign && isJoined}}">已报名</view>
+        <view wx:if="{{activity.timeStatus == 3 && !isSign && !isJoined}}">活动已结束</view>
+      </view>
+    </view>
+  </view>
+</view>
+
+<!--弹窗 &&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&-->
+
+
+<!-- 评论弹窗 -->
+<view class="ad_popWrap" wx:if="{{isPopOpen}}">
+  <form bindsubmit="commentSendFn">
+    <view class="ad_popBg" bindtap="popCancle"></view>
+    <view class="ad_popCon">
+      <view class="ad_popHd">
+        <button class="ad_popHdL" form-type="reset" bindtap="popClose">取消</button>
+        <button class="ad_popHdR" form-type="submit">发送</button>
+        发布评论
+      </view>
+      <view class="ad_popFt">
+        <textarea class="ad_popArea" bindinput="commentTxtFn" bindfocus="checkauth" focus="{{isPopOpen}}" value="{{comment.content}}" placeholder="最多输入256个字" maxlength="256" />
+      </view>
+      <view class="ad_popCout">还可输入
+        <text class="color_danger">{{commentTxtCount}}</text>个字</view>
+    </view>
+  </form>
+</view>
+<template is="deShareImg" data="{{shareImgUrl, showShareImg, shareTip, shareBtnTip}}"></template>

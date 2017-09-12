@@ -1,0 +1,39 @@
+<!--
+ 组件 
+-->
+<template name="actItem">
+  <view class="act_item_itemCon">
+    <!-- left -->
+    <view class="act_item_itemL act_itemL">
+      <image class="act_itemLPro" src="{{item.imgUrl}}"></image>
+      <image class="act_itemLLabel" src="../../image/act_isWarm.png" wx:if="{{ item.timeStatus==1}}"></image>
+      <image class="act_itemLLabel" src="../../image/act_isMarch.png" wx:if="{{ item.timeStatus==2}}"></image>
+      <image class="act_itemLLabel" src="../../image/act_isTerminate.png" wx:if="{{ item.timeStatus==3 && item.status==3}}"></image>
+      <image class="act_itemLLabel" src="../../image/act_isOver.png" wx:if="{{ item.timeStatus==3 && item.status!=3}}"></image>
+    </view>
+
+    <!-- right Begin -->
+    <view class="act_item_itemR ">
+      <view class="act_item_itemHead">{{item.title||'暂无标题'}}</view>
+      <view class="act_item_itemR_pos">
+        <image class="act_item_Icon_pos" src="../../image/act_add.png"></image>
+        <text class="act_item_hiddens">{{item.address||''}}</text>
+        <text class="act_item_hiddensd">({{item.distance}})</text>
+      </view>
+
+      <!-- 占位的 act_item_itemR_state -->
+      <view class="act_item_itemR_btm">
+        <view class="FL">
+          <image wx:if="{{item.timeStatus==1 || item.timeStatus==2 }}" class="act_item_startAct" src="../../image/act_beg.png"></image>
+          <image wx:else class="act_item_startAct" src="../../image/act_begGray.png"></image>
+          <text class="act_item_danger {{ (item.timeStatus==3)?'act_item_lightG':'' }}">{{item.startTimeStr}}</text>
+        </view>
+        <view class="act_item_itemR_pv">
+          {{item.viewCount||0}}
+          <image class="act_item_Icon_pv" src="../../image/sup_De_eye.png"></image>
+        </view>
+      </view>
+    </view>
+    <!-- right :end -->
+  </view>
+</template>

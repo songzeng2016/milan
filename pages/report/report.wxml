@@ -1,6 +1,39 @@
-<view class='top'>  请选择举报该账号的原因</view>
-<view class='content'> 
-  <text> 发布不恰当内容对我造成了骚扰</text>
-  <image src='../../image/mine_path.png' class='set_imgs fr'></image>
+
+<!--pages/report/report.wxml-->
+<view class="rep_Wrap">
+  <form bindsubmit="formSubmit">
+
+    <!--line 1  举报内容  -->
+    <view class="rep_chkCon">
+      <view class="rep_chkHed">
+        <text class="danger">*</text>举报内容
+      </view>
+      <checkbox-group class="rep_chkBd" bindchange="checkboxChange">
+        <label class="rep_chkBdItem" wx:for="{{resonLists}}" bindtap="checkIconchage" data-item="{{item}}">
+          <checkbox class="hide" value="{{item.id}}" /> {{item.title }}
+          <image wx:if="{{item.checked}}" class="rep_chkBdItem_icon" src="../../image/rep_iconOk.png"></image>
+        </label>
+      </checkbox-group>
+    </view>
+
+    <!-- line2 补充说明  -->
+    <view class="rep_areaCon">
+      <view class="rep_areaHd">补充说明(选填)</view>
+      <view class="rep_areaBd">
+        <textarea class="rep_areaBd_are" name="content" placeholder="请简明描述举报理由……" maxlength="256" bindinput="letterCountFn">{{complain.content}}</textarea>
+        <view class="rep_areaBd_tip">
+          还可输入<text class="{{!!tips?'danger':''}}">{{letterCount}}</text> 字</view>
+      </view>
+    </view>
+
+    <!-- line3 手机号 -->
+    <view class="rep_areaCon">
+      <view class="rep_areaHd">
+        <text class="danger">*</text>手机号</view>
+      <view class="rep_areaBd">
+        <input name="phone" class="rep_areaBd_inp" placeholder="为提高举报的真实性，请填写真实手机号" type="number" value="{{complain.phone}}" />
+      </view>
+    </view>
+    <button class="pubFConfirm" hover-class="pubFConfirmAct" formType="submit">提交</button>
+  </form>
 </view>
-<button hover-class='btn_hover' class='btn colors' >确定</button>

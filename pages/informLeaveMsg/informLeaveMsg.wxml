@@ -1,0 +1,14 @@
+<view class="ad_popError" wx:if="{{popErrorMsg}}">{{popErrorMsg}}</view>
+<view class="ad_popFt">
+  <form bindsubmit="commentSendFn">
+    <textarea class="ad_popArea" name="content" bindfocus="checkauth" bindinput="commentTxtFn" focus="{{isPopOpen}}" value="{{comment.content}}" placeholder="请输入留言内容" maxlength="256" placeholder-style="color:#cccccc;"  />
+    <view class="ad_popCout">
+      <text class="one_star">你还可以输入</text>
+      <text class="one_stars {{!!tips?'danger':''}}">{{commentTxtCount}}</text>
+      <text class="one_star">字</text>
+    </view>
+    <button class="informBtn" hover-class="informBtnAct" hover form-type="submit">确认发布</button>
+  </form>
+
+
+</view>

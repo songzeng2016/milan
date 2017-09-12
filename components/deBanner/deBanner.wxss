@@ -1,0 +1,9 @@
+/* 性情页的轮播 
+   样式前缀 de_ban_
+*/
+.de_ban_wrap{ position: relative;}
+.de_ban_con{ height:750rpx;}
+.de_ban_con .wx-swiper-dot {color:rgba(0,0,0,0.5);}
+.de_ban_con .wx-swiper-dot-active:before { color: #09bb07;}
+.de_ban_img{width: 100%; height:750rpx;}
+.de_ban_bg{ position: absolute; width: 100%; height: 13rpx; bottom: 0; left: 0;}

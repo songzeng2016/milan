@@ -1,0 +1,167 @@
+<!--pages/supplyManage/supplyManage.wxml-->
+<!-- 组件引入 -->
+<import src="/components/noData/noData.wxml" />
+<import src="/components/actItem/actItem.wxml" />
+<import src="/components/switch/switch.wxml" />
+<import src="/components/loading/loading.wxml" />
+<!-- line1 tab切换 -->
+
+<template is="switch" data="{{switch_selTypes,switch_selNum}}"></template>
+<navigator url="../activityRelease/activityRelease" class="publishBtn" hover-class="publishBtnAct" hover>
+  发布
+</navigator>
+
+<!--  &&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&& -->
+<!-- tab1 预热中  -->
+<view class="scrollWrap" data-current="0" wx:if="{{switch_selNum == 0}}">
+
+  <!-- 状态一 有数据 Begin -->
+  <view wx:if="{{ !!activityList1 && activityList1.length>=1}}">
+    <!-- item Begin -->
+    <view class="act_item" wx:for="{{activityList1}}" wx:key="id">
+      <!-- line1 -->
+      <view class="act_itemHead">
+        <image class="act_itemHeadImg" src="../../image/act_times.png"></image>发布时间 {{item.createTimeStr}}
+      </view>
+      <!-- line2 -->
+      <navigator class="act_item_Body" url="../activityDetail/activityDetail?activityId={{item.id}}">
+        <template is="actItem" data="{{item}}" />
+      </navigator>
+      <!-- line2 End -->
+
+      <!-- line3 Begin -->
+      <view class="act_itemBtns">
+        <button class="act_itemBtn" bindtap="operateFn" data-id="{{item.id}}" data-status="3" data-start="{{item.startTimeStr}}" data-end="{{item.endTimeStr}}">操作</button>
+        <button class="act_itemBtn" bindtap="regQRCodeFn" data-imgurl="{{item.signQrcode}}" data-id="{{item.id}}">签到二维码</button>
+        <navigator class="act_itemBtn" url="../activitySignList/activitySignList?activityId={{item.id}}&type=0" hover-class="none">{{item.joinCount}}人报名</navigator>
+      </view>
+      <!-- line3 End -->
+    </view>
+    <!-- item ：end -->
+    <view wx:if="{{ isOver1 }}" class="to_lower">已经到底了~~</view>
+    <view class="onloadingWrap" wx:if="{{isLoading}}">
+      <image src="../../image/loadingImg.gif" class="onloadingImg"></image> 正在加载…
+    </view>
+
+  </view>
+  <!-- 状态一 有数据 ：end -->
+
+  <!-- 状态二 暂无数据  -->
+  <view class="noneWrap" wx:if="{{ !activityList1.length || activityList1.length==0}}">
+    <block wx:if="{{isActivityLoading1}}">
+      <template is="loading"></template>
+    </block>
+    <block wx:else>
+      <template is="noData"></template>
+      <view class="noneTxt"> 暂无结果 </view>
+    </block>
+  </view>
+
+
+</view>
+
+
+
+<!--  &&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&& -->
+<!-- tab2 进行中  -->
+<view class="scrollWrap" data-current="1" wx:if="{{switch_selNum == 1}}">
+  <!-- 状态一  有数据  -->
+  <view class="" wx:if="{{!!activityList2 && activityList2.length>=1}}">
+    <view class="act_item" wx:for="{{activityList2}}" wx:key="id">
+      <!-- line1 -->
+      <view class="act_itemHead">
+        <image class="act_itemHeadImg" src="../../image/act_times.png"></image>发布时间 {{item.createTimeStr}}
+      </view>
+      <!-- line2 -->
+      <navigator class="act_item_Body" url="../activityDetail/activityDetail?activityId={{item.id}}">
+        <template is="actItem" data="{{item}}" />
+      </navigator>
+      <!-- line2 End -->
+      <!-- line3 Begin -->
+      <view class="act_itemBtns">
+        <button class="act_itemBtn" bindtap="operateFn" data-id="{{item.id}}" data-status="3" data-start="{{item.startTimeStr}}" data-end="{{item.endTimeStr}}">操作</button>
+        <button class="act_itemBtn" bindtap="regQRCodeFn" data-imgurl="{{item.signQrcode}}" data-id="{{item.id}}">签到二维码</button>
+        <navigator class="act_itemBtn" url="../activitySignList/activitySignList?activityId={{item.id}}&type=1" hover-class="none">{{item.signCount}}人签到</navigator>
+      </view>
+      <!-- line3 End -->
+    </view>
+
+    <view wx:if="{{ isOver2 }}" class="to_lower">已经到底了~~</view>
+    <view class="onloadingWrap" wx:if="{{isLoading}}">
+      <image src="../../image/loadingImg.gif" class="onloadingImg"></image> 正在加载…
+    </view>
+
+  </view>
+  <!-- 状态一  有数据：end  -->
+
+  <!-- 状态二 暂无数据 -->
+  <view class="noneWrap" wx:if="{{ !activityList2.length ||  activityList2.length==0}}">
+    <block wx:if="{{isActivityLoading2}}">
+      <template is="loading"></template>
+    </block>
+    <block wx:else>
+      <template is="noData"></template>
+      <view class="noneTxt"> 暂无结果 </view>
+    </block>
+  </view>
+
+
+</view>
+
+
+<!--  &&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&& -->
+<!-- tab3 已结束  -->
+<view class="scrollWrap" data-current="2" wx:if="{{switch_selNum == 2}}">
+  <!-- 状态一  有数据 -->
+  <view class="" wx:if="{{!!activityList3 && activityList3.length>=1}}">
+    <view class="act_item" wx:for="{{activityList3}}" wx:key="id">
+      <!-- line1 -->
+      <view class="act_itemHead">
+        <image class="act_itemHeadImg" src="../../image/act_times.png"></image>发布时间 {{item.createTimeStr}}
+      </view>
+      <!-- line2 -->
+      <navigator class="act_item_Body" url="../activityDetail/activityDetail?activityId={{item.id}}">
+        <template is="actItem" data="{{item}}" />
+      </navigator>
+      <!-- line2 End -->
+      <!-- line3 Begin -->
+      <view class="act_itemBtns">
+        <navigator class="act_itemBtn" url="../activitySignList/activitySignList?activityId={{item.id}}&type=1" hover-class="none">签到报名统计</navigator>
+        <button class="act_itemBtn" data-id="{{item.id}}" bindtap="removeAct" data-status="5">删除</button>
+      </view>
+      <!-- line3 End -->
+    </view>
+    <view wx:if="{{ isOver3 }}" class="to_lower">已经到底了~~</view>
+    <view class="onloadingWrap" wx:if="{{isLoading}}">
+      <image src="../../image/loadingImg.gif" class="onloadingImg"></image> 正在加载…
+    </view>
+  </view>
+  <!-- 状态一  有数据：end  -->
+
+  <!-- 状态二 暂无数据 -->
+  <view class="noneWrap" wx:if="{{ !activityList3.length || activityList3.length==0}}">
+    <block wx:if="{{isActivityLoading3}}">
+      <template is="loading"></template>
+    </block>
+    <block wx:else>
+      <template is="noData"></template>
+      <view class="noneTxt"> 暂无结果 </view>
+    </block>
+  </view>
+
+
+</view>
+
+
+<!--  &&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&& -->
+<!-- 签到二维码弹窗  暂时隐藏  hidden="true"-->
+<view class="QR_Wrap flexVer" wx:if="{{isQRCodeOpen}}">
+  <view class="QR_Con">
+    <view class="QR_iconClose" bindtap="QRCodeCloseFn"><image class="QR_iconCloseImg" src="../../image/act_close.png" ></image></view>
+    <view class="QR_Body">
+      <image class="QR_BodyImg" src="{{QRCodeImgUrl}}"></image>
+      <view class="color_sub ">此二维码适用于活动现场扫码签到</view>
+    </view>
+    <button class="btn btn_block btn_primary MT40" hover-class="btn_primaryAct" bindtap="saveQRCodeImgFn">保存二维码至相册</button>
+  </view>
+</view>

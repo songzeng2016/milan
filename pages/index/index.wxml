@@ -1,21 +1,21 @@
-<view class='main' wx:for="{{lists}}" wx:for-index="index" wx:key="id">
-
-  <view bindtap='navToTalk' data-id='{{item.chatroom_id}}'>
-    <view class='list'>
-      <view wx:if="{{item.ismanage === 1}}">
-        <view class='circle'></view>
-      </view>
-
-      <image src='{{item.chatroom_logo}}' class='list_img fl'></image>
-      <view class='fl list_msg'>
-        <view class='text_name'>{{item.chatroom_name}}</view>
-        <view class='text_msg '>{{item.chatroom_name}}</view>
-      </view>
-      <view class='disply fr list_r'>
-        <view>22:20</view>
-        <image src='/image/del.png' class='del_img' catchtap='deleteChatRoom' data-id='{{item.id}}'></image>
-      </view>
-    </view>
+<!--index.wxml-->
+<!-- line1 选择 -->
+<view class="ind_sel">
+  <view wx:for="{{searchTypes}}" bindtap="switchSeachType" class="{{searchTypeIndex == index ? 'ind_selLiSel' : 'ind_selLi'}}"  wx:key="index" data-current="{{index}}">
+      {{item}}
   </view>
-
 </view>
+<!-- line2 map   -->
+<view class="ind_mapWrap"  wx:if="{{!onloading}}">
+  <map id="map" class="indmapCon"  show-location scale="{{scale}}" controls="{{controls}}" markers="{{markers}}" bindmarkertap="markertap" bindcontroltap="controltap"/>
+</view>
+
+<!-- line3 loading  -->
+<view class="ind_load" wx:if="{{onloading}}">
+  <view class="ind_loadCon">
+    <view class="ind_loadTitle">网库展厅活动2.5</view>
+    <view class="ind_loadTxt">页面加载中... </view>
+  </view>
+</view>
+
+

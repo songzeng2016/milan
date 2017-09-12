@@ -1,0 +1,62 @@
+<!-- line1 scrollContent -->
+<view class="ad_wrap">
+    <scroll-view class="ad_scroll" scroll-y="true" bindscrolltolower="onPullDownRefresh">
+        <view  wx:for="{{adviceUserMsg}}">
+            <!--1 list item  靠左边显示 -->
+            <view class="ad_item" wx:if="{{item.userId != userId}}">
+                <!--item left -->
+                <image class="ad_itemL" src="{{item.imgurl}}"></image>
+                <!-- item right -->
+                <view class="ad_itemR">
+                    <view class="ad_itemRT">
+                        <text class="ad_itemRT_txt ad_itemRT_txtName">{{item.name||''}}</text>
+                        <text class="ad_itemRT_txt ad_itemRT_txtTime">{{item.time}}</text>
+                        <text class="ad_itemRT_txt ad_itemRT_txtDis">距{{item.distance}}</text>
+                    </view>
+                    <view class="ad_itemRB">
+                        <view class="ad_itemArow"></view>
+                        <text class="ad_itemRB_txt">{{item.text}}</text>
+                    </view>
+                </view>
+            </view>  
+            <!--2 list item  靠右边显示Begin -->
+            <view class="ad_item" wx:else> 
+                <view class="ad_itemR">
+                    <view class="ad_itemRT self_LT">
+                        <text class="ad_itemRT_txt ad_itemRT_txtDis">距{{item.distance}}</text>
+                        <text class="ad_itemRT_txt ad_itemRT_txtTime">{{item.time}}</text>
+                        <text class="ad_itemRT_txt ad_itemRT_txtName self_LT_txtName">{{item.name}}</text>
+                    </view>
+                    <view class="ad_itemRB self_LB">
+                        <view class="ad_itemArow self_LBArow"></view>
+                        <view class="ad_itemRB_txt self_LB_txt">
+                            <text class="self_LB_txt_txt">{{item.text}}</text>
+                        </view>
+                    </view>
+                </view>
+                <image class="ad_itemL self_R" src="{{item.imgurl}}"></image>
+            </view>  
+            <!--2 list item  靠右边显示End -->
+       </view>
+    </scroll-view>
+</view>
+<!-- line2 foot -->
+<view class="ad_foot" bindtap="wakeUpPopFn">
+    <view class="ad_footTxt">你不说点啥吗</view>
+</view>
+<!-- 输入弹窗 -->
+<view class="ad_popWrap" wx:if="{{isPopOpen}}">
+<form bindsubmit="sendMsgFn">
+    <view class="ad_popCon">
+        <!-- line1 -->
+        <view class="ad_popHd">
+            <button class="ad_popHdL" form-type="reset" bindtap="ad_popClose">取消</button>
+            <button class="ad_popHdR" form-type="submit">发送</button>
+            发布留言
+        </view>
+        <view class="ad_popFt">
+            <textarea class="ad_popArea" name="content" bindinput="sendTxtFn" bindfocus="checkauth" focus="{{isPopOpen}}" value="{{sendTxt}}"/>
+        </view>
+    </view>
+</form>
+</view>

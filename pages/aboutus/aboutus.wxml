@@ -1,0 +1,125 @@
+<!-- aboutus.wxml -->
+<!-- head  -->
+<view class="ab_Head">
+  网库云采购V3.3
+</view>
+
+<!--  body  -->
+<view class="ab_Body">
+  <!-- body line1 -->
+  <view class="ad_BdTitle">
+    发布时间：2017-06-20
+  </view>
+  <view class="ad_BdTxt">
+    欢迎访问网库云采购！我们网站有相应的安全措施确保我们掌握信息不丢失，不被滥用和变造。
+  </view>
+  <!-- body line2 -->
+  <view class="ad_BdTitle">
+    联系我们
+  </view>
+  <view class="ad_BdTxt">
+ 如果您对网站或隐私保护以及您在使用中的问题有任何意见和建议请给我们<navigator class="ad_BdTxtLk"  url="../advice/advice">留言</navigator>或拨打客服电话:<text class="ad_BdTxtLk FB" bindtap="callus">{{telephone}}</text>
+  </view>
+  <!-- body line3 -->
+  <view class="ad_BdTitle">
+    研发团队
+  </view>
+  <view class="ad_Por flex flexVer">
+    <!-- left -->
+    <view class="ad_PorL flex  flexVer">
+      <view class="ad_msg ad_msgLead ">
+        <image class="porImg" src="../../image/por_lead.png"></image>
+        <view class="porTxt ML0 MT10">
+          <view class="">饶正清</view>
+          <view class="F20">(项目经理)</view>
+        </view>
+      </view>
+      <view class="lineL"></view>
+      <view class="lineLShort"></view>
+
+    </view>
+
+    <!-- right -->
+    <view class="ad_PorR flex_1">
+      <!-- line1 -->
+      <view class="ad_msgCon flex flexVer">
+        <view class="ad_msg   flex_1 flex  flexVer">
+          <image class="porImg" src="../../image/por_shuai.png"></image>
+          <view class="ad_line"></view>
+          <view class="porTxt flex_1">
+            <view class="">冯帅刚</view>
+            <view class="F20">(研发经理)</view>
+          </view>
+
+        </view>
+        <view class="ad_msg  flex_1  flex  flexVer">
+          <image class="porImg" src="../../image/por_zhou.png"></image>
+          <view class="porTxt flex_1">
+            <view class="">周洋帆</view>
+            <view class="F20">(产品经理)</view>
+          </view>
+        </view>
+      </view>
+      <!-- line 2 -->
+      <view class="ad_msgCon flex flexVer MT30">
+        <view class="ad_msg   flex_1 flex  flexVer">
+          <image class="porImg" src="../../image/por_li.png"></image>
+          <view class="ad_line"></view>
+          <view class="porTxt flex_1">
+            <view class="">庄美丽</view>
+            <view class="F20">(前端开发)</view>
+          </view>
+
+        </view>
+        <view class="ad_msg  flex_1  flex  flexVer">
+          <image class="porImg" src="../../image/por_wu.png"></image>
+          <view class="porTxt flex_1">
+            <view class="">吴迎艺</view>
+            <view class="F20">(前端开发)</view>
+          </view>
+        </view>
+      </view>
+
+      <!-- line 3 -->
+      <view class="ad_msgCon flex flexVer MT30">
+        <view class="ad_msg   flex_1 flex  flexVer">
+          <image class="porImg" src="../../image/por_wei.png"></image>
+          <view class="ad_line"></view>
+          <view class="porTxt flex_1">
+            <view class="">宋威</view>
+            <view class="F20">(后端开发)</view>
+          </view>
+          
+        </view>
+        <view class="ad_msg  flex_1  flex  flexVer">
+          <image class="porImg" src="../../image/por_xun.png"></image>
+          <view class="porTxt flex_1">
+            <view class="">卢迅</view>
+            <view class="F20">(后端开发)</view>
+          </view>
+        </view>
+      </view>
+      <!-- line5 -->
+      <!-- line 3 -->
+      <view class="ad_msgCon flex flexVer MT30">
+        <view class="ad_msg   flex_1 flex  flexVer">
+          <image class="porImg" src="../../image/por_biao.png"></image>
+          <view class="ad_line"></view>
+          <view class="porTxt flex_1">
+            <view class="">桑洪彪</view>
+            <view class="F20">(UI设计）</view>
+          </view>
+        </view>
+
+      </view>
+
+      <!--  -->
+
+    </view>
+
+  </view>
+  <!-- body line3End -->
+
+</view>
+
+<!--&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&7777777777-->

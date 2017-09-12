@@ -1,0 +1,202 @@
+<view class="pubWrap">
+<view class="enroll_popError" wx:if="{{errorMsg}}">{{errorMsg}}</view>
+  <scroll-view scroll-y="true" class="scroll_1">
+   
+    <form class="pubForm">
+      <view class="one_top">
+        <text class="one_stared">*</text>
+        必填项
+      </view>
+      <view class="theme">
+      <!-- 活动类型 -->
+      <view class="pubFItem">
+        <view class="pubFItemCon1">
+          <view class="pubFItemL">活动类型</view>
+          <view class="pubFItemR">
+            <picker class="selected"  bindchange="bindPickerChange" value="{{form.typeIndex}}" range="{{activityTypes}}">
+              <view class=" pubFItemR_Input ">
+                {{activityTypes[form.typeIndex] || '请选择活动类型'}} >
+              </view>
+            </picker>
+          </view>
+        </view>
+      </view>
+      <!-- 活动归属 -->
+      <view class="pubFItem">
+        <view class="pubFItemCon1">
+          <view class="pubFItemL">活动归属</view>
+          <view class="pubFItemR">
+            <navigator url="../activityLocation/activityLocation">
+              <view class="pubFItemR_Input selected">
+                {{form.exhibitionName || '请选择归属展厅'}} >
+              </view>
+            </navigator>
+          </view>
+        </view>
+      </view>
+      <!-- 活动标题 -->
+      <view class="pubFItem">
+        <view class="pubFItemCon1">
+          <view class="pubFItemL">活动标题</view>
+          <view class="pubFItemR">
+            <input class="pubFItemR_Inp"  placeholder-style="color:#d9d9d9" placeholder="最多输入48个字" value="{{form.title}}" data-key="title" bindblur="bindFormData" />
+          </view>
+        </view>
+      </view>
+
+      <!-- 宣传图片 -->
+      <view class="pubFItem">
+        <view class="pubFItemCon1">
+          <view class="pubFItemL">宣传图片</view>
+          <view class="pubFItemR">
+            <text class="colorGray">点击图片设为主图</text>
+            <button class="pubFItem_upload" type="default" bindtap="chooseActivityPic" wx:if="{{form.imgs.length < 9}}">点击上传</button>
+          </view>
+        </view>
+
+        <!-- 图片预览 -->
+        <scroll-view scroll-x="true">
+          <view class="uploadWrap" scroll-x="true">
+            <view class="upload_Item" wx:for="{{form.imgs}}" wx:key="id">
+              <image class="upload_Item_img" src="{{item.imgUrl}}" data-id="{{item.id}}" bindtap="changeMainImgFn" data-index="{{index}}"></image>
+              <icon type="clear" size="16" class="upload_Btn" color="#f64400" bindtap="deleteActivityPic" data-index="{{index}}"></icon>
+              <view class="upload_mask show" wx:if="{{item.isMain == 1}}">主图</view>
+            </view>
+          </view>
+        </scroll-view>
+        <view class="clear"></view>
+      </view>
+
+      <!-- 起止时间 -->
+      <view class="pubFItem">
+        <view class="pubFItemCon1">
+          <view class="pubFItemL">开始时间</view>
+          <view class="pubFItemR1">
+            <picker class="pubFItemR_Inp1" mode="date" value="{{form.startPre}}" start="{{startPreRange}}" bindchange="bindDateChange" data-key="startPre">
+              {{form.startPre || '请选择'}}
+            </picker>
+          </view>
+          <view class="pubFItemR_txt1">
+            <image class="pub_dateIcon" src="../../image/atc_dates.png"></image>
+          </view>
+          <view class="division">/</view>
+          <view class="pubFItemR4">
+            <picker class="pubFItemR_Inp3" mode="time" value="{{form.startSuf}}" start="{{startSufRange}}" bindchange="bindDateChange" data-key="startSuf">
+              {{form.startSuf || '请选择'}}
+            </picker>
+          </view>
+          <view class="pubFItemR_txt1">
+            <image class="pub_dateIcon" src="../../image/atc_clock.png"></image>
+          </view>
+        </view>
+      </view>
+      <view class="pubFItem">
+        <view class="pubFItemCon1">
+          <view class="pubFItemL">结束时间</view>
+          <view class="pubFItemR1">
+            <picker class="pubFItemR_Inp1" mode="date" value="{{form.endPre}}" start="{{endPreRange}}" bindchange="bindDateChange" data-key="endPre">
+              {{form.endPre || '请选择'}}
+            </picker>
+          </view>
+          <view class="pubFItemR_txt1">
+            <image class="pub_dateIcon" src="../../image/atc_dates.png"></image>
+          </view>
+          <view class="division">/</view>
+          <view class="pubFItemR4">
+            <picker class="pubFItemR_Inp3" mode="time" value="{{form.endSuf}}" start="{{endSufRange}}" bindchange="bindDateChange" data-key="endSuf">
+              {{form.endSuf || '请选择'}}
+            </picker>
+          </view>
+          <view class="pubFItemR_txt1">
+            <image class="pub_dateIcon" src="../../image/atc_clock.png"></image>
+          </view>
+        </view>
+      </view>
+
+      <!-- 活动地址 -->
+      <view class="pubFItem">
+        <view class="pubFItemCon1">
+          <view class="pubFItemL">活动地址</view>
+          <view class="pubFItemR">
+            <button class="pubBtn" bindtap="locate">{{form.latitude == null ? '点击此处自动获取定位' : '已成功获取定位'}}</button>
+          </view>
+        </view>
+      </view>
+      <view class="pubFItem2">
+        <view class="pubFItemCon1">
+          <view class="pubFItemL2"></view>
+          <view class="pubFItemR">
+            <input class="pubFItemR_Inp2" placeholder-style="color:#d9d9d9" placeholder="填写活动地址，提高定位准确性" value="{{form.address}}" data-key="address" bindblur="bindFormData" maxlength="-1"/>
+          </view>
+        </view>
+      </view>
+
+      <!-- 手机号码-->
+      <view class="pubFItem">
+        <view class="pubFItemCon1">
+          <view class="pubFItemL">联系方式</view>
+          <view class="pubFItemR">
+            <input class="pubFItemR_Inp" placeholder-style="color:#d9d9d9" placeholder="可供参观者电话咨询" value="{{form.telephone}}" data-key="telephone" bindblur="bindFormData" />
+          </view>
+        </view>
+      </view>
+
+      <!-- 活动详情 -->
+      <view class="pubFItem clearfix">
+        <view class="pubFItemCon3" bindtap="wakeUpDeAreaFn1">
+          <view class="pubFItemL">活动详情</view>
+          <textarea class="pubFItemR2" placeholder-style="color:#cccccc" value="{{form.description}}" data-key="description" bindinput="bindFormData" maxlength="1000" />
+        </view>
+        <view class="act_centent">
+          <text class="one_star">还可以输入</text>
+          <text class="one_stars {{!!tips?'danger':''}}">{{letterCount}}</text>
+          <text class="one_star">字</text>
+        </view>
+      </view>
+      <view class="one_top">
+        <text class="one_star"> </text>
+        选填项
+      </view>
+
+      <!-- 联系邮箱 -->
+      <view class="pubFItem">
+        <view class="pubFItemCon1">
+          <view class="pubFItemL">联系邮箱</view>
+          <view class="pubFItemR">
+            <input class="pubFItemR_Inp" placeholder-style="color:#d9d9d9" placeholder="可供参观者邮件咨询" value="{{form.email}}" data-key="email" bindblur="bindFormData" />
+          </view>
+        </view>
+      </view>
+
+      <!-- 主办单位 -->
+      <view class="pubFItem" wx:for="{{form.sponsorList}}" wx:key="*this">
+        <view class="pubFItemCon1">
+          <view class="pubFItemL">主办单位</view>
+          <view class="pubFItemR">
+            <input class="pubFItemR_Inp" placeholder-style="color:#d9d9d9" placeholder="{{index == 0 ? '点击“+”进行添加多个主办方' : ''}}" value="{{item}}" data-index="{{index}}" bindblur="editSponsor" />
+          </view>
+          <view class="pubFItemR_txt">
+            <image class="pub_dateIcon" src="../../image/actRel_add.png" wx:if="{{index == 0}}" bindtap="addSponsor"></image>
+            <image class="pub_dateIcon" src="../../image/actRel_sub.png" wx:if="{{index != 0}}" bindtap="delSponsor" data-index="{{index}}"></image>
+          </view>
+        </view>
+      </view>
+
+      <!-- 承办单位 -->
+      <view class="pubFItem" wx:for="{{form.undertakerList}}" wx:key="*this">
+        <view class="pubFItemCon1">
+          <view class="pubFItemL">承办单位</view>
+          <view class="pubFItemR">
+            <input class="pubFItemR_Inp" placeholder-style="color:#d9d9d9" placeholder="{{index == 0 ? '点击“+”进行添加多个承办方' : ''}}" value="{{item}}" data-index="{{index}}" bindblur="editUndertaker" />
+          </view>
+          <view class="pubFItemR_txt">
+            <image class="pub_dateIcon" src="../../image/actRel_add.png" wx:if="{{index == 0}}" bindtap="addUndertaker"></image>
+            <image class="pub_dateIcon" src="../../image/actRel_sub.png" wx:if="{{index != 0}}" bindtap="delUndertaker" data-index="{{index}}"></image>
+          </view>
+        </view>
+      </view>
+      </view>
+      <button class="pubFConfirm" hover-class="pubFConfirmAct" bindtap="submit">确认发布</button>
+    </form>
+  </scroll-view>
+</view>

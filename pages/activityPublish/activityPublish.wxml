@@ -1,0 +1,7 @@
+<view class="a_content">
+  <image class="a_logo" src="../../image/act_logo.png"></image>
+  <view class="a_size">
+    举办展厅活动，更有效宣传展厅商品
+  </view>
+  <button class="a_btn" bindtap="onTap" hover-class="a_btnAct" hover>发布活动</button>
+</view>

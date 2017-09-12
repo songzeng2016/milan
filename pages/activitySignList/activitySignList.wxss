@@ -1,0 +1,32 @@
+.list_Wrap{ height: 100%; width: 100%; }
+.list_Top{ height: 120rpx; width: 100%; position: fixed;left: 0; top: 88rpx;z-index: 10;}
+.list_scroll{padding-top:160rpx; }
+.swiper{ position: absolute; left: 0;top: 0; width: 100%; height: 100%; padding-top: 88rpx; box-sizing: border-box;}
+.list_TopL{width: 437rpx;height: 122rpx;background: #a1c3e6; display: inline-block;border-radius: 5rpx;}
+.list_TopR{width: 263rpx;height: 122rpx;background: #6db0f2; display: inline-block;margin-left: 10rpx;border-radius: 5rpx;}
+.list_TopL{float: left;}
+.list_Top{padding: 20rpx; background: #f4f5f4}
+.list_TopL_L,.list_TopL_R{width: 217rpx;height: 104rpx; display: inline-block;margin-top: 10rpx;}
+.list_TopsL,.list_TopsR{width: 350rpx;height: 122rpx;display: inline-block;border-radius: 5rpx;}
+.list_TopsL{background: #a1c3e6;}
+.list_TopsR{background: #6db0f2;margin-left: 10rpx;}
+.list_TopL_R{border-left: 2rpx solid #C9C9C9; }
+.list_Num{font-size: 34rpx; display: inline-block; text-align: center; width: 100%;padding-top: 10rpx;color: #fff;font-weight: bold;}
+.list_Nums{padding-top: 20rpx;}
+.list_titleCon{display: inline-block;font-size: 20rpx;color: #fff;text-align: center;width: 100%;}
+.list_headline_L{width: 1530rpx;}
+.list_headline_R{width: 1710rpx;}
+.list_Order,.list_Sign,.list_Signs,.list_SignName,.list_Tel,.list_Company,.list_Time{display: inline-block;text-align: center; vertical-align: middle;}
+.list_headline_title{height: 58rpx;line-height: 58rpx; background: #e5e5e5;color: #333333;font-size: 24rpx; }
+.list_Order{width: 130rpx;}
+.list_Sign,.list_Signs{width: 146rpx;padding-left: 30rpx;}
+.list_Signs{color: #FF0000}
+.list_whether{display: inline-block;}
+.list_SignName{width: 220rpx;padding-left: 80rpx;}
+.list_Tel{width: 186rpx;padding-left: 100rpx;}
+.list_Company{width: 400rpx;padding-left: 100rpx;}
+.list_Time{width: 210rpx;padding-left: 100rpx;}
+.list_headline_content{min-height: 88rpx; font-size: 28rpx;color: #000; padding: 20rpx 0;border-bottom: 2rpx solid #C9C9C9;vertical-align: middle;display: table-cell;}
+
+.noneWrap{padding-top: 150rpx; }
+.noneTxt{font-size: 28rpx;color: #333;margin-top: 20rpx;text-align: center; line-height: 40rpx;}

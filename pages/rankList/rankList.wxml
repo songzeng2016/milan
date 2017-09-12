@@ -1,0 +1,294 @@
+<!--pages/rankList/rankList.wxml-->
+
+<import src="/components/switch/switch.wxml" />
+<import src="/components/noData/noData.wxml" />
+<import src="/components/loading/loading.wxml" />
+
+<!-- line1 tab切换 -->
+<template is="switch" data="{{switch_selTypes,switch_selNum}}"></template>
+<!-- line2 swiper  -->
+
+<!-- tab1 供应列表  -->
+<view class="swiperItem" data-current="0" wx:if="{{switch_selNum == 0}}">
+
+  <!--  状态一 暂无数据 Begin 暂时隐藏 没有数据得情况  wx:if="{{ !exhibitTop_lists.length }}"  -->
+  <view class="noneWrap" wx:if="{{ !exhibitTop_lists.length }}">
+    <block wx:if="{{exhibitionWeekLoading}}">
+      <template is="loading"></template>
+    </block>
+    <block wx:else>
+      <template is="noData"></template>
+      <view class="noneTxt">敬请期待……</view>
+    </block>
+    
+  </view>
+
+  <!-- 状态一 暂无数据 ：end -->
+
+  <!-- tab1- serch 状态二 有数据情况 wx:if="{{exhibitTop_lists.length}}"  -->
+  <view class="serWrap" wx:if="{{exhibitTop_lists.length}}">
+    <!--serch left -->
+    <view class="serSortCon {{isExhibitSortOpen?'serSortConAct':''}}" bindtap="exhibitSortTapFn">
+      {{exhibitSortSelect}}
+      <image class="serSortArow" src="../../image/mine_arowD.png"></image>
+      <view class="serSortList" hidden="{{ !isExhibitSortOpen }}">
+        <radio-group bindchange="exhibitSortChangeFn">
+          <block wx:for="{{exhibitSortData}}" wx:key="id">
+            <label class="serSortListItem  {{item.id == exhibitSortSelectId? 'serSortListItemAct':''}}" data-item="{{item}}" bindtap="exhibitSortChangeItemFn">
+              <view class="serSortListItL">
+                <radio value="{{item.name}}" checked="{{item.checked}}" hidden="true" />{{item.name}}
+              </view>
+              <view class="serSortListItR {{item.id == exhibitSortSelectId? 'show':'hide'}}">
+                <icon class="serSortListItR_ok" type="success_no_circle" size="16" />
+              </view>
+            </label>
+          </block>
+        </radio-group>
+      </view>
+    </view>
+    <!--serch  说明  -->
+    <navigator class="serSortTip" url="../rankInstruct/rankInstruct">
+      <image class="serSortTip_help" src="../../image/rk_icon_help.png"></image>说明
+    </navigator>
+
+  </view>
+
+  <!-- tab1 - scroll 状态二 有数据情况  wx:if="{{exhibit_lists.length}}" -->
+  <!--  ===================  本周综合指数前10  ========================   -->
+  <view class="scroll_1" wx:if="{{exhibitTop_lists.length}}" hidden="{{exhibitDisplayType==1? true:false}}">
+    <view class="scroll_1Con">
+
+      <!-- 1-2 Top10 列表 Begin -->
+      <block wx:for="{{exhibitTop_lists}}" wx:key="id">
+        <!-- status1 Top1 -->
+        <navigator url="../bookgoods/bookgoods?id={{item.exhibitionId}}" class="exhibit_item  {{item.rank==4?'exhibit_item2':''}} {{item.rank>4?'exhibit_item3':''}}">
+          <image class="exhibit_itemL" src="{{item.imgUrl}}"></image>
+
+          <!--  right Begin -->
+          <view class="exhibit_itemR">
+            <view class="exhibit_itemTit {{item.rank==1?'titleTop1':''}} {{item.rank==2?'titleTop2':''}} {{item.rank==3?'titleTop3':''}}">{{item.name||''}}O2O线下看货厅</view>
+            <view class="exhibit_itemRB">
+              <view class="exhibit_itemPV">
+                <view>浏览量</view>
+                <view class="itemPV {{item.rank<=3?'pvTop':''}}">{{item.viewCount||0}}</view>
+              </view>
+              <view class="exhibit_itemRank">
+                <view wx:if="{{item.rank>3}}">本周排名</view>
+                <view wx:if="{{item.rank>3}}" class="itemRank">{{item.rank<10?('0'+item.rank) :item.rank}}</view>
+              </view>
+              <image wx:if="{{item.rank<=3}}" class="exhibit_itemTop" src="../../image/rk_top{{item.rank}}.png"></image>
+            </view>
+          </view>
+          <!--  right end-->
+        </navigator>
+      </block>
+      <!-- 1-2 Top10  列表 ：end-->
+
+      <!--1-3  -->
+      <view class="to_lower" wx:if="{{isToLower}}">已经到底了~~</view>
+    </view>
+  </view>
+  <!--  ===================  本周综合指数前10 ：end ========================   -->
+
+  <!--  ===================  风云榜 Begin  ========================   -->
+  <!-- 1-2 风云榜 列表 Begin -->
+  <view class="scroll_1" hidden="{{exhibitDisplayType==0? true:false}}">
+    <view class="noneWrap" wx:if="{{ exhibitBill_lists.length == 0 }}">
+    <block wx:if="{{exhibitionHistoryLoading}}">
+      <template is="loading"></template>
+    </block>
+    <block wx:else>
+      <template is="noData"></template>
+      <view class="noneTxt">敬请期待……</view>
+    </block>
+      
+    </view>
+
+    <view class="scroll_1Con" wx:if="{{exhibitBill_lists.length}}">
+
+      <!-- 1-2 Top10 列表 Begin -->
+      <block wx:for="{{exhibitBill_lists}}" wx:key="id">
+        <!-- status1 Top1 -->
+        <navigator url="../bookgoods/bookgoods?id={{item.exhibitionId}}" class="exhibit_item  {{item.rank==4?'exhibit_item2':''}} {{item.rank>4?'exhibit_item3':''}}">
+          <image class="exhibit_itemL" src="{{item.imgUrl}}"></image>
+          <image wx:if="{{item.rank<=3}}" class="bill_itemLabel" src="../../image/rk_LabelTop{{item.rank}}.png"></image>
+          <image wx:else class="bill_itemLabelNor" src="../../image/rk_LabelTop{{item.rank}}.png"></image>
+          <!--  right Begin -->
+          <view class="exhibit_itemR">
+            <view class="exhibit_itemTit {{item.rank==1?'titleTop1':''}} {{item.rank==2?'titleTop2':''}} {{item.rank==3?'titleTop3':''}}">{{item.name||''}}O2O线下看货厅</view>
+
+            <view class="exhibit_itemRB bill_itemRB">
+              <view class=" bill_itemPV">
+                <view>第一名</view>
+                <view class="itemPV ">{{item.firstRank}}</view>
+              </view>
+              <view class=" bill_itemPV">
+                <view>第二名</view>
+                <view class="itemPV ">{{item.secondRank}}</view>
+              </view>
+              <view class=" bill_itemPV">
+                <view>第三名</view>
+                <view class="itemPV ">{{item.thirdRank}}</view>
+              </view>
+
+              <image wx:if="{{item.rank<=3}}" class="exhibit_itemTop bill_itemTop" src="../../image/rk_BgTop{{item.rank}}.png"></image>
+
+            </view>
+
+
+          </view>
+          <!--  right end-->
+        </navigator>
+      </block>
+      <!-- 1-2 Top10  列表 ：end-->
+
+      <!--1-3  -->
+      <view class="to_lower" wx:if="{{isToLower}}">已经到底了~~</view>
+    </view>
+  </view>
+
+  <!-- 1-2 风云榜 列表 :end -->
+  <!--  ===================  风云榜:end  ========================   -->
+</view>
+
+<!-- tab2 采购列表  -->
+<!--  状态一 暂无数据 Begin 暂时隐藏 没有数据得情况  wx:if="{{ !busTop_lists.length }}" -->
+<view class="swiperItem" data-current="1" wx:if="{{switch_selNum == 1}}">
+  <view class="noneWrap" wx:if="{{ !busTop_lists.length }}">
+    <block wx:if="{{userWeekLoading}}">
+      <template is="loading"></template>
+    </block>
+    <block wx:else>
+      <template is="noData"></template>
+      <view class="noneTxt">敬请期待……</view>
+    </block>
+  </view>
+
+  <!-- 状态一 暂无数据 ：end -->
+  <!-- tab2- serch 状态二  有数据情况  wx:if="{{ busTop_lists.length }}"-->
+  <view class="serWrap" wx:if="{{ busTop_lists.length }}">
+    <view class="serSortCon {{isBusSortOpen?'serSortConAct':''}}" bindtap="busSortTapFn">
+      {{busSortSelect}}
+      <image class="serSortArow" src="../../image/mine_arowD.png"></image>
+      <view class="serSortList" hidden="{{ !isBusSortOpen }}">
+        <radio-group bindchange="busSortChangeFn">
+          <block wx:for="{{busSortData}}" wx:key="id">
+            <label class="serSortListItem  {{item.id == busSortSelectId? 'serSortListItemAct':''}}" data-item="{{item}}" bindtap="busSortChangeItemFn">
+              <view class="serSortListItL">
+                <radio value="{{item.name}}" checked="{{item.checked}}" hidden="true" />{{item.name}}
+              </view>
+              <view class="serSortListItR {{item.id == busSortSelectId? 'show':'hide'}}">
+                <icon class="serSortListItR_ok" type="success_no_circle" size="16" />
+              </view>
+            </label>
+          </block>
+        </radio-group>
+      </view>
+    </view>
+    <!--serch  说明  -->
+    <navigator class="serSortTip" url="../rankInstruct/rankInstruct">
+      <image class="serSortTip_help" src="../../image/rk_icon_help.png"></image>说明
+    </navigator>
+  </view>
+
+  <!-- tab2 scroll 状态二  有数据情况  wx:if="{{ bus_lists.length }}"-->
+  <!--  ===================  本周热门 前10  ========================   -->
+  <view class="scroll_1" wx:if="{{exhibitTop_lists.length}}" hidden="{{busDisplayType==1? true:false}}">
+    <view class="scroll_1Con">
+
+      <!-- 1-2 Top10 列表 Begin -->
+      <block wx:for="{{busTop_lists}}" wx:key="id">
+        <!-- status1 Top1 -->
+        <navigator url="../businessCredit/businessCredit?id={{item.user.id}}" class="exhibit_item  {{item.rank==4?'exhibit_item2':''}} {{item.rank>4?'exhibit_item3':''}}">
+          <image class="exhibit_itemL bus_itemL" src="{{item.imgUrl}}"></image>
+
+          <!--  right Begin -->
+          <view class="exhibit_itemR">
+            <view class="exhibit_itemTit {{item.rank==1?'titleTop1':''}} {{item.rank==2?'titleTop2':''}} {{item.rank==3?'titleTop3':''}}">{{item.name||''}}</view>
+
+            <view class="exhibit_itemRB">
+              <view class="exhibit_itemPV">
+                <view>总浏览量</view>
+                <view class="itemPV pvTop">{{item.viewCount||'0'}}</view>
+              </view>
+              <view class="exhibit_itemPV">
+                <view>热门指数</view>
+                <view class="itemPV {{item.rank<=3?'pvTop':''}}">{{item.marks}}</view>
+              </view>
+              <view class="exhibit_itemRank">
+                <view wx:if="{{item.rank>3}}">本周排名</view>
+                <view wx:if="{{item.rank>3}}" class="itemRank">{{item.rank <10? "0"+item.rank:item.rank}}</view>
+                </view>
+                <image wx:if="{{item.rank<=3}}" class="exhibit_itemTop" src="../../image/rk_top{{item.rank}}.png"></image>
+              </view>
+            </view>
+            <!--  right end-->
+        </navigator>
+      </block>
+      <!-- 1-2 Top10  列表 ：end-->
+
+      <!--1-3  -->
+      <view class="to_lower" wx:if="{{isToLower}}">已经到底了~~</view>
+      </view>
+    </view>
+    <!--  ===================  本周热门 前10 ：end ========================   -->
+
+
+    <!--  ===================  风云榜 Begin  ========================   -->
+    <!-- 1-2 风云榜 列表 Begin -->
+    <view class="scroll_1" hidden="{{busDisplayType==0? true:false}}">
+      <view class="noneWrap" wx:if="{{ busBill_lists.length == 0 }}">
+        <block wx:if="{{userHistoryLoading}}">
+          <template is="loading"></template>
+        </block>
+        <block wx:else>
+          <template is="noData"></template>
+          <view class="noneTxt">敬请期待……</view>
+        </block>
+      </view>
+
+      <view class="scroll_1Con" wx:if="{{busBill_lists.length}}">
+
+        <!-- 1-2 Top10 列表 Begin -->
+        <block wx:for="{{busBill_lists}}" wx:key="id">
+          <!-- status1 Top1 -->
+          <navigator url="../businessCredit/businessCredit?id={{item.userId}}" class="exhibit_item  {{item.rank==4?'exhibit_item2':''}} {{item.rank>4?'exhibit_item3':''}}">
+            <image class="exhibit_itemL bus_itemL" src="{{item.imgUrl}}"></image>
+            <image wx:if="{{item.rank<=3}}" class="bill_itemLabel" src="../../image/rk_LabelTop{{item.rank}}.png"></image>
+            <image wx:else class="bill_itemLabelNor" src="../../image/rk_LabelTop{{item.rank}}.png"></image>
+            <!--  right Begin -->
+            <view class="exhibit_itemR">
+              <view class="exhibit_itemTit {{item.rank==1?'titleTop1':''}} {{item.rank==2?'titleTop2':''}} {{item.rank==3?'titleTop3':''}}">{{item.name||''}}</view>
+
+              <view class="exhibit_itemRB bill_itemRB">
+                <view class=" bill_itemPV">
+                  <view>第一名</view>
+                  <view class="itemPV ">{{item.firstRank}}</view>
+                </view>
+                <view class=" bill_itemPV">
+                  <view>第二名</view>
+                  <view class="itemPV ">{{item.secondRank}}</view>
+                </view>
+                <view class=" bill_itemPV">
+                  <view>第三名</view>
+                  <view class="itemPV ">{{item.thirdRank}}</view>
+                </view>
+
+                <image wx:if="{{item.rank<=3}}" class="exhibit_itemTop bill_itemTop" src="../../image/rk_BgTop{{item.rank}}.png"></image>
+
+              </view>
+
+
+            </view>
+            <!--  right end-->
+          </navigator>
+        </block>
+        <!-- 1-2 Top10  列表 ：end-->
+
+        <!--1-3  -->
+        <view class="to_lower" wx:if="{{isToLower}}">已经到底了~~</view>
+      </view>
+    </view>
+  </view>
+  <!-- 1-2 风云榜 列表 :end -->
+  <!--  ===================  风云榜:end  ========================   -->

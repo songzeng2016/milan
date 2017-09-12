@@ -1,0 +1,18 @@
+/*组件抽取*/
+.act_item_itemCon{ display: flex; display: -webkit-flex; height: 150rpx; }
+.act_item_itemL{ width: 150rpx; height: 150rpx; margin-right: 19rpx; }
+.act_itemL{ position: relative;}
+.act_itemLPro{ width:150rpx ; height:150rpx ; }
+.act_itemLLabel{ position: absolute; left: 0; top: 0; width:90rpx; height: 90rpx; }
+.act_item_itemR{ flex: 1;font-size: 24rpx; color: #999; line-height: 40rpx;}
+.act_item_itemHead{ line-height: 35rpx; color: #333; font-size: 28rpx;height: 70rpx; overflow: hidden; font-weight: bold; text-align: justify;word-break: break-all; }
+.act_item_itemR_pos{ height: 40rpx; margin-top: 4rpx; overflow: hidden;}
+.act_item_Icon_pos{ width: 27rpx; height: 28rpx;vertical-align: -4rpx; margin-right: 11rpx; }
+.act_item_hiddensd{vertical-align: middle;}
+.act_item_itemR_btm{  margin-top:3rpx; height: 40rpx; line-height: 40rpx;}
+.act_item_startAct{ width: 59rpx; height: 24rpx; vertical-align: -4rpx;}
+.act_item_danger{ color: #ff3333;  margin-left: 10rpx; line-height: 26rpx; font-size: 24rpx; }
+.act_item_lightG{ color: #999;}
+.act_item_itemR_pv{ border-radius: 6rpx; height: 34rpx; line-height: 34rpx;float: right; text-align: left; margin-top:5rpx; padding: 0 10rpx;}
+.act_item_Icon_pv{ width: 26rpx; height: 19rpx; vertical-align: -2rpx;}
+.act_item_hiddens{overflow:hidden; max-width: 410rpx; text-overflow:ellipsis; white-space:nowrap; display: inline-block; vertical-align: middle;}

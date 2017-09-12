@@ -1,0 +1,175 @@
+<!-- 组件引入 -->
+<!-- 组件的引入  -->
+<import src="/components/supItem/supItem.wxml" />
+<import src="/components/noData/noData.wxml" />
+<import src="/components/switch/switch.wxml" />
+<import src="/components/loading/loading.wxml" />
+<!-- line1 tab切换 -->
+<template is="switch" data="{{switch_selTypes,switch_selNum}}"></template>
+
+<!-- 底部的发布按钮 -->
+<view url="../publish/publish" class="publishBtn" bindtap="publishSupply" hover-class="publishBtnAct" hover>
+  发布
+</view>
+
+<!-- line2 swiper  -->
+<swiper class="swiperCon" current="{{switch_selNum}}" bindchange="switchType" duration="300" circular="true">
+
+  <!-- tab1 销售中  -->
+  <swiper-item>
+    <scroll-view scroll-y="true" class="scrollWrap" bindscrolltolower="loadNextSupplyPage" wx:if="{{!!sup_lists1 && sup_lists1.length > 0}}" data-status="1">
+      <view class="sup_item" wx:for="{{sup_lists1}}" wx:key="id">
+
+        <!-- item line 1 -->
+        <navigator url="../supplyDetail/supplyDetail?supplyId={{item.id}}" class="sup_itemMain">
+          <template is="supItem" data="{{item,isSupImgTxt}}"></template>
+        </navigator>
+
+        <!-- item line1 End -->
+
+        <!-- item line2Begin -->
+        <view class="sup_itemBtns">
+          <view class="sup_itemTime">发布时间 {{item.createTimeStr}}</view>
+          <view class="sup_itemBtn" data-id="{{item.id}}" data-status="2" bindtap="updateProDown">下架</view>
+        </view>
+
+        <!-- item line2End -->
+      </view>
+      <view class="to_lower" wx:if="{{isOver1}}">已经到底了~~</view>
+      <view wx:if="{{isLoading}}" class="onloadingWrap">正在加载中…</view>
+    </scroll-view>
+
+    <!--  暂无数据信息 -->
+    <view class="noneWrap" wx:if="{{!sup_lists1 || sup_lists1.length <= 0}}">
+      <block wx:if="{{loading1}}">
+        <template is="loading"></template>
+      </block>
+      <block wx:else>
+        <template is="noData"></template>
+        <view class="noneTxt"> 暂无结果 </view>
+      </block>
+      
+    </view>
+  </swiper-item>
+
+  <!-- tab2 未通过  -->
+  <swiper-item class="pubWrap">
+    <scroll-view scroll-y="true" class="scrollWrap" bindscrolltolower="loadNextSupplyPage" wx:if="{{!!sup_lists3 && sup_lists3.length > 0}}" data-status="3">
+      <view class="sup_item" wx:for="{{sup_lists3}}" wx:key="id">
+
+        <!-- item line 1 -->
+        <view class="sup_itemMain">
+          <template is="supItem" data="{{item,isSupImgTxt}}"></template>
+        </view>
+
+        <!-- item line1 End -->
+
+        <!-- item item2 resonBegin -->
+        <view class="sup_itemReson" wx:if="{{item.reason}}">
+          <text class="color_danger">原因：</text>{{item.reason}}
+        </view>
+
+        <!-- item item2 reson :end -->
+
+        <!-- item line2Begin -->
+        <view class="sup_itemBtns">
+          <view class="sup_itemTime">发布时间 {{item.createTimeStr}}</view>
+          <navigator class="sup_itemBtn" url="../update/update?id={{item.id}}">修改</navigator>
+          <view class="sup_itemBtn" data-id="{{item.id}}" bindtap="deletePro">删除</view>
+        </view>
+
+        <!-- item line2End -->
+      </view>
+      <view class="to_lower" wx:if="{{isOver3}}">已经到底了~~</view>
+      <view wx:if="{{isLoading}}" class="onloadingWrap">正在加载中…</view>
+    </scroll-view>
+
+     <!--  暂无数据信息 -->
+    <view class="noneWrap" wx:if="{{!sup_lists3 || sup_lists3.length <= 0}}">
+      <block wx:if="{{loading3}}">
+        <template is="loading"></template>
+      </block>
+      <block wx:else>
+        <template is="noData"></template>
+        <view class="noneTxt"> 暂无结果 </view>
+      </block>
+     
+    </view>
+  </swiper-item>
+
+  <!-- tab3 待审核 -->
+  <swiper-item class="pubWrap">
+    <scroll-view scroll-y="true" class="scrollWrap" bindscrolltolower="loadNextSupplyPage" wx:if="{{!!sup_lists0 && sup_lists0.length > 0}}" data-status="0">
+      <view class="sup_item" wx:for="{{sup_lists0}}" wx:key="id">
+
+        <!-- item line 1 -->
+        <view class="sup_itemMain">
+          <template is="supItem" data="{{item,isSupImgTxt}}"></template>
+        </view>
+
+        <!-- item line1 End -->
+
+        <!-- item line2Begin -->
+        <view class="sup_itemBtns">
+          <view class="sup_itemTime">发布时间 {{item.createTimeStr}}</view>
+          <navigator class="sup_itemBtn" url="../update/update?id={{item.id}}">修改</navigator>
+          <view class="sup_itemBtn" data-id="{{item.id}}" bindtap="deletePro">删除</view>
+        </view>
+
+        <!-- item line2End -->
+      </view>
+      <view class="to_lower" wx:if="{{isOver0}}">已经到底了~~</view>
+      <view wx:if="{{isLoading}}" class="onloadingWrap">正在加载中…</view>
+    </scroll-view>
+
+    <!--  暂无数据信息 -->
+    <view class="noneWrap"  wx:if="{{!sup_lists0 || sup_lists0.length <= 0}}">
+      <block wx:if="{{loading0}}">
+        <template is="loading"></template>
+      </block>
+      <block wx:else>
+       <template is="noData"></template>
+       <view class="noneTxt"> 暂无结果 </view>
+      </block>
+     
+    </view>
+  </swiper-item>
+
+  <!-- tab4 待上架  -->
+  <swiper-item class="pubWrap">
+    <scroll-view scroll-y="true" class="scrollWrap" bindscrolltolower="loadNextSupplyPage" wx:if="{{!!sup_lists2 && sup_lists2.length > 0}}" data-status="2">
+      <view class="sup_item" wx:for="{{sup_lists2}}" wx:key="id">
+
+        <!-- item line 1 -->
+        <navigator class="sup_itemMain" url="../supplyDetail/supplyDetail?supplyId={{item.id}}&type=preview">
+          <template is="supItem" data="{{item,isSupImgTxt}}"></template>
+        </navigator>
+
+        <!-- item line1 End -->
+
+        <!-- item line2Begin -->
+        <view class="sup_itemBtns">
+          <view class="sup_itemTime">发布时间 {{item.createTimeStr}}</view>
+          <view class="sup_itemBtn" data-id="{{item.id}}" data-status="1" bindtap="updateProShow">上架</view>
+          <navigator class="sup_itemBtn" url="../update/update?id={{item.id}}">修改</navigator>
+          <view class="sup_itemBtn" data-id="{{item.id}}" bindtap="deletePro">删除</view>
+        </view>
+
+        <!-- item line2End -->
+      </view>
+      <view class="to_lower" wx:if="{{isOver2}}">已经到底了~~</view>
+      <view wx:if="{{isLoading}}" class="onloadingWrap">正在加载中…</view>
+    </scroll-view>
+    
+    <!--  暂无数据信息 -->
+    <view class="noneWrap"   wx:if="{{!sup_lists2 || sup_lists2.length <= 0}}">
+       <block wx:if="{{loading2}}">
+        <template is="loading"></template>
+      </block>
+      <block wx:else>
+        <template is="noData"></template>
+        <view class="noneTxt"> 暂无结果 </view>
+      </block>
+    </view>
+  </swiper-item>
+</swiper>

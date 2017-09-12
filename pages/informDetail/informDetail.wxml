@@ -1,0 +1,84 @@
+<view class="main">
+
+  <view class="main_top">
+    <view class="flock_title">群通知</view>
+    <view class="flock_dataTitlw">本群发 ({{informCreateYear}}) {{informSer}}号</view>
+    <view class="flock_img">
+      <image class="flock_line" src="../../image/notice_star.png"></image>
+    </view>
+    <view class="flock_mesTitle">{{informTitle}}</view>
+    <text class="flock_mesContent">{{informContent}}</text>
+    <view class="flock_name">{{informSigner}}</view>
+    <view class="flock_data">{{informCreateTime}}</view>
+  </view>
+  <!-- 状态二 有数据   -->
+  <view class="main_bottom" wx:if="{{!!historys && historys.length>0}}">
+    <view class="crowd_list">
+      <view class="crowd_de_Attr">
+        <view class="crowd_de_AttrTit actDel_sort">已查看人数({{ informCount || 0 }})</view>
+        <!--<text class="FR crowd_act_sort">查看人数</text>-->
+      </view>
+      <view class="crowd_act_UserDetWrap">
+        <!-- item Begin -->
+        <view class="crowd_act_UserDet" wx:for="{{historys}}" wx:key="id">
+          <view class="crowd_act_uName">
+            <image src="{{item.avatarUrl}}" wx:if="{{!!item.avatarUrl}}"></image>
+            <image src="../../image/por_default2.png" wx:else></image>
+
+            <text class="crowd_act_userName">{{item.nickName || '未知'}}</text>
+            <text class="crowd_act_reviewTime FR">{{item.createTime}}</text>
+          </view>
+          <view class="crowd_act_content">{{item.message}}</view>
+          <navigator url="../informLeaveMsg/informLeaveMsg?historyId={{item.id}}&informId={{informId}}" class="crowd_act_contentNull" wx:if="{{item.canLeaveMessage}}" hover-class="none">
+            <view class="crowd_btnMes">我要留言</view>
+          </navigator>
+        </view>
+      </view>
+    </view>
+
+    <!-- 已经到底部了  -->
+    <view class="de_STFootTip">已经到底了~~</view>
+  </view>
+  <!-- 状态二 有数据  ：end -->
+
+  <!--状态一 无数据 -->
+  <view class="noPeople" wx:else>
+    暂无人查看
+  </view>
+  <!--状态一 无数据 -->
+
+  <!-- line7 返回我的  -->
+  <navigator class="de_toIndex" hover-class="de_toIndexAct" open-type="switchTab" url="../mine/mine">
+    <image class="de_toIndexImg" src="../../image/toMine.png"></image>
+  </navigator>
+
+
+  <!-- 底部分享按鈕 Begin-->
+  
+
+<view class="not_bottom" wx:if="{{!isToEnd && isInformBtnShow}}">
+    <view class="not_shareItem">
+      <button open-type="share" class="not_shareBtn">
+        <image class="not_shareICon" src="../../image/notice_Icon_shares.png"></image>
+        <view class="not_size">分享</view>
+      </button>
+    </view>
+    <navigator class="not_shareItem" url="../informPublish/informPublish">
+      <view class="not_shareBtn2" bindtap="auths">
+        <view class="node_back">
+          <image class="not_shareICon" src="../../image/notice_Icon_edit.png"></image>
+          <view class="not_sizes"> 我也要发</view>
+        </view>
+      </view>
+    </navigator>
+  </view>
+
+    <view class="not_shareed" wx:else>
+    <view class="not_shareItemed">
+      <button open-type="shareed" open-type="share" class="not_shareBtned">
+        <image class="not_shareIConed" src="../../image/notice_Icon_share.png"></image>分享至微信群
+      </button>
+    </view>
+  </view>
+  <!-- 底部分享按鈕 ：end-->
+</view>

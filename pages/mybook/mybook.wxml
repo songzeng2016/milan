@@ -1,0 +1,34 @@
+<!--pages/mybook/mybook.wxml-->
+<scroll-view class="book_wrap" scroll-y="true">
+    <view class="book_Con" wx:for="{{bookList}}" wx:if="{{bookList}}">
+        <view class="book_head">
+            {{item.date}}
+        </view>
+        <view class="book_list" wx:for="{{item.list}}">
+            <!-- left -->
+            <view class="book_liL">
+                <image class="imgBg" src="../../image/book_bg.jpg"></image>
+                <view class="timeCon">
+                    <view class="timeStart">{{item.startTime}}</view>
+                    <view class="timeEnd">{{item.endTime}}</view>
+                </view>
+            </view>
+            <!-- right -->
+            <view class="book_liR">
+                <view class="liR_title">{{item.meetingRoomName}}</view>
+                <view class="liR_name">{{item.name}}</view>
+                <view class="liR_por">
+                    <image class="liR_proImg" src="{{item.avatarUrl}}"></image>
+                </view>
+                <button class="cancelBtn" hover-class="cancelBtnTap" bindtap="cancelBook" data-id="{{item.id}}">取消</button>
+            </view>
+        </view>
+    </view>
+    <!--  暂无数据信息 -->
+    <view class="no_load" wx:if="{{bookList.length <= 0}}">
+        <image src="../../image/book_bgNo.png" class="no_loadImg"></image>
+        <view class="no_loadTitle">还没有有效的预订记录哟~</view>
+        <view class="no_loadTxt">返回会议室列表预订吧~ </view>
+    </view>
+</scroll-view>
+

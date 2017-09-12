@@ -1,0 +1,9 @@
+/* de_comItem_前缀 */
+.de_comItem{ display: flex; display: -webkit-flex;}
+.de_comItem_L{ width: 44rpx; margin-right: 11rpx;}
+.de_comItem_LImg{ width: 44rpx; height: 44rpx; margin-top: 7rpx; border-radius: 50%;}
+.de_comItem_R{ flex: 1; font-size: 26rpx; color: #000; word-break: break-all;}
+.de_comItem_RHd{ color: #999; font-size: 24rpx; height: 44rpx; line-height: 44rpx; padding: 7rpx 0; }
+.de_comItem_RBd{ line-height: 36rpx;}
+.de_comItem_RFt{ line-height: 40rpx;}
+.de_comItem_RFtDel{ float: right;color: #ff3333; padding: 0 20rpx; margin-right: -20rpx; margin-bottom: -5rpx;}

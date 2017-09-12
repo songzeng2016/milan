@@ -1,0 +1,15 @@
+<!--
+组件说明： 顶部切换组件
+     顶部的切换 组件
+     需要参数   data="{{switch_selTypes,switch_selNum,swicth_selTitles}}"
+     switch_selTypes ： Array 必填  切换数组
+     switch_selNum   ： Number必填  当前索引
+     swicth_selTitles： Array 可选  顶部的标题 改变的是  setNavigationBarTitle
+-->
+<template name="switch">
+  <view class="switch_wrap">
+    <view wx:for="{{ switch_selTypes}}" bindtap="switchFn" class="{{switch_selNum==index? 'switch_selItemAct':'switch_selItem' }}" wx:key="index" data-current="{{index}}">
+      {{ item }}
+    </view>
+  </view>
+</template>

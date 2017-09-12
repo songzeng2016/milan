@@ -1,0 +1,6 @@
+/* pages/supplyNearList/supplyNearList.wxss */
+.scrollWrap{ height: 100%; position:  absolute; left: 0; top: 0; width: 100%;}
+.scrollCon{ height: 100%;}
+/* 供应列表 Begin */
+.sup_item{ margin: 0 20rpx; padding: 30rpx 0; border-bottom: 1px solid #ebebeb;}
+/* 供应列表 ：end */

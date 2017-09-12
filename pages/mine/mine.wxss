@@ -1,15 +1,21 @@
-page{background: #ebebeb;}
-.userinfo {height: 165rpx;background: #fff;margin-top: 30rpx; }
-.userinfo-avatar { width: 128rpx;height: 128rpx;margin: 20rpx;}
-.userinfo-nickname {height: 100rpx; color: #aaa;vertical-align: middle; display: inline-block;padding-bottom: 100rpx;}
-.usermotto { margin-top: 40rpx;background: #fff;height: 100rpx;font-size: 30rpx;}
-.mine_meg{margin: 200rpx 0; }
-.text_name{font-size: 32rpx;color: #000000;height: 60rpx;line-height: 60rpx;margin-top: 30rpx;}
-.text_msg{font-size: 26rpx;color: #a9a9a9;height: 60rpx;line-height: 60rpx; overflow:hidden;text-overflow:ellipsis;white-space:nowrap; }
-.del_img{width: 42rpx;height: 42rpx;margin: 70rpx 30rpx;}
-.set_img{width: 52rpx;height: 53rpx;margin: 25rpx;}
-.set_font{font-size: 30rpx;line-height: 100rpx;display: inline-block;}
-.set_imgs{width: 19rpx;height: 31rpx;margin: 35rpx 25rpx;}
-.fr{float: right;}
-.fl{float: left;}
-.disply{display: inline-block;}
+/* pages/mine/mine.wxss */
+page{background: #f4f5f4}
+
+.my_Info{ text-align: center;  background: #fff;position: relative; height: 300rpx; padding-bottom: 20rpx;}
+.my_InfoBg{ position: absolute; width: 100%; left: 0; top: 0; height: 300rpx;}
+.my_InfoMain{ position: relative;padding: 10rpx 0 30rpx;}
+.my_proCon{  width: 128rpx; height: 128rpx; margin: 0 auto; position: relative; border-radius: 50%;}
+.my_pro{ display: block; height: 120rpx; width: 120rpx; border-radius: 50%; position: absolute; left: 0rpx; top: 0rpx; right: 0; bottom: 0; margin: auto; box-shadow: 0 0 0 4rpx rgba(255,255,255,0.4);}
+.my_sex{ width:40rpx; height: 40rpx; position: absolute; right: 0; bottom: 0;}
+.my_sexImg{  width:40rpx; height: 40rpx; border-radius: 50%;}
+.my_name{ display: inline-block; color: #fff;  height: 60rpx; line-height: 60rpx;font-size: 34rpx; font-weight: bold; }
+.my_pos{ color: #fff; font-size: 24rpx; line-height: 40rpx;font-weight: bold; }
+.my_posImg{ width: 16rpx; height: 22rpx; position: relative; vertical-align: top; top: 10rpx; margin-right: 10rpx; margin-left: 20rpx;}
+.my_listNew{ width:40rpx; height:30rpx; vertical-align: top; position: relative; top: 15rpx; }
+/*  list */
+.my_list{ margin-bottom: 15rpx; background: #fff; overflow: hidden;}
+.my_arowR{ width: 14rpx; height: 24rpx; vertical-align: middle; margin-top: -3rpx; margin-left:10rpx;}
+.my_listItem{ font-size:28rpx; color:#333; height: 88rpx; line-height: 88rpx; margin: 0 20rpx; border-top:1px solid #ebebeb ; margin-top: -1px;}
+.my_listItemAct{ color: #f64400;}
+.my_listItem_sub{ float: right; color: #999; font-size: 24rpx;}
+.my_listImg{ float: left; width: 58rpx; height: 58rpx; margin-right: 16rpx; margin-top: 15rpx;}

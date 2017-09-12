@@ -1,0 +1,200 @@
+ <view class="enroll_popError" wx:if="{{errorMsg}}">{{errorMsg}}</view>
+<scroll-view scroll-y="true" class="scroll_1">
+ 
+  <view class="pubForm_con">
+    <form class="pubForm">
+        <!-- line1 name -->
+        <view class="pubFItem">
+            <view class="pubFItemCon1">
+                <view class="pubFItemL">商品标题</view>
+                <view class="pubFItemR">
+                    <input class="pubFItemR_Inp" placeholder-class="attr_Place" placeholder-style="color:#d9d9d9" placeholder="建议包含产品名和特性关键词" data-key="title" bindinput="bindFormData" value="{{supply_Form.title}}"/>
+                </view>
+                <view class="reminders" bindtap="showSupplyTitleTip">
+                    <image class="pub_dateIcon" src="../../image/supply_help.png"></image>
+                </view>
+            </view>  
+        </view>
+        <!-- line2  upload -->
+        <view class="pubFItem">
+            <view class="pubFItemCon1">
+                <view class="pubFItemL">商品图片</view>
+                <view class="pubFItemR">
+                    <text class="colorGray">(点击图片设为主图)</text>
+                    <button class="pubFItem_upload" type="default" bindtap="chooseSupplyPic" wx:if="{{supply_Form.imgs.length < 9 || true}}">点击上传({{supply_Form.imgs.length || 0}}/9)</button>
+                </view>
+            </view>
+            <!-- 上传的图片所在区域 -->
+            <scroll-view scroll-x="true">
+                <view class="uploadWrap">
+                    <view class="upload_Item" wx:for="{{supply_Form.imgs}}" wx:key="id">
+                        <image class="upload_Item_img" src="{{item.imgUrl}}" data-index="{{index}}" bindtap="changeMainImgFn"></image>
+                        <icon type="clear" size="16" class="upload_Btn" color="#f64400" bindtap="deleteSupplyPic" data-index="{{index}}"></icon>
+                        <view class="upload_mask show" wx:if="{{item.isMain}}">主图</view>
+                    </view>
+                </view>
+            </scroll-view>
+            <view class="clear"></view>
+        </view>
+        <!-- line3 price -->
+        <view class="pubFItem">
+            <view class="pubFItemCon1">
+                <view class="pubFItemL">商品单价</view>
+                <view class="pubFItemR_pri">
+                    <input class="pubFItemR_price"  type="digit" placeholder-class="attr_Place" placeholder-style="color:#d9d9d9" placeholder="请输入单价" data-key="minPrice" bindblur="bindFormDataPrice" value="{{supply_Form.minPriceStr}}"/>
+                </view>
+                <view class="pubFItemR_txt">元</view>
+                <view class="pub_Cut">/</view>
+                <view class="pubFItemR_un">
+                    <input class="pubFItemR_unit" placeholder-class="placeholder" placeholder-style="color:#d9d9d9" placeholder="计量单位(如:个/万个…)" data-key="unit" bindinput="bindFormData" value="{{supply_Form.unit}}"/>
+                </view>
+            </view>  
+        </view>
+        <!-- line4 attribute -->
+        <view class="pubFItem ">
+            <view class="pubFItemCon2 BorB" bindtap="editAttrs">
+                <view class="pubFItemL">规格属性</view>
+                <view class="pubFItemR pubFItemR_txtR">
+                    <text class="fontBold_center" wx:if="{{supply_Form.attrs.length > 0}}">已填写{{supply_Form.attrs.length}}项属性</text>
+                    {{supply_Form.attrs.length > 0 ? '' : '未添加'}} >
+                </view>
+            </view>
+        </view>
+        <!-- line5 address-->
+        <view class="pubFItem">
+            <view class="pubFItemCon1">
+                <view class="pubFItemL">发货地址</view>
+                <view class="pubFItemR">
+                    <button class="pubBtns" bindtap="supplyLocate" wx:if="{{supplyLocateError}}">获取定位失败</button>
+                    <button class="pubBtn" bindtap="supplyLocate" wx:elif="{{supply_Form.latitude == null}}">点击此处自动获取定位</button>
+                    <button class="pubBtn" bindtap="supplyLocate" wx:else>已成功获取定位</button>
+                    <icon type="String" />
+                    <input class="pubFItemR_Inp" />
+                </view>
+            </view>   
+        </view>
+        <view class="pubFItem2">
+            <view class="pubFItemCon1">
+                <view class="pubFItemL2"></view>
+                <view class="pubFItemR">
+                    <input class="pubFItemR_Inp2" placeholder-class="attr_Place" placeholder-style="color:#d9d9d9" placeholder="请填写详细街道地址" value="{{supply_Form.address}}" data-key="address" bindblur="bindFormData" />
+                </view>
+            </view>
+        </view>
+        <!-- line6 telphone-->
+        <view class="pubFItem">
+            <view class="pubFItemCon1">
+                <view class="pubFItemL">手机号码</view>
+                <view class="pubFItemR">
+                    <icon type="clear" class="icon_Btn" size="16" bindtap="resetSupplyTelephone" />
+                    <input class="pubFItemR_Inp" type="number" placeholder-style="color:#d9d9d9" placeholder="请输入您的手机号" bindblur="bindFormData"  data-key="telephone" value="{{supply_Form.telephone}}"/>
+                </view>
+            </view>  
+        </view>
+        <!-- line7 detail-->
+       
+        <view class="pubFItem" catchtap="editSupplyDesc">
+            <view class="act_details">
+                <view class="act_pubFItemL">商品详情</view>
+                <view class="pubFItemR">
+                    <view class="act_UserDetWrap">
+                        <view class="act_UserDet">
+                            <view class="act_content">
+                                <view class="act_optional" hidden="{{supply_Form.description}}">(选填)点击填写商品详情</view>
+                                {{supply_Form.description}}
+                            </view>
+                        </view>
+                    </view>
+                </view>
+            </view>
+        </view>
+         <view class="bottom_empty"></view>
+        <button class="pubFConfirm" hover-class="pubFConfirmAct" bindtap="supplySubmit">确认发布</button>
+    </form>  
+  </view>    
+</scroll-view>
+
+<!-- 规格属性 Begin-->
+<view class="attrWrap" wx:if="{{isAttrPopOpen}}">
+    <view class="attrCon">
+        <view class="attr_head_error" wx:if="{{popErrorMsg}}">{{popErrorMsg}}</view>
+        <view class="attr_Head">
+            <view class="attr_BtItemL " bindtap="cancelAttrEdit">取消</view>
+            <view class="attr_BtItemR" bindtap="confirmAttrEdit">确定</view>
+            选择规格属性
+        </view>
+        <scroll-view class="attr_scroll" scroll-y="true" scroll-top="{{scrollTop}}">
+            <view class="attr_Ct">
+                <view class="attr_common_B" wx:for="{{defaultAttrs}}" wx:key="*this" wx:if="{{attrs.length < 3}}">
+                    <view class="attr_CtItem attr_common_T">
+                        <view class="attr_CtItemL">属性</view>
+                        <input class="attr_Inp" placeholder-class="attr_Place" placeholder="{{item.key}}" value="{{attrs[index].key}}" bindinput="inputAttr" data-type="key" data-index="{{index}}"/>
+                    </view>
+                    <view class="attr_CtItem ">
+                        <view class="attr_CtItemL">属性值</view>
+                        <input class="attr_Inp" placeholder-class="attr_Place" placeholder="{{item.value}}" value="{{attrs[index].value}}" bindinput="inputAttr" data-type="value" data-index="{{index}}"/>
+                    </view>
+                </view>
+                <view class="attr_append" wx:for="{{attrs}}" wx:key="*this" wx:if="{{attrs.length > 2}}">
+                    <view class="attr_common_Bs" data-index="{{index}}" bindtouchstart="touchS" bindtouchmove="touchM" bindtouchend="touchE" style="left:{{item.left + 'rpx'}}">
+                        <view class="attr_CtItem attr_common_T attr_common_Ts">
+                            <view class="attr_CtItemL">属性</view>
+                            <input class="attr_Inp" placeholder-class="attr_Place" placeholder="{{defaultAttrs[index].key}}" value="{{item.key}}" bindinput="inputAttr" data-type="key" data-index="{{index}}"/>
+                        </view>
+                        <view class="attr_CtItem attr_common_Ts">
+                            <view class="attr_CtItemL">属性值</view>
+                            <input class="attr_Inp" placeholder="{{defaultAttrs[index].value}}" value="{{item.value}}" bindinput="inputAttr" data-type="value" data-index="{{index}}"/>
+                        </view>
+                    </view>
+                    <view class="attr_common_BL" wx:if="{{index > 1}}">
+                        <view class="attr_common_Dl" bindtap="removeAttr" data-index="{{index}}">删除</view>
+                    </view>
+                </view>
+            </view>
+        </scroll-view>
+        <button class="attr_addBtn" bindtap="addAttr">+ 添加属性</button>
+    </view>
+</view>
+<!-- 规格属性 End -->
+
+<!-- 供应商品标题提示 -->
+<view class="attrWrap1" wx:if="{{supplyTitleTip}}">
+  <view class="attrCon1">
+    <view class="advice">
+      <text class="attrCon1_texts">引起买家兴趣的标题需要包含什么？————</text>
+      <image class="supply_hint" src="../../image/supply_hint.png"></image>
+    </view>
+    <view class="advices">1、只含一个产品，且产品
+      <text class="attrCon1_text">名称通俗易懂</text>; </view>
+    <view class="advices">2、包含具有竞争力的
+      <text class="attrCon1_text">产品属性</text>; </view>
+    <view class="advices">3、包含产品
+      <text class="attrCon1_text">优惠政策</text>和
+      <text>促销信息</text>;</view>
+    <view class="advicesed"><text class="advices">例如:</text> 例如:正宗新疆阿克苏糖心苹果甜脆爽口10斤包邮</view>
+    <button class="advices_btn" bindtap="closeSupplyTitleTip">我知道了</button>
+  </view>
+</view>
+
+<!-- 商品详情编辑 -->
+<view class="ad_popWrap" wx:if="{{showSupplyDesc}}">
+    <view class="ad_popError" wx:if="{{popErrorMsg}}">{{popErrorMsg}}</view>
+    <view class="ad_popBg"></view>
+    <view class="ad_popCon">
+        <view class="ad_popHd">
+            <button class="ad_popHdL" bindtap="closeSupplyDesc">取消</button>
+            <button class="ad_popHdR" bindtap="confirmSupplyDesc">保存</button>
+            商品详情
+        </view>
+        <view class="ad_popFt">
+            <textarea class="ad_popArea" placeholder="请详细描述您的商品" placeholder-style="color:#cccccc" bindinput="supplyLetterCountFn" focus="{{showSupplyDesc}}" value="{{supplyDesc}}" maxlength="-1"/>
+        </view>
+        <view class="ad_popCout" wx:if="{{supplyLetterCount >= 0}}">
+            还可输入<text class="{{supplyLetterCount <= 10 ? 'colorDanger' : ''}}">{{supplyLetterCount}}</text> 字
+        </view>
+        <view class="ad_popCout" wx:else>
+            已经超出<text class="colorDanger">{{0 - supplyLetterCount}}</text> 字
+        </view>
+    </view>
+</view>
+

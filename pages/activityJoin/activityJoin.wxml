@@ -1,0 +1,17 @@
+<view class="content">
+  <view class="a_top">
+    <text class="de_ftItem">姓名</text>
+    <text class="de_ftItem a_border">联系电话</text>
+    <text class="de_ftItem">参加人数</text>
+  </view>
+  <view class="a_btm" wx:for="{{joinMap}}" wx:key="id">
+    <view class="a_time">
+        <text>{{index}}</text>
+    </view>
+    <view class="a_top a_mess" wx:for="{{item}}">
+      <text class="de_ftItem">{{item.userName}}</text>
+      <text class="de_ftItem">{{item.telephone}}</text>
+      <text class="de_ftItem">{{item.number || 1}}人</text>
+    </view>
+  </view>
+</view>

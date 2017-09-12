@@ -1,22 +1,112 @@
-<view>
-  <view class="userinfo">
-    <button wx:if="{{!hasUserInfo && canIUse}}" class="mine_meg" open-type="getUserInfo" bindgetuserinfo="getUserInfo"> 获取头像昵称 </button>
-    <block wx:else>
-      <!-- <image bindtap="bindViewTap" class="userinfo-avatar" src="{{userInfo.avatarUrl}}" background-size="cover"></image> 
-      <text class="userinfo-nickname">{{userInfo.nickName}}</text> -->
-      <image src='{{userInfo.avatarUrl}}' class='userinfo-avatar fl'></image>
-      <view class='fl list_msg'>
-          <view class='text_name'>{{userInfo.nickName}}</view>
-          <view class='text_msg '>微信号：{{motto}}</view>
+<view class="myWrap">
+
+  <!--  line1 -->
+  <view class="my_Info">
+    <image class="my_InfoBg" src="../../image/mine_bg.jpg"></image>
+    <view class="my_InfoMain">
+      <view class="my_proCon">
+        <image class="my_pro" src="{{user.avatarUrl}}"></image>
+        <view class="my_sex">
+          <!-- gender 1 男 gender 2 女 gender 0未知 -->
+          <image class="my_sexImg" src="../../image/mine_sex1.png" wx:if="{{user.gender==1}}"></image>
+          <image class="my_sexImg" src="../../image/mine_sex2.png" wx:if="{{user.gender==2}}"></image>
+        </view>
       </view>
-      <view class='disply fr list_r'>
-          <image src='../../image/ewm.png' class='del_img'></image>
-      </view> 
-    </block>
+      <view>
+        <text class="my_name">{{user.nickName || "未知"}}</text>
+        <view class="my_pos">
+          注册时间 {{user.createTime}}<image class="my_posImg" src="../../image/mine_pos.png"></image>{{province}} {{city}}
+        </view>
+        
+      </view>
+    </view>
   </view>
-  <view class="usermotto">
-    <image src='../../image/set.png' class='set_img fl'></image>
-     <text class="set_font">设置</text>
-     <image src='../../image/mine_path.png' class='set_imgs fr'></image>
+  <!-- line2 管理  -->
+  <view class="my_list">
+    <navigator class="my_listItem" url="../supplyManage/supplyManage" hover-class="my_listItemAct">
+      <image src="../../image/mine_sup.png" class="my_listImg"></image>供应管理
+      <view class="my_listItem_sub">
+        便捷管理供应商品
+        <image src="../../image/mine_arowR.png" class="my_arowR"></image>
+      </view>
+    </navigator>
+    <navigator class="my_listItem" url="../purchaseManage/purchaseManage" hover-class="my_listItemAct">
+      <image src="../../image/mine_pur.png" class="my_listImg"></image>采购管理
+      <view class="my_listItem_sub">
+        便捷管理采购产品
+        <image src="../../image/mine_arowR.png" class="my_arowR"></image>
+      </view>
+    </navigator>
   </view>
+  <!-- line3 展厅 -->
+  <view class="my_list">
+    <navigator class="my_listItem" url="../upreport/upreport?type=0" hover-class="my_listItemAct">
+      <image src="../../image/my_exhibit.png" class="my_listImg"></image>展厅管理
+      <view class="my_listItem_sub">
+        <image src="../../image/mine_arowR.png" class="my_arowR"></image>
+      </view>
+    </navigator>
+    <!--<navigator class="my_listItem" url="../upreport/upreport?type=2" hover-class="my_listItemAct">
+      <image src="../../image/mine_enter.png" class="my_listImg"></image>入驻展厅
+      <view class="my_listItem_sub">
+        <image src="../../image/mine_arowR.png" class="my_arowR"></image>
+      </view>
+    </navigator>-->
+     <view class="my_listItem" hover-class="my_listItemAct" bindtap="toActivity">
+      <image src="../../image/mine_active.png" class="my_listImg"></image>活动管理
+      <view class="my_listItem_sub">
+        <image src="../../image/mine_arowR.png" class="my_arowR"></image>
+      </view>
+    </view>
+    <!--<navigator class="my_listItem" url="../upreport/upreport?type=1" hover-class="my_listItemAct">
+      <image src="../../image/mine_join.png" class="my_listImg"></image>加盟展厅
+      <view class="my_listItem_sub">
+        <image src="../../image/mine_arowR.png" class="my_arowR"></image>
+      </view>
+    </navigator>-->
+  </view>
+  <!-- line4 活动 -->
+  <!--<view class="my_list">
+    <view class="my_listItem" hover-class="my_listItemAct" bindtap="toActivity">
+      <image src="../../image/mine_active.png" class="my_listImg"></image>活动管理
+      <view class="my_listItem_sub">
+        <image src="../../image/mine_arowR.png" class="my_arowR"></image>
+      </view>
+    </view>
+  </view>-->
+  <!-- line5 通知公告 -->
+
+  <view class="my_list">
+    <navigator class="my_listItem" url="../informList/informList" hover-class="my_listItemAct">
+      <image src="../../image/mine_inform.png" class="my_listImg"></image>发布群通知
+      <image src="../../image/mine_new.gif" class="my_listNew"></image>
+      <view class="my_listItem_sub">
+        高效查看成员已读统计<image src="../../image/mine_arowR.png" class="my_arowR"></image>
+      </view>
+    </navigator>
+    <navigator class="my_listItem" url="../noticeList/noticeList" hover-class="my_listItemAct">
+      <image src="../../image/mine_notice.png" class="my_listImg"></image>查看公告
+      <view class="my_listItem_sub">
+        <image src="../../image/mine_arowR.png" class="my_arowR"></image>
+      </view>
+    </navigator>
+  </view>
+
+  <!-- 意见 -->
+  <view class="my_list">
+    <navigator class="my_listItem" url="../advice/advice" hover-class="my_listItemAct">
+      <image src="../../image/mine_adv.png" class="my_listImg"></image>意见反馈
+      <view class="my_listItem_sub">
+        填写意见
+        <image src="../../image/mine_arowR.png" class="my_arowR"></image>
+      </view>
+    </navigator>
+     <navigator class="my_listItem" url="../aboutus/aboutus" hover-class="my_listItemAct">
+      <image src="../../image/mine_aboutus.png" class="my_listImg"></image>关于我们
+      <view class="my_listItem_sub">
+        <image src="../../image/mine_arowR.png" class="my_arowR"></image>
+      </view>
+    </navigator>
+  </view>
+
 </view>

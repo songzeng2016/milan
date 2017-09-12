@@ -1,0 +1,206 @@
+<!--pages/businessCredit/businessCredit.wxml-->
+<scroll-view class="scrollWrap" scroll-y="true" bindscroll="scrollFn">
+
+  <!-- line 1 个人信息 -->
+  <view class="bus_proWrap">
+    <view class="bus_proHd">
+      <view class="bus_proHdCon">
+        <image class="bus_proHd_img" wx:if="{{user.avatarUrl.length>0}}" src="{{user.avatarUrl}}"></image>
+        <image class="bus_proHd_img" wx:else="{{user.avatarUrl.length==0}}" src="../../image/por_default.png"></image>
+        <image class="bus_proHd_sex" src="../../image/mine_sex1.png" wx:if="{{user.gender==1}}"></image>
+        <image class="bus_proHd_sex" src="../../image/mine_sex2.png" wx:if="{{user.gender==2}}"></image>
+      </view>
+    </view>
+    <view class="bus_proBd" wx:if="{{!!user.nickName}}">{{user.nickName||''}}</view>
+    <view class="bus_proBd" wx:if="{{!user.nickName}}">未公开个人信息</view>
+    <view class="bus_proFt">
+      <text wx:if="{{user.createTime}}"> 注册时间 {{user.createTime}}</text>
+      <image class="bus_proFt_img" src="../../image/bus_pos.png"></image>
+      <block wx:if="{{user.province.length>0}}">
+        <text class="ML10">{{user.province||''}}{{user.city||''}}</text>
+      </block>
+      <block wx:if="{{user.province==null||user.province.length<=0}}">
+        <text class="ML10">未开启位置服务</text>
+      </block>
+    </view>
+  </view>
+
+  <!-- line2  tab -->
+  <view class="bus_sel {{ isToTab? 'bus_selFixed':''}}">
+    <view bindtap="bus_swichFn" data-current="0" class="{{bus_SelNum==0? 'bus_selLiSel':'bus_selLi' }}">
+      被举报({{complainTotal}})
+    </view>
+    <view bindtap="bus_swichFn" data-current="1" class="{{bus_SelNum==1? 'bus_selLiSel':'bus_selLi' }}">
+      近期发布({{publishTotal}})
+    </view>
+  </view>
+
+  <!-- line3 swiper -->
+  <swiper class="swiperWrap  {{ isToTab? 'swiperWrapFixed':''}}" current="{{ bus_SelNum}}" bindchange="bus_swichtConFn" duration="300" circular="true" style=" height:100%;">
+
+    <!-- tab1 被举报  -->
+    <swiper-item class="sup_Wrap">
+      <scroll-view scroll-y="{{!isToTab}}" class="innerScroll" bindscrolltolower="complainScrollPage">
+
+        <!--  状态一 暂无数据 Begin 暂时隐藏 没有数据得情况 wx:if="{{complainList.length==0}}"  -->
+        <view class="noneWrap" wx:if="{{complainList.length==0}}">
+          <view class="noneLogo">
+            <image class="noneLogo_img" src="../../image/act_logo.png"></image>
+          </view>
+          <view class="noneTxt">暂无举报内容</view>
+        </view>
+        <!-- 状态一 暂无数据 ：end -->
+
+        <block wx:for="{{complainList}}">
+
+          <!-- tab1  line 1 -->
+          <view class="sup_item bus_item" wx:if="{{item.supply}}">
+            <navigator url="../supplyDetail/supplyDetail?supplyId={{item.id}}">
+              <!-- left -->
+              <view class="sup_itemL bus_itemL">
+                <image class="sup_itemLPro bus_itemLPro" src="{{item.supply.mainImgUrl}}"></image>
+              </view>
+
+              <!-- right -->
+              <view class="sup_itemR bus_itemR">
+                <view class="sup_itemRTit sup_itemRTit_One">{{item.supply.title}}</view>
+                <view class="sup_itemPos">{{item.supply.originProvince }}{{item.supply.originCity }}({{item.supply.distance}})</view>
+                <view class="sup_itemDis">
+                  <view class="sup_itemPrice">
+                    <text class="sup_itemPriceUnit ">￥ {{item.supply.minPrice}}</text>
+                  </view>
+                  <view class="sup_itemPV">
+                    举报总数 {{item.count}}
+                  </view>
+                </view>
+              </view>
+            </navigator>
+          </view>
+
+          <view class="sup_item bus_item" wx:if="{{item.buy}}">
+            <navigator url="../purchaseDetail/purchaseDetail?buyId={{item.id}}">
+              <!-- left -->
+              <view class="sup_itemL bus_itemL">
+                <image class="sup_itemLPro bus_itemLPro" src="{{item.buy.mainImgUrl}}"></image>
+              </view>
+
+              <!-- right -->
+              <view class="sup_itemR bus_itemR">
+                <view class="sup_itemRTit sup_itemRTit_One">{{item.buy.title}}</view>
+                <view class="sup_itemPos">{{item.buy.originProvince }}{{item.buy.originCity }}({{item.buy.distance}})</view>
+                <view class="sup_itemDis">
+                  <view class="sup_itemTime">
+                    采购倒计时
+                    <text class="sup_itemTime_danger ">{{item.buy.deadLine}}</text>
+                  </view>
+                  <view class="sup_itemPV">
+                    举报总数 {{item.count}}
+                  </view>
+                </view>
+              </view>
+            </navigator>
+          </view>
+
+          <!-- tab1 line2 举报内容 -->
+          <view class="bus_resCon">
+            <text class="bus_resItem" wx:for="{{item.map}}" wx:for-item="complain_item">{{complain_item.name}}({{complain_item.num}})</text>
+            <view class="clear"></view>
+          </view>
+
+          <!-- tab1 line3 -->
+          <view class="bus_txCon">
+            <view class="bus_txItem" wx:for="{{item.list}}" wx:for-item="item_l">
+              <view class="bus_txItemHd">
+                <text class="bus_txItemTel">{{item_l.telephone}}</text>
+                <text class="bus_txItemTime">{{item_l.createTime}}</text>
+              </view>
+              <view class="bus_txItemBd">{{item_l.content}}</view>
+            </view>
+          </view>
+        </block>
+
+        <!-- 底部的  加载 已经到低部分了 -->
+        <view class="footPD">
+          <view class="onloadingWrap" wx:if="{{ isRefresh }}">
+            <image src="../../image/loadingImg.gif" class="onloadingImg"></image> 正在加载中…</view>
+          <view wx:if="{{ isComplainToLower }}" class="onloadingWrap">别扯了，到底了</view>
+        </view>
+      </scroll-view>
+    </swiper-item>
+
+    <!-- tab2 近期发布  -->
+    <swiper-item class="sup_Wrap">
+      <scroll-view scroll-y="true" class="innerScroll" bindscrolltolower="publishScrollPage">
+        <view wx:for="{{publishList}}" wx:key="id">
+
+          <!-- 1、 supply  供应数据 Begin -->
+          <view class="sup_item" wx:if="{{item.isSupplyData}}">
+
+            <!-- left -->
+            <navigator url="../supplyDetail/supplyDetail?supplyId={{item.id}}">
+
+              <view class="sup_itemL {{ item.imgurl? '':'sup_itemL_no'}}">
+                <image class="sup_itemLPro" src="{{item.imgurl}}" wx:if="{{item.imgurl}}"></image>
+                <image class="sup_itemLLabel" src="../../image/bus_supLb.png" wx:if="{{item.isSupplyData}}"></image>
+              </view>
+
+              <!-- right -->
+              <view class="sup_itemR {{ item.imgurl? '':'sup_itemR_no'}}">
+                <view class="sup_itemRTit">{{item.title}}</view>
+                <view class="sup_itemPos">{{item.address }}({{item.distance}})</view>
+                <view class="sup_itemDis">
+                  <view class="sup_itemPrice">
+                    <text class="sup_itemPriceUnit ">￥</text>{{item.price}}</view>
+
+                  <view class="sup_itemR_pv"> {{item.pvCount}}
+                    <image class="sup_Icon_pv" src="../../image/sup_De_eye.png"></image>
+                  </view>
+
+
+                </view>
+              </view>
+            </navigator>
+          </view>
+
+          <!-- 1、 supply  供应数据 End -->
+
+          <!-- 2、 purchase  求购数据 Begin -->
+          <view class="sup_item" url="../purchaseDetail/purchaseDetail?buyId={{item.id}}" wx:if="{{!item.isSupplyData}}">
+            <!-- left 判断 是否有图片 ，没有图片 添加class sup_itemL_no  sup_itemR_no-->
+            <navigator url="../purchaseDetail/purchaseDetail?buyId={{item.id}}">
+              <view class="sup_itemL {{ item.imgurl? '':'sup_itemL_no'}}">
+                <image class="sup_itemLPro" src="{{item.imgurl}}" wx:if="{{item.imgurl}}"></image>
+                <image class="sup_itemLLabel" src="../../image/bus_purLb.png"></image>
+              </view>
+              <!-- right -->
+              <view class="sup_itemR   {{ item.imgurl? '':'sup_itemR_no'}}">
+                <view class="sup_itemRTit">{{item.title}}</view>
+                <view class="sup_itemPos">{{item.address }}({{item.distance}})</view>
+                <view class="sup_itemDis">
+                  <view class="sup_itemTime">
+                    采购倒计时
+                    <text class="sup_itemTime_danger ">{{item.deadline}}</text>
+                  </view>
+                  <view class="sup_itemR_pv"> {{item.pvCount}}
+                    <image class="sup_Icon_pv" src="../../image/sup_De_eye.png"></image>
+                  </view>
+
+                  
+                </view>
+              </view>
+            </navigator>
+          </view>
+
+          <!-- 2、  purchase  求购数据 End  -->
+        </view>
+
+
+        <!-- 底部的 加载   -->
+        <view class="onloadingWrap" wx:if="{{ isRefresh }}">
+          <image src="../../image/loadingImg.gif" class="onloadingImg"></image> 正在加载中…</view>
+        <view wx:if="{{ isPublishToLower }}" class="onloadingWrap">别扯了，到底了</view>
+
+      </scroll-view>
+    </swiper-item>
+  </swiper>
+</scroll-view>

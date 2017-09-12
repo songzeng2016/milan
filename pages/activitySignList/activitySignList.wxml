@@ -1,0 +1,116 @@
+<!--activitySignList.wxml-->
+<import src="/components/switch/switch.wxml" />
+<import src="/components/noData/noData.wxml" />
+<import src="/components/loading/loading.wxml" />
+<template is="switch" data="{{switch_selTypes,switch_selNum}}"></template>
+<!--报名表-->
+<view class="swiper" data-current="0" wx:if="{{switch_selNum == 0 }}">
+  <view class="list_Wrap" wx:if="{{ joinMap && joinMap.length>=1}}">
+
+    <view class="list_Top">
+      <view class="list_TopsL">
+        <view class="list_Num list_Nums">{{newNumber||0}}</view>
+        <view class="list_titleCon">新增报名人数</view>
+      </view>
+
+      <view class="list_TopsR">
+        <view class="list_Num list_Nums">{{jonNums.joinCount || 0}}</view>
+        <view class="list_titleCon">总报名人数</view>
+      </view>
+    </view>
+    <scroll-view scroll-y="true" scroll-x="true" class="list_scroll">
+      <view class="list_headline_L">
+        <view class="list_headline_title">
+          <view class="list_Order">序号</view>
+          <view class="list_SignName">参与者姓名</view>
+          <view class="list_Tel">手机号</view>
+          <view class="list_Company">公司名称</view>
+          <view class="list_Time">报名时间</view>
+        </view>
+        <view class="a_btm" wx:for="{{joinMap}}" wx:key="id">
+          <view class="list_headline_content">
+            <view class="list_Order">{{item.nums}}</view>
+            <view class="list_SignName">{{item.userName}}</view>
+            <view class="list_Tel">{{item.telephone}}</view>
+            <view class="list_Company">{{item.corporation}}</view>
+            <view class="list_Time">{{item.createTime}}</view>
+          </view>
+
+        </view>
+      </view>
+    </scroll-view>
+  </view>
+  <view class="noneWrap" wx:if="{{ !joinMap.length || joinMap.length == 0}}">
+
+    <block wx:if="{{isLoading1}}">
+      <template is="loading"></template>
+    </block>
+    <block wx:else>
+      <template is="noData"></template>
+      <view class="noneTxt">暂无报名信息</view>
+    </block>
+
+  </view>
+
+</view>
+<!--签到表-->
+<view class="swiper" data-current="1" wx:if="{{switch_selNum == 1 }}">
+  <view class="list_Wrap" wx:if="{{ signMap && signMap.length>=1}}">
+    <view class="list_Top">
+      <view class="list_TopL">
+        <view class="list_TopL_L">
+          <view class="list_Num">{{signNums.signJoin || 0}}</view>
+          <view class="list_titleCon">报名并签到</view>
+        </view>
+        <view class="list_TopL_R">
+          <view class="list_Num">{{signNums.signOnly || 0}}</view>
+          <view class="list_titleCon">未报名仅签到</view>
+        </view>
+      </view>
+
+      <view class="list_TopR">
+        <view class="list_Num list_Nums">{{signNums.signTotal || 0}}</view>
+        <view class="list_titleCon">总签到人数</view>
+      </view>
+    </view>
+    <scroll-view scroll-y="true" scroll-x="true" class="list_scroll">
+      <view class="list_headline_R">
+        <view class="list_headline_title">
+          <view class="list_Order">序号</view>
+          <view class="list_Sign">是否已报名</view>
+          <view class="list_SignName">签到者姓名</view>
+          <view class="list_Tel">手机号</view>
+          <view class="list_Company">公司名称</view>
+          <view class="list_Time">签到时间</view>
+        </view>
+        <view class="list_btm" wx:for="{{signMap}}" wx:key="id">
+          <view class="list_headline_content">
+            <view class="list_Order">{{item.rank}}</view>
+            <view class="list_whether" wx:if="{{item.join == true}}">
+              <view class="list_Sign">是</view>
+            </view>
+            <view class="list_whether" wx:if="{{item.join == false}}">
+              <view class="list_Signs">否</view>
+            </view>
+
+            <view class="list_SignName">{{item.name}}</view>
+            <view class="list_Tel">{{item.phone}}</view>
+            <view class="list_Company">{{item.corporation}}</view>
+            <view class="list_Time">{{item.createTime}}</view>
+          </view>
+
+        </view>
+      </view>
+    </scroll-view>
+  </view>
+  <view class="noneWrap" wx:if="{{ !signMap.length || signMap.length == 0}}">
+    <block wx:if="{{isLoading2}}">
+      <template is="loading"></template>
+    </block>
+    <block wx:else>
+      <template is="noData"></template>
+      <view class="noneTxt">暂无签到信息</view>
+    </block>
+
+  </view>
+</view>

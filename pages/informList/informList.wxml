@@ -1,0 +1,65 @@
+<!--pages/informList/informList.wxml-->
+<import src="/components/loading/loading.wxml" />
+<view class="not_Wrap">
+  <view class="not_Con" wx:if="{{ !!informLists && informLists.length >0}}">
+    <block wx:for="{{informLists}}" wx:key="{{item.id}}">
+      <view class="not_Item" data-index="{{index}}" bindtouchstart="touchS" bindtouchmove="touchM" bindtouchend="touchE" style="left:{{ item.left + 'rpx'}}"  >
+        <!-- left  -->
+        <navigator class="not_ItemCon" url="../informDetail/informDetail?informId={{item.id}}">
+          <!-- line 1 head -->
+          <view class="not_ItemHd">
+            <image class="not_Icon_loud" src="../../image/inform_bg.png"></image>
+            <view class="not_ItemHd_tit">{{item.title}}</view>
+          </view>
+          <!-- line2 body -->
+          <view class="not_ItemBd">
+            <text class="not_ItemBdTxt">{{item.content}}</text>
+          </view>
+          <!-- line 3 foot  -->
+          <view class="not_ItemFt">
+            <view class="not_ItemFtL">{{item.createTime}}</view>
+
+            <view class="not_ItemFtR">
+              已有
+              <text class="not_ItemFtR_count">{{item.num}}</text>人查看
+            </view>
+          </view>
+        </navigator>
+        <!-- right Remove -->
+        <view class="not_Item_Remove" bindtap="inform_removeFn" data-id="{{item.id}}">删除</view>
+      </view>
+      <!-- item :end -->
+    </block>
+
+     <!--1-3  -->
+    <view class="de_STFootTip" wx:if="{{isOver}}">已经到底了~~</view>
+    <view class="onloadingWrap" wx:if="{{isLoading}}">
+      <image src="../../image/loadingImg.gif" class="onloadingImg"></image> 正在加载…</view>
+
+      
+  </view>
+  <navigator url="../informPublish/informPublish" class="pubWrap"  wx:if="{{ !!informLists && informLists.length >0}}">
+    <button class="pubFConfirm" hover-class="pubFConfirmAct" hover>发布群通知</button>
+  </navigator>
+  <!-- 没有数据的情况 Begin -->
+  <view class="noneWrap"  wx:if="{{ !informLists || informLists.length == 0 }}">
+      <block wx:if="{{initLoading}}">
+        <template is="loading"></template>
+      </block>
+      <block wx:else>
+        <view class="noneLogo">
+            <image class="noneLogo_img" src="../../image/act_logo.png"></image>
+          </view>
+          <view class="noneTxt">
+            <view class="">您暂未发布群通知 </view>
+            <view class="">点击按钮可发布群通知</view>
+          </view>
+          <view bindtap="publishConfirm">
+          <button class="noneBtn" hover-class="noneBtnAct" hover>发布群通知</button>
+          </view>
+
+      </block>
+ </view> 
+
+  <!-- 没有数据得情况:end -->
+</view>

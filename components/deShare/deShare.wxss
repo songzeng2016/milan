@@ -1,0 +1,8 @@
+/*分享*/
+.de_sha_wrap{ position: fixed; left: 0; top: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); z-index: 99;}
+.de_sha_con{ position: absolute; width: 100%; left: 0; bottom: 0;}
+.de_sha_body{ background: #fff; padding: 35rpx 88rpx 21rpx;  text-align: center;}
+.de_sha_img{ width: 88rpx; height: 88rpx; border-radius:12rpx ; border: 1rpx solid #ccc;}
+.de_sha_txt{ line-height: 52rpx; height: 52rpx; font-size: 24rpx; color: #333;}
+.de_sha_devide{height:  10rpx; background:  rgba(255,255,255,0.8);}
+.de_sha_foot{ background: #fff; height: 98rpx; line-height: 98rpx; color: #000; font-size: 34rpx; text-align: center; }

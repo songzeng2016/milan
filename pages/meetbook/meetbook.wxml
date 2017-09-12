@@ -1,0 +1,56 @@
+<form bindsubmit="formSubmit" report-submit="true">
+    <!--line1  预定部门 -->
+    <view class="formItem">
+        <view class="formItem_R">
+            <input class="formItem_RTxt" type="text" name="depart" placeholder="预定部门" />
+        </view>
+    </view>
+    <!--line2 预订人 -->
+    <view class="formItem">
+        <view class="formItem_R">
+            <input class="formItem_RTxt" type="text" name="name" placeholder="预订人" />
+        </view>
+    </view>
+    <!-- line3 date -->
+    <view class="formItem">
+        <view class="formItem_L">日期</view>
+        <view class="formItem_R">
+            <picker class="pickerDate" bindchange="changeDate" value="{{initDateIndex}}" range="{{bookDate}}" mode="selector">
+                {{index}}
+                {{bookDate[initDateIndex]}}
+            </picker>
+        </view>
+    </view>
+    <!-- line4 time -->
+    <view class="formItem">
+        <view class="formItem_L">时间</view>
+        <view class="formItem_R" bindtap="selTimeFn">
+            {{initTime}}
+            <input class="formItem_RTxt hidden" type="number" value="{{initTime}}" />
+        </view>
+    </view>
+    <!-- line5提交按钮 -->
+    <view class="form_submit">
+        <button type="primary" size="default" form-type="submit">确定</button>
+    </view>
+</form>
+
+<!-- mask -->
+<view class="mask" wx:if="{{isPopOpen}}">
+    <view class="maskCon">
+        <view class="maskItem" wx:for="{{bookTimes}}">
+            <view  class="maskItemTxt {{item.disabled ? 'disabled' : ''}}  {{item.selected ? 'selected' : ''}}" 
+            bindtap="{{item.disabled ? '' : 'selectTime'}}" data-id="{{item}}">
+            {{item.time}}
+            </view>
+        </view>
+        <view class="clear"></view>
+        <view class="mask_btn">
+            <button type="primary" size="default" bindtap="popConfirmFn">确定</button>
+        </view>
+    </view>
+</view>
+
+
+
+

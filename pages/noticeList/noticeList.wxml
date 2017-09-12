@@ -1,0 +1,43 @@
+<!--pages/noticeList/noticeList.wxml-->
+<!-- 组件引入 -->
+<import src="../../components/noData/noData.wxml" />
+<import src="/components/loading/loading.wxml" />
+<view class="not_Wrap">
+  <view class="not_Con" wx:if="{{ !!noticeLists && noticeLists.length >0}}">
+    <block wx:for="{{noticeLists}}" wx:key="id">
+      <navigator class="not_Item" url="../noticeDetail/noticeDetail?noticeId={{item.id}}">
+        <view class="not_ItemHd">
+          <image wx:if="{{item.isRead}}" class="not_Icon_loud" src="../../image/notice_bgDis.png"></image>
+          <image wx:else class="not_Icon_loud" src="../../image/notice_bg.png"></image>
+
+          <view class="not_ItemHd_tit {{item.isRead ? 'not_ItemHd_titDis':'' }}">{{item.title}}</view>
+        </view>
+        <view class="not_ItemBd">
+          <text class="not_ItemBdTxt">{{item.content}}</text>
+        </view>
+        <view class="not_ItemFt">
+          <view class="not_ItemFtL {{item.isRead ? 'not_ItemFtLDis':''}}">{{item.createTime}}</view>
+
+          <view class="not_ItemFtR">
+            查看详情
+            <image class="not_Icon_arowR" src="../../image/mine_arowR.png"></image>
+          </view>
+        </view>
+      </navigator>
+
+    </block>
+  </view>
+
+  <!-- 没有数据的情况 Begin -->
+  <view class="noneWrap" wx:else>
+    <block wx:if="{{loading}}">
+        <template is="loading"></template>
+      </block>
+      <block wx:else>
+        <template is="noData"></template>
+        <view class="noneTxt"> 暂无公告 </view>
+      </block>
+
+  </view>
+  <!-- 没有数据得情况:end -->
+</view>

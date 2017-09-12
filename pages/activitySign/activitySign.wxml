@@ -1,0 +1,47 @@
+<view class="sign_title" wx:if="{{type != 'show'}}">
+ <view class="sign_popError" wx:if="{{popErrorMsg}}">{{popErrorMsg}}</view>
+  <image src="{{activity.imgList.imgUrl}}" class="sign_img" mode="center"></image>
+  <view class="sign_mask"></view>
+  <view class="sign_title_text">
+  <view class="sign_title_textCent">{{activity.title}}</view>
+  </view>
+</view>
+<view class="sign_centent">
+  <form bindsubmit="goDetail">
+    <view class="sign_nape">
+      <view class="sign_name">姓名</view>
+      <view class="sign_popHd">
+        <input class="sign_inp" placeholder="请填写真实姓名" placeholder-style="color:#808580;" bindinput="nameTxtFn" name="inputName" value="{{name}}" disabled="{{type == 'show'}}"/>
+        <icon class="sign_clear" type="clear" size="20" wx:if="{{!!name && type != 'show'}}" bindtap="clearName"/>
+      </view>
+    </view>
+
+    <view class="sign_nape">
+      <view class="sign_tel">手机</view>
+      <view class="sign_popHd">
+        <input class="sign_inp" placeholder="请输入手机号" type="number" placeholder-style="color:#808580;" bindinput="phoneTxtFn" name="inputTel" maxlength="11" value="{{phone}}" disabled="{{type == 'show'}}"/>
+        <icon class="sign_clear" type="clear" size="20" wx:if="{{!!phone && type != 'show'}}" bindtap="clearPhone"/>
+      </view>
+    </view>
+
+    <view class="sign_nape">
+      <view class="sign_company">公司名称</view>
+      <view class="sign_popHd">
+        <input class="sign_inp" placeholder="请输入公司名称" placeholder-style="color:#808580;" bindinput="corporationTxtFn" name="inputCompany" value="{{corporation}}" disabled="{{type == 'show'}}"/>
+        <icon class="sign_clear" type="clear" size="20" wx:if="{{!!corporation && type != 'show'}}" bindtap="clearCorporation"/>
+      </view>
+    </view>
+
+
+    <button class="sign_btn" hover-class="informBtnAct" hover form-type="submit">{{type == 'show' ? '已签到' : '确认签到'}}</button>
+  </form>
+
+  <view class="sign_message" wx:if="{{type != 'show'}}">
+    <view class="sign_msTime">
+      <text>活动时间：</text><text>{{activity.start}} ~ {{activity.end}}</text>
+    </view>
+     <view class="sign_msAdd">
+      <text class="sign_msAdd_contentL">活动地址：</text><text class="sign_msAdd_contentR">{{activity.address}}</text>
+     </view>
+  </view>
+</view>

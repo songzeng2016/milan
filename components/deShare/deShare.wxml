@@ -1,0 +1,25 @@
+<!--
+组件说明 详情页面的分享组件
+wxml需要传递参数
+    data="{{isShareOpen}}" //分享弹窗是否显示
+js需要使用参数
+   isShareOpen 
+-->
+<template name="deShare">
+  <view class="de_sha_wrap" hidden="{{isShareOpen}}">
+    <view class="de_sha_con">
+      <view class="de_sha_body flex">
+        <button class="flex_1" open-type="share">
+          <image class="de_sha_img" src="../../image/act_shareTWeChat.png"></image>
+          <view class="de_sha_txt">分享至好友</view>
+        </button>
+        <view class="flex_1">
+          <image class="de_sha_img" src="../../image/act_shareTQRCode.png"></image>
+          <view class="de_sha_txt">生成分享图</view>
+        </view>
+      </view>
+      <view class="de_sha_devide"></view>
+      <view class="de_sha_foot" bindtap="close">关闭</view>
+    </view>
+  </view>
+</template>

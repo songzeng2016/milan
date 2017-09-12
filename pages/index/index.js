@@ -1,121 +1,311 @@
-// pages/find/find.js
-const app = getApp()
-const { wc } = app
-let { openId } = app
-const { data, isSuccess, success } = wc
+import { domain } from '../../utils/domain';
+import { wk } from '../../utils/wk';
+import { auth, auth2 } from '../../utils/auth';
+var app = getApp();
+var GPS = app.GPS;
 
 Page({
-
-  /**
-   * 页面的初始数据
-   */
   data: {
-    lists: [
-      { id: "001", imgurl: "../../image/1.jpg", state: 1, name: '土耳其咖啡馆', msg: '[120条]宁娟：@张小炽 羡慕羡慕', time: '23:15' },
-      { id: "002", imgurl: "../../image/1.jpg", state: 2, name: '一季花开、一季花落', msg: '的思维习惯和行为习惯，从而在自相矛盾的大道理中无法前行。', time: '23:15' },
-      { id: "003", imgurl: "../../image/1.jpg", state: 1, name: '一季花开、一季花落', msg: '爱尔兰雪、土耳其蓝、莫斯科眼泪。我都收藏在小小的太阳里、还有晴天和微笑。', time: '23:15' },
-      { id: "004", imgurl: "../../image/1.jpg", state: 1, name: '一季花开、一季花落', msg: '的思维习惯和行为习惯，从而在自相矛盾的大道理中无法前行。', time: '23:15' },
-      { id: "005", imgurl: "../../image/1.jpg", state: 2, name: '一季花开、一季花落', msg: '爱你、给你我生命所有的美好、然后退场、让万花筒灿烂你的眼瞳。', time: '23:15' },
-      { id: "006", imgurl: "../../image/1.jpg", state: 1, name: '一季花开、一季花落', msg: '的思维习惯和行为习惯，从而在自相矛盾的大道理中无法前行。', time: '23:15' }
-    ],
+    onloading: true,
+    searchTypes: ["展厅", "供应", "求购", "活动"],
+    searchTypeIndex: 0,
+    //data 地图控件
+    centerLongitude: 117.0445,
+    centerLatitude: 39.41499,
+    scale: 9,
+    controls: [],
+    markers: []
   },
-
-  // 进入聊天室
-  navToTalk: function (e) {
-    let data = e.currentTarget.dataset
-    wc.navigateTo('/pages/talk/talk?id=' + data.id)
+  onLoad: function () {
   },
+  onReady: function () {
+    this.setData({
+      onloading: !this.data.onloading
+    });
+    this.mapCtx = wx.createMapContext('map');
+    setTimeout(function () {
+      console.log("moveToLocation onready");
+      wx.createMapContext('map').moveToLocation();
+    }, 500);
+  },
+  onShow: function () {
+    //授权验证 2017-07先注释
+    auth2('userInfo', 'userLocation');
+    var that = this;
+    setTimeout(function () {
+      showIcon(that);
+    }, 500);
 
-  // 删除聊天室
-  deleteChatRoom: function (e) {
-    console.log(e.currentTarget.dataset.id)
-    const that = this
-    let getData = {
-      Action: 'DoDelUserChatroom',
-      OpenID: openId,
-      ID: e.currentTarget.dataset.id
+    setTimeout(function () {
+      console.log("moveToLocation onready");
+      wx.createMapContext('map').moveToLocation();
+    }, 100);
+    var index = this.data.searchTypeIndex;
+    switch (index) {
+      case 0: selectAllExhibition(that); break;
+      case 1: selectAllSupply(that); break;
+      case 2: selectAllBuy(that); break;
+      case 3: selectAllAdvice(that); break;
+      default: break;
+    }
+  },
+  switchSeachType(e) {
+    var that = this;
+    var index = e.target.dataset.current;
+    if (index == this.data.searchTypeIndex) {
+      return false;
+    }
+    this.setData({ searchTypeIndex: index });
+    switch (index) {
+      case 0: selectAllExhibition(that); break;
+      case 1: selectAllSupply(that); break;
+      case 2: selectAllBuy(that); break;
+      case 3: selectAllAdvice(that); break;
+      default: break;
+    }
+  },
+  markertap(e) {
+    console.log(e.markerId);
+    var markerId = e.markerId;
+    var marker = this.data.markers.filter(item => item.id == e.markerId)[0];
+    var cate = marker.cate;
+    //点击展厅的marker
+    if (cate == "exhibition") {
+      wk.navigateTo({
+        url: '../bookgoods/bookgoods?id=' + markerId
+      });
+    }
+    else if (cate == "supply") {
+      wk.navigateTo({
+        url: '../supplyDetail/supplyDetail?supplyId=' + markerId
+      });
+    }
+    else if (cate == "buy") {
+      wk.navigateTo({
+        url: '../purchaseDetail/purchaseDetail?buyId=' + markerId
+      });
+    }
+    //点击留言的marker
+    else if (cate == "advice") {
+      wk.navigateTo({
+        url: '../activityDetail/activityDetail?activityId=' + markerId
+      });
     }
 
-    wc.get(getData, (json) => {
-      if (json[isSuccess] === success) {
-        wc.showToast(['删除成功'])
+  },
+  controltap(e) {
+    var that = this;
+    var id = e.controlId;
+    switch (id) {
+      case "refresh":
+        //刷新页面
+        var index = that.data.searchTypeIndex;
+        switch (index) {
+          case 0: selectAllExhibition(that); break;
+          case 1: selectAllSupply(that); break;
+          case 2: selectAllBuy(that); break;
+          case 3: selectAllAdvice(that); break;
+          default: break;
+        }
+        break;
+      case "here":
+        this.mapCtx.moveToLocation();
+        this.setData({ scale: -1 });
+        this.setData({ scale: 9 });
+        break;
+      case "all":
+        //黑魔法，手动缩放地图，map的scale值并不会跟着改变，所以点击全国按钮只有第一次生效，手动修改scale可以解决这个问题。
+        this.setData({ scale: -1 });
+        this.setData({ scale: 2 });
+        break;
+    }
+  },
+});
+//计算地图控件位置和大小
+function mapControlPosition(left, top) {
+  return {
+    left: left, top: top, width: 40, height: 40
+  }
+}
+//显示地图控件
+function showIcon(page) {
+  wx.getSystemInfo({
+    success: function (res) {
+      var winW = res.windowWidth;
+      var winH = res.windowHeight;
+      var newControls = [
+        {
+          id: "refresh",
+          iconPath: '/image/ind_side1.png',
+          position: mapControlPosition(10, winH - 230 - 44),
+          clickable: true
+        },
+        {
+          id: "here",
+          iconPath: '/image/ind_side2.png',
+          position: mapControlPosition(10, winH - 180 - 44),
+          clickable: true
+        },
+        {
+          id: "all",
+          iconPath: '/image/ind_side3.png',
+          position: mapControlPosition(10, winH - 130 - 44),
+          clickable: true
+        },
+      ];
+      page.setData({
+        controls: newControls
+      });
+    }
+  });
+}
+//获取展厅信息
+function selectAllExhibition(page) {
+  wx.request({
+    url: domain + '/exhibitions/',
+    method: 'GET',
+    success: function (res) {
+      console.log(res.data);
+      var markers = [];
+      if (!!res.data) {
+        let list = res.data.list;
+        for (var i in list) {
+          var item = list[i];
+          console.log("latitude:"+item.latitude+" ,longitude:"+item.longitude);
+          var position = GPS.gcj_encrypt(item.latitude, item.longitude);
+          markers.unshift({
+            cate: 'exhibition',
+            id: item.id,
+            name: item.title,
+            address: item.address,
+            telephone: item.telephone,
+            latitude: position.lat,
+            longitude: position.lon,
+            iconPath: '/image/ind_maPosZ' + (item.status + 1) + '.png',
+            width: 38,
+            height: 44
+          });
+        }
+        console.log("markers:======================");
+        
+        page.setData({
+          markers: markers
+        });
+        console.log(page.data.markers);
       }
-    }, true)
-  },
+    },
+    complete: function () {
 
-  // 获取聊天室列表
-  getLists: function () {
-    const that = this
-    let getData = {
-      Action: 'GetUserChatroomList',
-      OpenId: openId,
-      pageSize: 20,
-      pageIndex: 1
     }
-
-    wc.get(getData, (json) => {
-      if (json[isSuccess] === success) {
-        that.setData({
-          lists: json[data]
+  });
+}
+//获取供应信息
+function selectAllSupply(page) {
+  wx.request({
+    url: domain + '/supplies/page',
+    method: "GET",
+    data:{status:1},
+    success: function (res) {
+      console.log(res);
+      var markers = [];
+      if (!!res.data) {
+        for (var i in res.data) {
+          var item = res.data[i];
+          var position = GPS.gcj_encrypt(item.latitude, item.longitude);
+          markers.push({
+            cate: 'supply',
+            id: item.id,
+            name: item.title,
+            latitude: position.lat,
+            longitude: position.lon,
+            iconPath: '/image/ind_maPosG2.png',
+            width: 38,
+            height: 44
+          });
+        }
+        page.setData({
+          markers: markers
+        });
+      }
+    },
+    fail: function () {
+      wk.showModal({
+        title: '提示',
+        content: '获取供应信息失败，请稍后再试',
+        showCancel: false
+      });
+    }
+  });
+}
+//获取采购信息
+function selectAllBuy(page) {
+  wx.request({
+    url: domain + '/buys/page',
+    method: 'GET',
+    data: { isValid: 1 },
+    success: function (res) {
+      console.log(res);
+      var markers = [];
+      if (!!res.data) {
+        for (var i in res.data) {
+          var item = res.data[i];
+          var position = GPS.gcj_encrypt(item.latitude, item.longitude);
+          markers.push({
+            cate: 'buy',
+            id: item.id,
+            name: item.title,
+            latitude: position.lat,
+            longitude: position.lon,
+            iconPath: '/image/ind_maPosC2.png',
+            width: 38,
+            height: 44
+          });
+        }
+        page.setData({
+          markers: markers
+        });
+      }
+    },
+    fail: function () {
+      wx.showModal({
+        title: '提示',
+        content: '获取采购信息失败，请稍后再试',
+        showCancel: false
+      });
+    }
+  });
+}
+//获取留言信息
+function selectAllAdvice(page) {
+  wx.request({
+    url: domain + '/activities',
+    method: 'GET',
+    success: function (res) {
+      console.log(res);
+      var list = res.data.list;
+      var markers = [];
+      if (!!list) {
+        for (var i in list) {
+          var item = list[i];
+          var type = 1
+          var position = GPS.gcj_encrypt(item.latitude, item.longitude);
+          markers.push({
+            cate: 'advice',
+            id: item.id,
+            type: type,
+            comment: item.comment,
+            latitude: position.lat,
+            longitude: position.lon,
+            iconPath: '/image/ind_maPosH1.png',
+            width: 38,
+            height: 44
+          });
+        }
+        page.setData({
+          markers: markers
         })
       }
-    })
-  },
-
-  /**
-   * 生命周期函数--监听页面加载
-   */
-  onLoad: function (options) {
-    openId = wx.getStorageSync('openId')
-    // this.getLists()
-  },
-
-  /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
-  onReady: function () {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面显示
-   */
-  onShow: function () {
-    this.getLists()
-  },
-
-  /**
-   * 生命周期函数--监听页面隐藏
-   */
-  onHide: function () {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面卸载
-   */
-  onUnload: function () {
-
-  },
-
-  /**
-   * 页面相关事件处理函数--监听用户下拉动作
-   */
-  onPullDownRefresh: function () {
-
-  },
-
-  /**
-   * 页面上拉触底事件的处理函数
-   */
-  onReachBottom: function () {
-
-  },
-
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage: function () {
-
-  }
-})
+    },
+    fail: function () { }
+  });
+}

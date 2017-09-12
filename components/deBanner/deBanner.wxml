@@ -1,0 +1,14 @@
+<!-- 组件介绍:
+     详情页的轮播  宽:高=  1:1
+     需要传递 参数 data="{{ bannerImgs }}" 
+ -->
+<template name="deBanner">
+  <view class="de_ban_wrap">
+    <swiper class="de_ban_con" circular="true" autoplay="true" interval="3000" duration="200" indicator-dots="true"  bindtap="previewImgs" wx:if="{{bannerImgs.length > 0}}">
+      <swiper-item wx:for="{{bannerImgs }}" wx:key="*this">
+        <image class="de_ban_img" src="{{item.cutImgUrl}}"></image>
+      </swiper-item>
+    </swiper>
+    <image class="de_ban_bg" src="../../image/supDe_bg.png"></image>
+  </view>
+</template>

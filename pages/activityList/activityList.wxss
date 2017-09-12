@@ -1,0 +1,29 @@
+/* pages/supplyManage/supplyManage.wxss */
+.scrollWrap{  background:  #f4f5f4; margin-top: 88rpx;}
+
+/* 活动列表 Begin */
+.act_item{ background: #fff; margin-top: 15rpx; }
+.act_itemHead{ height: 76rpx; line-height: 76rpx; font-size: 24rpx; color: #333; margin: 0 20rpx; position: relative;}
+.act_itemHeadImg{ width: 26rpx; height: 26rpx; vertical-align: top; position: relative; top: 25rpx; margin-right: 10rpx; }
+
+.act_item_Body{  padding: 16rpx 20rpx; background:#fafafa; }
+.act_itemBtns{text-align: right; margin: 0 20rpx;height: 88rpx; }
+.act_itemTime{font-size: 20rpx;  color:#969996; line-height: 67rpx; }
+
+.act_itemBtn{ height: 58rpx; line-height:56rpx; font-size: 24rpx; color: #333;min-width: 150rpx; padding: 0 10rpx; text-align: center; border: 1px solid #ccc; border-radius: 4rpx;margin:0 0 0 15rpx;   margin-top: 15rpx; float: right; box-sizing: border-box; }
+.act_itemReson{margin: 0 20rpx;  font-size: 24rpx; color: #969996; text-align: left; line-height: 30rpx; padding: 30rpx 0 8rpx; }
+/* 活动列表 :end*/
+
+/* 暂无数据 情况 Begin */
+.noneWrap{padding-top: 150rpx; background: #fff; }
+.noneTxt{font-size: 28rpx;color: #333;margin-top: 20rpx;text-align: center; line-height: 40rpx;}
+/* 暂无数据 情况 ：end */
+
+/* 二维码弹窗 Begin */
+.QR_Wrap{ background: rgba(0,0,0,0.5); position: fixed; left: 0; top: 0; height: 100%; width: 100%; z-index: 99; display: flex; display: -webkit-flex; flex: 1;}
+.QR_Con{width: 560rpx; margin:  0 auto; padding-bottom: 60rpx;position: relative;}
+.QR_Body{ background: #fff; border-radius: 10rpx; height: 560rpx; text-align: center; font-size: 24rpx; }
+.QR_iconClose{ position: absolute; right: -35rpx; top: -35rpx; width: 50rpx; height: 50rpx; padding: 20rpx;}
+.QR_iconCloseImg{width: 50rpx; height: 50rpx;}
+.QR_BodyImg{ width: 430rpx; height: 430rpx; padding-top: 52rpx; }
+/* 二维码弹窗 ：end */

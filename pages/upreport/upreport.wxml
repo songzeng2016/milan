@@ -1,0 +1,200 @@
+<!-- 组件引入 -->
+<import src="/components/switch/switch.wxml" />
+<!-- line1 tab切换 -->
+<template is="switch" data="{{switch_selTypes,switch_selNum}}"></template>
+<swiper class="swiper" current="{{switch_selNum}}" bindchange="switchTab" duration="300" circular="true">
+  <!-- tab切换1 -->
+  <view class="enroll_popError" wx:if="{{errorMsg1}}">{{errorMsg1}}</view>
+  <swiper-item class="pubWrap">
+    <scroll-view scroll-y="true" class="scroll_1">
+
+      <form bindsubmit="submit" class="pubForm">
+        <!-- line2 展厅位置 -->
+        <view class="pubFItem">
+          <view class="pubFItemCon1">
+            <view class="pubFItemL">展厅位置</view>
+            <view class="pubFItemR">{{form.coordinate}}</view>
+            <view class="pubFItemR_btn">
+              <button class="pubFItem_pos" type="default" hover-class="pubFItem_uploadAct" bindtap="locateUser">定位</button>
+            </view>
+          </view>
+          <view class="pubFItemCon1 BorT">
+            <view class="pubFItemR">
+              <input class="pubFItemR_Inp" placeholder="请输入展厅详细地址" type="text" placeholder="请输入展厅详细地址" value="{{form.address}}" data-key="address" bindblur="bindFormData" />
+            </view>
+          </view>
+        </view>
+        <!--line2 上传图片 -->
+        <view class="pubFItem">
+          <view class="pubFItemCon1">
+            <view class="pubFItemL">商品图片</view>
+            <view class="pubFItemR">
+              <text class="colorGray">点击图片设为主图</text>
+              <button class="pubFItem_upload" type="default" bindtap="choosePic" wx:if="{{form.imgs.length < 9}}">上传图片</button>
+            </view>
+          </view>
+          <!-- 上传的图片所在区域 -->
+          <view class="upload_Wrap">
+            <view class="upload_Item_con" wx:for="{{form.imgs}}" wx:key="id">
+              <image class="upload_Img" src="{{item.imgUrl}}" bindtap="changeMainPic" data-index="{{index}}"></image>
+              <icon type="clear" size="23" class="upload_Btn" color="#f64400" bindtap="deletePic" data-index="{{index}}"></icon>
+              <view class="upload_mask show" wx:if="{{item.isMain}}">主图</view>
+            </view>
+          </view>
+          <view class="clear"></view>
+        </view>
+        <!--line3 基地名称 -->
+        <view class="pubFItem">
+          <view class="pubFItemCon1">
+            <view class="pubFItemL">基地名称</view>
+            <view class="pubFItemR {{form.name ? '' : 'colorGray'}}" bindtap="exhibitNameFocus">
+              {{form.name || '请选择基地'}}
+            </view>
+          </view>
+        </view>
+        <!--line4  提交人 -->
+        <view class="pubFItem ">
+          <view class="pubFItemCon2">
+            <view class="pubFItemL">提交人</view>
+            <view class="pubFItemR">
+              <input class="pubFItemR_Inp" type="text" placeholder="你的姓名" value="{{form.operator}}" data-key="operator" bindblur="bindFormData" />
+            </view>
+          </view>
+        </view>
+        <!--line5  手机号 -->
+        <view class="pubFItem ">
+          <view class="pubFItemCon2">
+            <view class="pubFItemL">手机号码</view>
+            <view class="pubFItemR">
+              <input class="pubFItemR_Inp" type="number" placeholder="你的手机号" value="{{form.telephone}}" data-key="telephone" bindblur="bindFormData" />
+            </view>
+          </view>
+        </view>
+        <!--line6  备注 -->
+        <view class="pubFItem" bindtap="showInput">
+          <view class="pubFItemCon3" bindtap="wakeUpDeAreaFn1">
+            <view class="pubFItemL">备注信息</view>
+            <view class="pubFItemR">
+              <!-- 模拟 textarea  点击时候 显示 input，input 失去焦点 显示 的是view -->
+              <input class="pubFItemR_Inp" wx:if="{{isEdit}}" placeholder="请输入备注" value="{{form.description}}" bindinput="upReportTxtAreaFn" bindblur="hideInput" focus="{{isEdit}}" />
+              <view class="pubFItemR_Area {{form.description ? '' : 'colorGray'}}" wx:if="{{!isEdit}}">
+                {{form.description || '请输入备注'}}
+              </view>
+            </view>
+          </view>
+        </view>
+        <!-- line7 提交按钮 -->
+        <button class="pubFConfirm" hover-class="pubFConfirmAct" form-type="submit">提交</button>
+      </form>
+    </scroll-view>
+  </swiper-item>
+  <!-- tab切换2  -->
+  <swiper-item class="pubWrap">
+    <scroll-view scroll-y="true" class="scroll_1 scroll_bg">
+      <view class="joinWrap">
+        <view class="joinHead">【加盟说明】</view>
+        <view class="joinTxt">加盟益处</view>
+        <view class="joinTxt">1.成为网库O2O展厅的一员，产品可在全国200个网库线下展厅进行联展；</view>
+        <view class="joinTxt">2.还可以在网库旗下2000多个产业联盟网线上联展；</view>
+        <view class="joinTxt">3.使用[展厅活动]小程序，进行现场采购招商及节日展会活动；</view>
+        <view class="joinTxt">4.具体加盟条件，联系客服
+          <text class="colorLink" bindtap="callus">{{telephone}}</text>
+        </view>
+      </view>
+    </scroll-view>
+  </swiper-item>
+  <!-- tab切换3 -->
+  <swiper-item class="pubWrap">
+    <scroll-view scroll-y="true" class="scroll_1">
+      <view class="enroll_popError" wx:if="{{errorMsg2}}">{{errorMsg2}}</view>
+      <form bindsubmit="submitHall" class="pubForm">
+        <!--line1  公司名称 -->
+        <view class="pubFItem">
+          <view class="pubFItemCon1">
+            <view class="pubFItemL">公司名称</view>
+            <view class="pubFItemR">
+              <input class="pubFItemR_Inp" type="text" value="{{productForm.corporation}}" bindblur="finishInput" data-key="corporation" placeholder="请输入公司名称" />
+            </view>
+          </view>
+        </view>
+        <!--line2  手机号 -->
+        <view class="pubFItem">
+          <view class="pubFItemCon1">
+            <view class="pubFItemL">手机号码</view>
+            <view class="pubFItemR">
+              <input class="pubFItemR_Inp" type="number" value="{{productForm.telephone}}" bindblur="finishInput" data-key="telephone" placeholder="你的手机号" />
+            </view>
+          </view>
+        </view>
+        <!--line3  入驻展厅 -->
+        <view class="pubFItem">
+          <view class="pubFItemCon3">
+            <view class="pubFItemL">入驻展厅</view>
+            <view class="pubFItemR {{productForm.nameStr ? '' : 'colorGray'}}" bindtap="exhibitNameFocusMul">
+              <view class="pubFItemR_Area">{{productForm.nameStr || '请选择展厅'}}</view>
+              <input class="pubFItemR_Inp hidden" placeholder="请选择展厅" value="{{productForm.nameStr}}" />
+            </view>
+          </view>
+        </view>
+        <!--line4  备注 -->
+        <view class="pubFItem">
+          <view class="pubFItemCon3" bindtap="showInput2">
+            <view class="pubFItemL">备注信息</view>
+            <view class="pubFItemR">
+              <!-- 模拟 textarea  点击时候 显示 input，input 失去焦点 显示 的是view -->
+              <input class="pubFItemR_Inp" wx:if="{{isEdit2}}" placeholder="请输入备注" value="{{productForm.backup}}" bindinput="exhibitTxtAreaFn" bindblur="hideInput2" focus="{{isEdit2}}" />
+              <view class="pubFItemR_Area {{productForm.backup ? '' : 'colorGray'}}" wx:if="{{!isEdit2}}">
+                {{productForm.backup || '请输入备注'}}
+              </view>
+            </view>
+          </view>
+        </view>
+        <!-- line7提交按钮 -->
+        <button class="pubFConfirm" hover-class="pubFConfirmAct" form-type="submit">提交</button>
+      </form>
+    </scroll-view>
+  </swiper-item>
+</swiper>
+
+<!-- 基地名称弹窗 -->
+<view class="popBase" wx:if="{{exhibitShow}}">
+  <scroll-view class="popBaseCon" scroll-y="true">
+    <icon type="clear" class="popBaseCon_close" size="26" color="#f64400" bindtap="confirmBase"></icon>
+    <view class="popBaseItem" wx:for="{{baseList}}">
+      <view class="popBaseItemH">{{item.name}}</view>
+      <view class="popBaseItemB">
+        <view class="{{form.baseId == item.id ? 'popBaseItemB_nameSel' : 'popBaseItemB_name'}}" wx:for="{{item.base}}" bindtap="chooseBase" data-id="{{item.id}}" data-name="{{item.name}}">{{item.name}} </view>
+      </view>
+    </view>
+    <button class="pubFConfirm" bindtap="confirmBase">确定</button>
+  </scroll-view>
+</view>
+
+<!-- 入驻展厅弹窗 -->
+<view class="popBase" wx:if="{{exhibitShowMul}}">
+  <scroll-view class="popBaseCon" scroll-y="true">
+    <icon type="clear" class="popBaseCon_close" size="26" color="#f64400" bindtap="exhibitOkMulFn"></icon>
+    <view class="popBaseItem" wx:for="{{baseList}}">
+      <view class="popBaseItemH">{{item.name}}</view>
+      <view class="popBaseItemB">
+        <!-- 选中的 样式popBaseItemB_nameSel  没有选中 popBaseItemB_name ，这里 三元运算符  selected=1 表示选中 -->
+        <view class="{{item.selected == 1 ? 'popBaseItemB_nameSel' : 'popBaseItemB_name'}}" wx:for="{{item.base}}" bindtap="exhibitSelNumMulFn" data-id="{{item.id}}" data-name="{{item.name}}" data-selected="{{item.selected}}">{{item.name}} </view>
+      </view>
+    </view>
+    <button class="pubFConfirm" bindtap="exhibitOkMulFn">确定</button>
+  </scroll-view>
+</view>
+
+<!-- 分享确认 -->
+<view class="sha_popWrap" wx:if="{{showShare}}">
+  <view class="sha_popCon">
+    <view class="sha_popHead">正在生成分享图片…</view>
+    <view class="sha_popCount">{{shareCloseSeconds}}</view>
+    <view class="sha_popTxt">长按图片或点击右上角三个点保存图片。将图片分享至朋友圈，提高宣传效率
+    </view>
+    <view class="sha_popFt ">
+      <view class="sha_popBtnCancel" bindtap="closeShareImg">取消</view>
+      <view class="sha_popBtnOK" bindtap="previewShareImg">直接生成图片</view>
+    </view>
+  </view>
+</view>

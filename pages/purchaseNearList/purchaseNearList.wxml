@@ -1,0 +1,19 @@
+<!--pages/purchaseNearList/purchaseNearList.wxml-->
+<!-- 组件的引入  -->
+<import src="/components/purItem/purItem.wxml" />
+
+<view class="scrollWrap">
+  <scroll-view class="scrollCon" scroll-y="true" bindscrolltolower="loadNextBuyPage">
+    <navigator class="pur_item" wx:for="{{buyList}}" wx:key="id" url="../purchaseDetail/purchaseDetail?buyId={{item.id}}">
+      <template is="purItem" data="{{item}}"></template>
+    </navigator>
+
+    <!--1-3  -->
+    <view wx:if="{{ isOver }}" class="to_lower">已经到底了~~</view>
+
+    <!-- 1-4 正在加载中 -->
+    <view class="onloadingWrap" wx:if="{{isLoading}}">
+      <image src="../../image/loadingImg.gif" class="onloadingImg"></image> 正在刷新…
+    </view>
+  </scroll-view>
+</view>

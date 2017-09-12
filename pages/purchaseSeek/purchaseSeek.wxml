@@ -1,0 +1,70 @@
+<!--pages/purchaseSeek/purchaseSeek.wxml-->
+<!-- 组件的引入  -->
+<import src="/components/purItem/purItem.wxml" />
+<import src="/components/noData/noData.wxml" />
+<import src="/components/loading/loading.wxml" />
+
+<!-- line 1 顶部的 搜索 -->
+<view class="seekWrap">
+  <view class="seekL">
+    <icon class="seekIcon" type="search" size="14"></icon>
+    <input class="seekInp" placeholder="请输入搜索内容" bindfocus="showHistory" bindinput="showCancleFlag" bindconfirm="searchPurchase" value="{{purSortSelTxt}}" />
+    <icon class="seekClear" type="clear" size="14" color="#aaa" bindtap="clearSearch" wx:if="{{showCancle}}" />
+  </view>
+  <view class="seekBtn" bindtap="backToList">返回</view>
+</view>
+
+<!-- line 2 排序方式 -->
+<view class="serSortWrap" wx:if="{{isSortWay&&!showHistory}}">
+  <view class="serSortItem " wx:for="{{purSortData}}" wx:key="id">
+    <view class="serSortInner {{purSortSelId==item.id ?'serSortInnerAct':'' }}" bindtap="purSortSelFn" data-item="{{item}}">
+      <icon class="serSortItemR_ok" type="success_no_circle" size="16" hidden="{{purSortSelId !=item.id }}" /> {{item.name}}
+    </view>
+  </view>
+</view>
+
+<!-- line3  历史记录  暂时先隐藏 如果需要显示 去掉 -->
+<view class="hisWrap" wx:if="{{showHistory}}">
+  <view class="hisHead">历史记录</view>
+
+  <!-- 状态一 历史记录  有历史记录 -->
+
+  <!-- wx:key 后面的参数 id   是一个主键 -->
+  <view class="hisList" wx:if="{{ purchaseSearchHistory.length&&showHistory}}" wx:for="{{purchaseSearchHistory}}" wx:key="id">
+    <view class="hisListItem" bindtap="selectHistoryValue" data-history="{{item}}">{{item}}</view>
+  </view>
+
+  <!-- 状态二 历史记录  暂无记录 -->
+  <view class="hisListNo" wx:if="{{ !purchaseSearchHistory.length&&showHistory}}">暂无历史记录</view>
+</view>
+
+<!-- line4 搜索的列表 -->
+<view class="scroll_1">
+  <!-- 状态一 列表数据 有数据情况 Begin -->
+  <!-- 注意 ：有 排序方式的情况下 addclass  scroll_1ConSort  -->
+  <view class="scroll_1Con" wx:if="{{pur_lists.length}}">
+
+
+    <!-- 1-2 列表 -->
+    <navigator class="pur_item" url="../purchaseDetail/purchaseDetail?buyId={{item.id}}" wx:for="{{pur_lists}}" wx:key="id">
+      <template is="purItem" data="{{item}}"></template>
+    </navigator>
+
+    <!--1-3  -->
+    <view class="onScrollFoot" wx:if="{{ to_lower }}">别扯了，到底了</view>
+  </view>
+  <!-- 状态一 列表数据 有数据情况 ：end-->
+  <!--  状态二 暂无数据 Begin 暂时隐藏 没有数据得情况 如果显示 请去掉 hidden="true" -->
+  <view class="noneWrap" wx:if="{{!pur_lists.length}}">
+    <block wx:if="{{loading}}">
+      <template is="loading"></template>
+    </block>
+    <block wx:else>
+      <template is="noData"></template>
+      <view class="noneTxt">没有搜索到您想要的内容</view>   
+    </block>
+
+  </view>
+
+  <!-- 状态二暂无数据 ：end -->
+</view>

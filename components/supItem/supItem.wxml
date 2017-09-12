@@ -1,0 +1,34 @@
+<!-- 组件说明
+     供应的图文列表 组件的抽取 
+     需要传递  参数 data="{{ item , isSupImgTxt}}" 
+     变量1： item 数组的每一项
+     变量2： isSupImgTxt: 图文切换变量
+-->
+<template name="supItem">
+  <view class="sup_item_Con">
+    <!-- left -->
+    <image class="sup_item_L" src="{{item.imgUrl}}" wx:if="{{isSupImgTxt}}"></image>
+
+    <!-- right Begin -->
+    <view class="sup_item_R">
+      <view class="sup_item_Head">{{item.title}}</view>
+      <view class="sup_item_R_pos">
+        <image class="sup_item_iconTruck" src="../../image/sup_De_truck.png"></image>{{item.originProvince||''}} {{item.originCity||''}}({{item.distance}})
+      </view>
+
+      <!-- 占位的 sup_item_R_state -->
+      <view class="sup_item_R_btm">
+        <view class="sup_item_R_price">
+          <text class="sup_item_R_pSym">¥</text>
+          <text class="sup_item_R_pNum">{{item.minPrice}}</text>
+          <text class="sup_item_R_pUnit" wx:if="{{!!item.unit}}">/{{item.unit}}</text>
+        </view>
+        <view class="sup_item_R_pv">
+           {{item.viewCount||'0'}}
+          <image class="sup_item_iconPV" src="../../image/sup_De_eye.png"></image>
+        </view>
+      </view>
+    </view>
+    <!-- right :end -->
+  </view>
+</template>

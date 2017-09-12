@@ -1,0 +1,29 @@
+/* pages/commentList/commentList.wxss */
+.scrollWrap{ height: 100%; position: absolute; left: 0; top: 0; width: 100%;}
+.de_AttrTitArowR{  vertical-align: middle; width:14rpx; height: 24rpx; margin-top: -6rpx; margin-left:10rpx; }
+.de_Attr{  background: #fff; }
+.de_AttrTit{font-size: 24rpx; height: 76rpx; line-height: 76rpx;  }
+.de_AttrTit{ color: #969996;  padding: 0 20rpx; border-bottom: 1px solid #ebebeb; border-left:4rpx solid #09bb07 ;}
+/*用户评论 Begin*/
+.pubFItemL{font-size: 30rpx; color: #333;height: 76rpx; line-height: 76rpx; border-bottom: 1px solid #f4f4f4;}
+.pubFItemR{ font-size: 24rpx;color: #999; line-height: 40rpx; padding-left: 18rpx}
+.actDel_long{width: 6rpx;height:76rpx;background-color:#09bb07;}
+.actDel_sort{padding-left: 18rpx;}
+.de_green{ color: #09bb07;}
+.act_uName image{width: 44rpx;height: 44rpx;border-radius:200rpx; background-color: #969996; vertical-align: middle; }
+.act_uName{padding: 30rpx 0 12rpx 20rpx;}
+.act_UserDet{border-bottom:1px solid #f4f4f4; background: #fff; padding-bottom: 20rpx;}
+.de_AttrTitArowR{  vertical-align: middle; width:14rpx; height: 24rpx; margin-top: -6rpx;  }
+.act_uName text{font-size: 24rpx;color: #969996; vertical-align: middle;}
+.act_userName{padding-left: 12rpx; height: 40rpx; line-height: 40rpx }
+.act_reviewTime{padding-right: 20rpx; height: 40rpx; line-height: 40rpx }
+.act_content{font-size: 26rpx;color: #000000; line-height: 40rpx; padding-left: 20rpx}
+.act_delete{font-size: 24rpx;color: red;padding:0 20rpx; line-height: 40rpx; text-align: right;}
+.interval{width: 100%;height: 16rpx;background-color: #f4f4f4}
+/*用户评论 End*/
+.de_toIndex{ color: #0ab007; font-size: 24rpx;  text-align: center; line-height: 36rpx; padding: 20rpx 0; text-decoration: underline;}
+.de_toIndexImg{ width: 34rpx; height: 34rpx; vertical-align: -5rpx; }
+.de_toIndexTxt{ display: inline-block; line-height: 36rpx; margin-left:8rpx; text-decoration: underline;}
+.de_STFootTip{ font-size: 32rpx; color: #969996; text-align: center; height: 60rpx; line-height: 60rpx; }
+
+.FR{ float:right;}

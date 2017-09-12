@@ -1,0 +1,7 @@
+.hint_content{text-align: center;}
+.hint_logo{height: 200rpx;margin-top: 150rpx;width: 200rpx; }
+.hint_btn {background-color: #f4f5f4; height: 88rpx;line-height:88rpx;color: #000;font-size: 34rpx; box-shadow:0px 2px 5px 1px rgba(52,52,52,0.25);margin-top: 190rpx;width: 670rpx;font-weight: bold;}
+.hint_size{font-size: 34rpx;color: #000;margin-top: 20rpx;text-align: center; line-height: 40rpx;font-weight: bold; }
+.informBtnActs{background: #E3E3E3;}
+.hint_time{font-size: 28rpx;color: #999999;padding-top: 20rpx;font-weight: bold}
+button::after{ border: none;}

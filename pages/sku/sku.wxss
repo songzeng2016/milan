@@ -1,0 +1,6 @@
+/* pages/SKU/SKU.wxss */
+.joinWrap{ margin: 0 10px;}
+.scroll_bg{ background: #fff;}
+.joinHead{ font-size: 40rpx; color: #333; line-height: 80rpx; padding-top: 10px;}
+.joinTxt{ font-size: 28rpx; color: #666564; line-height: 48rpx; word-break: break-all; text-indent: 58rpx; }
+.colorLink{ color: #09bb07; font-size: 36rpx;}

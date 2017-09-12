@@ -1,0 +1,68 @@
+/* pages/rankList/rankList.wxss */
+page{min-height: 100%; background: #f0f0f0; transition: none; -webkit-transition: none; overflow-x: hidden;}
+
+/*顶部  serch Begin */
+/* */
+.serWrap{color: #b2b2b2; background: #f4f4f4; height: 88rpx; padding: 11rpx 20rpx; position: fixed; left: 0; top: 88rpx; width: 100%;  box-sizing: border-box; z-index: 9; display: flex; display: -webkit-flex;box-shadow: 0 7rpx 5rpx 6rpx rgba(255,255,255,0.6); } 
+.serSortCon,.serCon{border:1px solid #e6e6ea; height: 64rpx;  line-height: 64rpx; background: #fff;  font-size: 26rpx;border-radius:6rpx;}
+.serSortCon{ flex: 1; color: #969899; position: relative; text-indent: 15rpx; }
+.serSortConAct{ border-radius:6rpx 6rpx 0 0; }
+.serSortArow{ width: 24rpx; height: 14rpx; position: absolute; right:19rpx; top: 25rpx;   }
+.serSortList{ position: absolute; left: -1rpx; top: 64rpx; background: #fff; border-radius:0 0 6rpx 6rpx; width: 100%; border: 1px solid #ebebeb;  }
+.serSortListItem{ color: #202120; font-size: 26rpx;  line-height: 88rpx;padding: 0 15rpx; display: flex; display: -webkit-flex;}
+.serSortListItemAct{ background: #f4f4f4; color: #09bb07; line-height: 88rpx;}
+.serSortListItL{ flex: 1; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.serSortListItR{ width:40rpx; }
+.serSortListItR_ok{ vertical-align: -5rpx; line-height: 20rpx; display:inline;}
+
+.serSortTip{ flex: 1; text-align: right;font-size: 26rpx; color: #09bb07; line-height: 66rpx; height: 66rpx;}
+.serSortTip_help{ width: 26rpx; height: 26rpx; position: relative;vertical-align: top; top: 19rpx; padding-right: 9rpx;}
+/*顶部 serch :end */
+
+/* swiper切换 Begin */
+.swiperItem{  /*width: 100%;*/ margin-top: 176rpx;}
+/* swiper切换 ：end */
+
+
+/*展厅  前10名 Begin */
+.exhibit_item{ display: flex; display: -webkit-flex; height: 218rpx; margin-top: 15rpx; background: #fff; border-radius: 4rpx; padding: 20rpx 0 20rpx 20rpx;position: relative;  box-sizing: border-box; -webkit-box-sizing: border-box;}
+.exhibit_item2{ margin-top: 0rpx;  background: -webkit-linear-gradient(#f5f5f5, #fff 10%,#fff);  }
+.exhibit_item3{margin-top:0rpx;  }
+.exhibit_itemL{ width:236rpx; height: 177rpx; margin-right: 20rpx; }
+.exhibit_itemR{ flex: 1; height: 177rpx; padding-right: 20rpx; text-align: justify; word-break: break-all; }
+.exhibit_itemTop{ width:181rpx; height: 167rpx; position: absolute; right: 0; bottom:-1rpx; }
+.exhibit_itemTit{  font-size: 28rpx; color: #333; font-weight: bold;  line-height: 36rpx; height: 72rpx; padding-top: 10rpx;}
+.exhibit_itemRB{ display: flex; display: -webkit-flex;font-size: 20rpx; color: #999; line-height: 35rpx; margin-top: 12px; margin-right: -20rpx; margin-left: -20rpx;}
+
+.exhibit_itemPV,.exhibit_itemRank{ flex: 1; text-align: center;}
+.exhibit_itemRank{ padding-left:20rpx;}
+.exhibit_itemPV .itemPV,.exhibit_itemRank .itemRank{  font-size: 28rpx; font-weight: bold;}
+.exhibit_itemPV .itemPV{color: #ff9500;}
+.exhibit_itemRank .itemRank{ color:#09bb07; }
+
+.exhibit_itemR .titleTop1{color: #ff3d33;}
+.exhibit_itemR .titleTop2{color: #f28d00;}
+.exhibit_itemR .titleTop3{color: #009de6;}
+.exhibit_itemR .pvTop{color: #999;}
+/*展厅  前10名 :end */
+
+/* 展厅 历史风云 榜 Begin */
+.bill_itemTop{ width:171rpx; height: 167rpx; }
+.bill_itemLabel{ position: absolute; width: 184rpx; height: 60rpx; left: 0; top: 0;}
+.bill_itemRB{-webkit-justify-content: space-between;
+    justify-content: space-between;margin-left: -20rpx; margin-right: -20rpx;}
+.bill_itemPV{ text-align: center; flex: 1;}
+.bill_itemPV .itemPV{ color: #999; font-weight: bold; font-size: 28rpx;}
+.bill_itemLabelNor{ width: 60rpx; height: 60rpx; position: absolute; left: 17rpx; top: 15rpx;}
+/* 展厅 历史风云 榜 ：end */
+
+/* 商家排行 Top10 Begin */
+.bus_itemL{ width: 177rpx; height: 177rpx; border-radius: 50%; margin-right: 40rpx;}
+/* 商家排行 Top10 :end */
+
+
+/* 暂无数据 情况 Begin */
+.noneWrap{padding-top: 150rpx; }
+.noneTxt{font-size: 28rpx;color: #333;margin-top: 20rpx;text-align: center; line-height: 40rpx;}
+/* 暂无数据 情况 ：end */
+

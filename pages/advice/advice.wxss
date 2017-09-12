@@ -1,0 +1,33 @@
+.ad_wrap{   position: absolute;left: 0;top: 0; width: 100%; bottom: 58px; }
+.ad_scroll{ position: absolute;left: 0;top: 0; width: 100%; height: 100%; }
+.ad_item{ display: flex; display: -webkit-flex; margin: 5px 8px 0; }
+.ad_itemL{ width:44px ; height: 44px; margin-top: 5px; margin-right:10px;}
+.ad_itemR{ flex: 1; }
+.ad_itemRT{ height:20px; line-height: 20px;}
+.ad_itemRT_txt{  margin-right:10px; height: 16px; line-height: 16px;color:#a9a9a9;font-size: 12px; display: inline-block; vertical-align: middle; }
+.ad_itemRT_txtName{ color:#444; max-width: 100px; overflow: hidden; white-space: nowrap; text-overflow: ellipsis;}
+.ad_itemRB{ margin-top:5px; position: relative;}
+.ad_itemArow{ width: 6px; height: 6px; border:1px solid #e5e5e5; position: absolute; left: -4px; top: 11px;background: #f7f7fa; transform: rotate(45deg);transform: -webkit-rotate(45deg);border-right: 0; border-top: 0;}
+.ad_itemRB_txt{ display: inline-block; background: #f7f7fa; color: #333; font-size: 14px; padding: 2px 6px 2px 8px; border: 1px solid #e5e5e5;border-radius: 5px;line-height: 24px; min-height: 24px; word-break: break-all; }
+
+.ad_foot{ position: fixed; bottom: 0; left: 0;width: 100%; height: 52px; line-height: 52px; background: #efeff4; border: 1px solid #d6d6db; border-left: 0; border-right: 0;  font-size: 14px;}
+.ad_footTxt{height: 36px; line-height: 36px; background: #fff; border-radius: 5px;  margin: 8px 10px 0 10px; padding: 0 4px; color: #808080;}
+/*右侧的消息*/
+.self_R{margin-right: 0px; margin-left: 10px;}
+.self_LT{ text-align: right;}
+.self_LT_txtName{ margin-right: 0;}
+.self_LB{float: right;}
+.self_LB_txt_txt{ text-align: left;}
+.self_LBArow{transform: rotate(225deg);transform: -webkit-rotate(225deg);left: auto;right: -4px;  background: #09bb07; border-color:#099906 ;}
+.self_LB_txt{ background: #09bb07;border-color:#099906 ;  color: #fff;}
+/* 弹窗*/
+.ad_popWrap{ position: fixed; z-index: 9;  left: 0; top: 0; background: rgba(0, 0, 0, 0.5);  width: 100%; height: 100%;}
+.ad_popCon{ position: absolute; left: 0; bottom: 0; background: #fff; width: 100%;background: #fafafa;}
+.ad_popHd{height: 44px; line-height: 44px; font-size: 14px; color: #333; text-align: center; border-bottom: 1px solid #ebebeb; padding: 0 10px;}
+.ad_popHdL,.ad_popHdR{font-size:15px ; height: 50px; line-height: 50px; color: #586c94; padding: 0; background-color: transparent; }
+.ad_popHdL{ float: left;}
+.ad_popHdR{ float: right;}
+.ad_popFt{ padding: 10px 10px 12px;}
+.ad_popArea{ width: 100%; height: 90px; border: 1px solid #ddd;background: #fff;font-size: 14px;padding: 4px; box-sizing: border-box; -webkit-box-sizing: border-box; line-height: 20px; color: #666;}
+
+button::after{ border: none;}

@@ -1,0 +1,21 @@
+<!--pages/commentList/commentList.wxml-->
+<scroll-view scroll-y="true"  class="scrollWrap" bindscrolltolower="scrollToLowerFn">
+  <view class="de_Attr">
+    <view class="de_AttrTit">
+      <text class="FL">用户评论({{commentCount}})</text>
+    </view>
+  </view>
+  <view class="act_UserDet" wx:for="{{commentList}}" wx:key="id">
+    <view class="act_uName">
+      <image src="{{item.avatarUrl || '../../image/por_default.png'}}"></image>
+      <text class="act_userName">{{item.nickName || '****'}}</text>
+      <text class="act_reviewTime FR">{{item.createTime}}</text>
+    </view>
+    <view class="act_content">{{item.content}}</view>
+    <view class="act_delete " wx:if="{{item.userId == user.id}}">
+      <text bindtap="commentDelFn" data-id="{{item.id}}">删除</text>
+    </view>
+  </view>
+  <view class="de_STFootTip" wx:if="{{isToLower}}">已经到底了~~</view>
+  <view class="de_STFootTip" wx:if="{{isLoading}}">正在加载中…</view>
+</scroll-view>

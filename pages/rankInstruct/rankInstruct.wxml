@@ -1,0 +1,96 @@
+<!-- 组件引入 -->
+<import src="/components/switch/switch.wxml" />
+<template is="switch" data="{{switch_selTypes,switch_selNum}}"></template>
+<!-- line2 swiper  -->
+<swiper class="swiper" current="{{switch_selNum}}" bindchange="sup_swichtConFn" duration="300" circular="true">
+
+  <!-- tab1 展厅排行榜  -->
+  <swiper-item class="swiperItem">
+    <!--展厅排行榜 B-->
+    <scroll-view scroll-y="true" class="scrolls">
+      <view class="joinWrap">
+        <view class="joinHead">展厅本周综合指数排行</view>
+        <view class="num_mess">1、榜单什么时候更新？</view>
+        <view class="joinTxt">排行榜每晚00:00:00更新本周数据，欢迎围观~</view>
+        <view class="num_mess">2、综合指数的竞争指标有哪些？</view>
+        <view class="joinTxt">1）展厅详情</view>
+        <view class="joinTxt"> 新增浏览量；新增评论量</view>
+        <view class="joinTxt">2）展厅活动详情</view>
+        <view class="joinTxt">新增浏览量；新增评论量；活动新增报名数；新增活动次数</view>
+        <view class="joinTxt"> 3）与展厅及展厅活动有关的有效用户每日登录</view>
+        <view class="joinTxt"> 以上所述，均为指有效新增量</view>
+        <view class="num_mess">3、总浏览量是指什么？</view>
+        <view class="joinTxt">总浏览量=展厅详情页浏览量+活动详情页浏览量</view>
+        <view class="num_mess">4、谁可以上榜？</view>
+        <view class="joinTxt">根据以上竞争指标，系统进行自动综合计算并进行排名，获得前10名的展厅显示在榜单上</view>
+      </view>
+      <view class="interval"></view>
+      <view class="joinWrap">
+        <view class="joinHead">展厅历史风云排行</view>
+        <view>
+          <view class="num_mess">1、榜单什么时候更新？</view>
+          <view class="joinTxt">排行榜每晚00:00:00更新本周数据，欢迎围观~</view>
+          <view class="num_mess">2、展厅历史风云竞争指标有哪些？</view>
+          <view class="joinTxt">
+            展厅获得第一名、第二名、第三名的次数
+          </view>
+          <view class="num_mess">3、谁可以上榜？</view>
+          <view class="joinTxt">
+            根据获得第一名、第二名、第三名的次数进行综合排序，只要获得过前三名的展厅均可上榜
+          </view>
+        </view>
+        <view class="affiliation">最终解释权归小程序「网库云采购」所有</view>
+      </view>
+    </scroll-view>
+
+    <!--展厅排行榜 E-->
+  </swiper-item>
+
+  <!-- tab2 商家排行榜  -->
+  <swiper-item>
+    <!--商家排行榜 B-->
+    <scroll-view scroll-y="true" class="scrolls">
+      <view class="joinWrap">
+        <view class="joinHead">商家本周热门排行</view>
+        <view class="num_mess">1、榜单什么时候更新？</view>
+        <view class="joinTxt">排行榜每晚00:00:00更新本周数据，欢迎围观~</view>
+        <view class="num_mess">2、综合指数的竞争指标有哪些？</view>
+        <view class="joinTxt">1）供应/采购详情 </view>
+        <view class="joinTxt"> 新增浏览量；新增举报数（减分项）</view>
+        <view class="joinTxt">2）新增供应/采购的信息数量</view>
+        <view class="joinTxt"> 3）与供应/采购信息有关的有效用户每日登录</view>
+        <view class="num_mess">3、总浏览量是指什么？</view>
+        <view class="joinTxt">总浏览量=展厅详情页浏览量+活动详情页浏览量</view>
+        <view class="num_mess">4、谁可以上榜？</view>
+        <view class="joinTxt">根据以上竞争指标，系统进行自动综合计算并进行排名，获得前10名的展厅显示在榜单上
+        </view>
+        <view class="num_mess">5、上榜的有什么用？</view>
+        <view class="joinTxt">
+          这个不用多说，亲爱的你也知道吧？对喽，提高了供应/采购商家的知名度，有效的帮你进行宣传。所以啊，亲爱的你，赶紧根据竞争指标，用自己的力量提高你的排名吧！
+        </view>
+
+      </view>
+      <view class="interval"></view>
+      <view class="joinWrap">
+        <view class="joinHead">商家历史风云排行</view>
+        <view>
+          <view class="num_mess">1、榜单什么时候更新？</view>
+          <view class="joinTxt">
+            排行榜每晚00:00:00更新本周数据，欢迎围观~
+          </view>
+          <view class="num_mess">2、商家历史风云竞争指标有哪些？</view>
+          <view class="joinTxt">
+            商家获得第一名、第二名、第三名的次数
+          </view>
+          <view class="num_mess">3、谁可以上榜？</view>
+          <view class="joinTxt">
+            根据获得第一名、第二名、第三名的次数进行综合排序，只要获得过前三名的商家均可上榜
+          </view>
+        </view>
+        <view class="affiliation">最终解释权归小程序「网库云采购」所有</view>
+      </view>
+    </scroll-view>
+
+    <!--商家排行榜 E-->
+  </swiper-item>
+</swiper>

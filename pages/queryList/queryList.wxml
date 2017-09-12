@@ -1,0 +1,174 @@
+<!-- 组件引入 -->
+<import src="/components/supItem/supItem.wxml" />
+<import src="/components/purItem/purItem.wxml" />
+<import src="/components/actItem/actItem.wxml" />
+<import src="/components/switch/switch.wxml" />
+<import src="/components/noData/noData.wxml" />
+<import src="/components/loading/loading.wxml" />
+<!-- line1 tab切换 -->
+<template is="switch" data="{{switch_selTypes,switch_selNum}}"></template>
+
+<!-- tab1 供应列表&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&& -->
+<view class="swiperItem" data-current="0" wx:if="{{switch_selNum == 0}}">
+  <!--  状态一 暂无数据 Begin 暂时隐藏 没有数据得情况  wx:if="{{ !sup_lists.length }}"  -->
+  <view class="noneWrap" wx:if="{{ !supplyList || supplyList.length == 0 }}">
+    <block wx:if="{{supplyLoading}}">
+     <template is="loading"></template>
+    </block>
+    <block wx:else>
+       <template is="noData"></template>
+       <view class="noneTxt">暂无供应信息</view>
+    </block>
+   
+  </view>
+  <!-- 状态一 暂无数据 ：end -->
+
+  <!--  serch 状态二 有数据情况 wx:if="{{sup_lists.length}}"  -->
+  <view class="serWrap" wx:if="{{!!supplyList&&supplyList.length>0}}">
+    <view class="serSortCon {{isSupSortOpen?'serSortConAct':''}}" bindtap="supSortTapFn">
+      {{supSortSelect}}
+      <image class="serSortArow" src="../../image/mine_arowD.png"></image>
+      <view class="serSortList" hidden="{{ !isSupSortOpen }}">
+        <radio-group bindchange="supSortChangeFn">
+          <block wx:for="{{supSortData}}" wx:key="id">
+            <label class="serSortListItem  {{item.id == supSortSelectId? 'serSortListItemAct':''}}" data-item="{{item}}" bindtap="supSortChangeItemFn">
+              <view class="serSortListItL">
+                <radio value="{{item.name}}" checked="{{item.checked}}" hidden="true" />{{item.name}}
+              </view>
+              <view class="serSortListItR {{item.id == supSortSelectId? 'show':'hide'}}">
+                <icon class="serSortListItR_ok" type="success_no_circle" size="16" />
+              </view>
+            </label>
+          </block>
+        </radio-group>
+      </view>
+    </view>
+    <navigator url="../supplySeek/supplySeek" class="serCon">
+      <icon type="search" size="14" class="serIcon"></icon>
+      <text>搜索供应</text>
+    </navigator>
+    <!-- serch right -->
+    <view class="serTabCon" bindtap="supShowModeFn">
+      <image wx:if="{{isSupImgTxt}}" class="serTabImg" src="../../image/query_Icon_imgTxt.png"></image>
+      <image wx:else class="serTabImg" src="../../image/query_Icon_txt.png"></image>
+    </view>
+
+  </view>
+  <!-- serch 状态二 有数据情况 -->
+
+
+  <!--状态二  1-2 列表 -->
+  <view class="sup_Wrap" wx:if="{{!!supplyList}}">
+    <!-- 1-2 列表 -->
+    <block wx:for="{{supplyList}}" wx:key="id">
+      <navigator class="sup_item" url="../supplyDetail/supplyDetail?supplyId={{item.id}}">
+        <template is="supItem" data="{{item ,isSupImgTxt}}"></template>
+      </navigator>
+    </block>
+    <!--1-3  -->
+    <view class="to_lower" wx:if="{{isOver1}}">已经到底了~~</view>
+    <view class="onloadingWrap" wx:if="{{isLoading}}">
+      <image src="../../image/loadingImg.gif" class="onloadingImg"></image> 正在加载…
+    </view>
+
+  </view>
+</view>
+
+
+
+
+<!--tab2求购列表  &&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&& -->
+<view class="swiperItem" data-current="1" wx:if="{{switch_selNum == 1}}">
+  <!--  状态一 暂无数据 Begin 暂时隐藏 没有数据得情况  wx:if="{{ !pur_lists.length }}" -->
+  <view class="noneWrap" wx:if="{{ !buyList || buyList.length == 0 }}">
+   <block wx:if="{{buyLoading}}">
+     <template is="loading"></template>
+    </block>
+    <block wx:else>
+       <template is="noData"></template>
+       <view class="noneTxt">暂无求购信息</view>
+    </block>
+  </view>
+
+  <!-- 状态一 暂无数据 ：end -->
+
+  <!-- tab2- serch 状态二  有数据情况  wx:if="{{ pur_lists.length }}"-->
+  <view class="serWrap" wx:if="{{ !!buyList && buyList.length>0}}">
+    <view class="serSortCon {{isPurSortOpen?'serSortConAct':''}}" bindtap="purSortTapFn">
+      {{purSortSelect}}
+      <image class="serSortArow" src="../../image/mine_arowD.png"></image>
+      <view class="serSortList" hidden="{{ !isPurSortOpen }}">
+        <radio-group bindchange="purSortChangeFn">
+          <block wx:for="{{purSortData}}" wx:key="id">
+            <label class="serSortListItem  {{item.id == purSortSelectId? 'serSortListItemAct':''}}" data-item="{{item}}" bindtap="purSortChangeItemFn">
+              <view class="serSortListItL">
+                <radio value="{{item.name}}" checked="{{item.checked}}" hidden="true" />{{item.name}}
+              </view>
+              <view class="serSortListItR {{item.id == purSortSelectId? 'show':'hide'}}">
+                <icon class="serSortListItR_ok" type="success_no_circle" size="16" />
+              </view>
+            </label>
+          </block>
+        </radio-group>
+      </view>
+    </view>
+    <navigator url="../purchaseSeek/purchaseSeek" class="serCon serCon2">
+      <icon type="search" size="14" class="serIcon"></icon>
+      <text>搜索采购</text>
+    </navigator>
+  </view>
+
+  <!-- tab2 scroll 状态二 -->
+
+
+  <!-- 求购 列表  Begin -->
+  <view class="sup_Wrap" wx:if="{{ buyList }}">
+    <navigator class="sup_item" url="../purchaseDetail/purchaseDetail?buyId={{item.id}}" wx:for="{{buyList}}" wx:key="id">
+      <template is="purItem" data="{{item}}"></template>
+    </navigator>
+    <!--1-3  -->
+    <view class="to_lower" wx:if="{{isOver2}}">已经到底了~~</view>
+    <view class="onloadingWrap" wx:if="{{isLoading}}">
+      <image src="../../image/loadingImg.gif" class="onloadingImg"></image> 正在加载…</view>
+
+  </view>
+  <!-- 求购 列表  :end -->
+</view>
+
+<!--tab3 活动列表 &&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&& -->
+<view class="swiperItem" data-current="2" wx:if="{{switch_selNum == 2}}">
+  <!--  状态一 暂无数据 Begin 暂时隐藏 没有数据得情况 如果显示 请去掉 hidden="true" -->
+  <view class="noneWrap" wx:if="{{ !activityList.length || activityList.length == 0 }}">
+    <block wx:if="{{activityLoading}}">
+     <template is="loading"></template>
+    </block>
+    <block wx:else>
+       <template is="noData"></template>
+       <view class="noneTxt">暂未举办活动，请耐心等待</view>
+    </block>
+  </view>
+
+  <!-- 状态一 暂无数据 ：end -->
+
+  <!--  状态二 有数据  Begin -->
+  <view class="act_Wrap" wx:if="{{ activityList.length}}">
+
+    <!-- 1-2 列表 Begin -->
+    <navigator class="sup_item" url="../activityDetail/activityDetail?activityId={{item.id}}" wx:for="{{activityList}}" wx:key="id">
+      <template is="actItem" data="{{item}}" />
+    </navigator>
+
+    <!-- 1-2 列表 :end-->
+
+    <!--state2-3 到底部了 -->
+    <view class="to_lower" wx:if="{{isOver3}}">已经到底了~~</view>
+    <view class="onloadingWrap" wx:if="{{isLoading}}">
+      <image src="../../image/loadingImg.gif" class="onloadingImg"></image> 正在加载…</view>
+  </view>
+
+  <!--  状态二 有数据  ：end -->
+</view>
+
+
+
+<!--  tab isEnd &&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&& -->

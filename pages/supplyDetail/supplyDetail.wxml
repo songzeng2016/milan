@@ -1,0 +1,229 @@
+<!--pages/supplyDetail/supplyDetail.wxml-->
+<!-- 组件的引入  -->
+<import src="/components/deBanner/deBanner.wxml" />
+<import src="/components/supItem/supItem.wxml" />
+<import src="/components/deComItem/deComItem.wxml" />
+<import src="/components/deShareImg/deShareImg.wxml" />
+
+<view class="de_Wrap">
+  <scroll-view class="de_Con" scroll-y="true" bindscrolltolower="scrollToLowerFn">
+
+    <!--  line1 swiper  -->
+    <template is="deBanner" data="{{bannerImgs}}"></template>
+    <!-- line2 txt -->
+    <view class="de_Txt">
+
+      <!-- line2 txt /title -->
+      <view class="de_Txt_tit">{{supply.title}}</view>
+
+      <!-- line2 txt /price -->
+      <view class="de_Txt_price">
+        <text class="de_Txt_priceSym FL">¥</text>
+        <text class="FL">{{supply.minPriceStr}}</text>
+        <text class="de_Txt_priceUnit FL">
+          <block wx:if="{{!!supply.unit}}">/{{supply.unit}}</block>
+        </text>
+      </view>
+
+      <!-- line2 txt /distance -->
+      <view class="de_Txt_dis">
+        <view class="de_Txt_disL">
+          <image class="de_Txt_disLtruck" src="../../image/sup_De_truckAct.png"></image>
+          {{supply.address || (supply.originProvince + supply.originCity) || '' }}({{supply.distance}})
+        </view>
+        <view class="de_Txt_disR" bindtap="toMapLocation">
+          <image class="de_Txt_dis_pos" src="../../image/sup_De_pos.png"></image>
+          <text class="de_Txt_dis_txt">去发货地</text>
+        </view>
+      </view>
+
+      <!-- line2 txt /jubao -->
+      <view class="de_Txt_sub" wx:if="{{type != 'preview'}}">
+        <view class="de_compCtn" bindtap="toComplain">
+          <image class="de_compImg" src="../../image/supDe_comp.png"></image> 举报</view>
+        <view class="FR ML20">
+         <image class="de_comp_pv MR10" src="../../image/sup_De_eye.png"></image>{{supply.viewCount || '1'}}
+          
+        </view>
+      </view>
+    </view>
+
+    <!-- line3 attribute -->
+    <view class="de_Attr">
+      <view class="de_AttrTit">
+        <text class="FL FB">产品属性</text>
+        <view class="FR" wx:if="{{supply.attrLists.length >= 3}}" hover-class="de_green" bindtap="wakeUpAttrFn">查看更多
+          <image class="de_AttrTitArowR" src="../../image/mine_arowR.png"></image>
+        </view>
+      </view>
+      <view class="de_AttrItem" wx:for="{{supply.shotattrLists}}" wx:key="id">
+        <text class="de_AttrItemL">{{item.key}}</text>
+        <text class="de_AttrItemR">{{item.value}}</text>
+      </view>
+    </view>
+
+    <!-- line5  用户评论 -->
+    <view class="de_Attr" wx:if="{{type != 'preview'}}">
+      <view class="de_AttrTit">
+        <text class="FL FB">用户评论({{query.count || 0}})</text>
+        <navigator url="../commentList/commentList?fkId={{supply.id}}&type=2" class="FR" hover-class="de_green" wx:if="{{query.count > 5}}">查看更多
+          <image class="de_AttrTitArowR" src="../../image/mine_arowR.png"></image>
+        </navigator>
+      </view>
+    </view>
+    <view class="act_UserDetWrap" wx:if="{{type != 'preview'}}">
+      <view class="act_UserDet" wx:if="{{commentLists!=null}}" wx:for="{{commentLists}}" wx:key="id">
+        <template is="deComItem" data="{{item,userInfo}}"></template>
+      </view>
+    </view>
+    <view class="de_comNoCon" wx:if="{{(commentLists == null || commentLists.length <= 0) && type != 'preview'}}">
+      <view class="de_comNoTxt">暂时无人评论</view>
+      <button class="de_comNoBtn" type="default" catchtap="triggerComtFn">赶紧抢占沙发</button>
+    </view>
+
+    <!-- line4 商品详情 -->
+    <block wx:if="{{supply.description}}">
+      <view class="de_Attr">
+        <view class="de_AttrTit FB">商品详情</view>
+      </view>
+      <view class="de_proTxt">
+        {{supply.description}}
+      </view>
+    </block>
+
+    <!-- line6  附近 -->
+    <view class="de_Attr " wx:if="{{supplyList.length > 0 && type != 'preview'}}">
+      <view class="de_AttrTit">
+        <text class="FL FB">附近≤{{supplyQuery.distance/1000||0}}km({{supplyQuery.count}})</text>
+        <navigator url="../supplyNearList/supplyNearList" class="FR" hover-class="de_green" wx:if="{{supplyQuery.count > 5 && !isNearToEnd}}">查看更多
+          <image class="de_AttrTitArowR" src="../../image/mine_arowR.png"></image>
+        </navigator>
+      </view>
+    </view>
+    <view class="de_nearBy" wx:if="{{type != 'preview'}}">
+      <!-- 状态一  Begin 解决跳转次数问题  wx:if="{{isNearToEnd}} -->
+      <view class="de_nearEnd" wx:if="{{supplyList.length > 0 && isNearToEnd }}">
+        <view class="de_nearEndTxt">很抱歉，此列表不能再无限点击下去了…</view>
+        <navigator class="de_nearEndBtn" url="../queryList/queryList" open-type="switchTab">返回查询列表</navigator>
+      </view>
+      <!-- 状态一  :end -->
+      <navigator class="sup_item" wx:if="{{!isNearToEnd}}" wx:for="{{supplyList}}" wx:key="id" url="../supplyDetail/supplyDetail?supplyId={{item.id}}">
+
+        <template is="supItem" data="{{item,isSupImgTxt }}"></template>
+      </navigator>
+    </view>
+
+    <!-- line7 已经到底了 -->
+    <view class="to_lower">已经到底了~~</view>
+  </scroll-view>
+
+  <!-- 返回首页 -->
+  <navigator class="to_index" hover-class="to_indexAct" open-type="switchTab" url="../index/index">
+    <image class="to_indexImg" src="../../image/toIndex.png"></image>
+  </navigator>
+
+  <!-- line7  分享 Begin -->
+  <view class="de_foot" wx:if="{{type != 'preview'}}">
+
+    <!-- share -->
+    <view class="de_ftItem de_ftShare" hover-class="de_ftGrayAct" catchtap="genShareImg">
+      <view class="de_ftImgCon">
+        <image class=" de_ftImg de_ftShareImg" src="../../image/supDe_share.png"></image>
+      </view>
+      <view class="de_ftTxt">二维码</view>
+    </view>
+
+    <!-- comment -->
+    <view class="de_ftItem " hover-class="de_ftGrayAct" catchtap="triggerComtFn">
+      <view class="de_ftImgCon">
+        <image class=" de_ftImg de_ftcommentImg" src="../../image/supDe_comment.png"></image>
+      </view>
+      <view class="de_ftTxt">评论</view>
+    </view>
+
+    <!-- credit -->
+    <navigator class="de_ftItem " hover-class="de_ftGrayAct" url="../businessCredit/businessCredit?fkId={{supply.id}}&id={{user.id}}">
+      <view class="de_ftImgCon">
+        <image class=" de_ftImg de_ftcommentImg" src="../../image/supDe_credit.png"></image>
+      </view>
+      <view class="de_ftTxt">商家信誉</view>
+    </navigator>
+
+    <!-- tel-->
+    <view class="de_ftItem de_ftItemTel" bindtap="callSeller" hover-class="de_ftGreenAct">
+      <view class="de_ftItemTelCon">
+        {{}}
+        <view class="de_ftItemTelL" wx:if="{{user.avatarUrl.length>0 &&user.nickName.length>0}}">
+          <image class="de_ftItemTelL_pro" src="../../image/supDe_tel.png"></image>
+          <view class="de_ftItemTelL_name">{{user.nickName || ''}}</view>
+        </view>
+        <view class="de_ftItemTelR">{{supply.telephone || ''}}</view>
+      </view>
+    </view>
+  </view>
+  <view class="de_foot" wx:else>
+    <navigator class="de_ftItemTel" url="../supplyManage/supplyManage?index=3" style="font-size: 30rpx; line-height: 100rpx; text-align: center;">信息未上架，前往“待上架”列表查看</navigator>
+  </view>
+
+  <!-- line7  分享 End -->
+</view>
+
+<!-- 属性弹层 Begin -->
+<view class="popAttr_Wrap" wx:if="{{isAttrOpen}}">
+  <view class="popAttr_Con">
+
+    <!-- popHead -->
+    <view class="popAttr_Head">产品属性</view>
+
+    <!-- popBody -->
+    <scroll-view class="popAttr_Body" scroll-y="true">
+      <view class="de_AttrItem" wx:for="{{supply.attrLists}}" wx:key="id">
+        <text class="de_AttrItemL">{{item.key}}</text>
+        <text class="de_AttrItemR">{{item.value}}</text>
+      </view>
+    </scroll-view>
+
+    <!-- popFoot -->
+    <view class="popAttr_Btn " hover-class="popAttr_BtnAct" bindtap="closeAttrFn">关闭</view>
+  </view>
+</view>
+
+<!-- 属性弹层 End -->
+<view class="ad_popWrap" wx:if="{{isPopOpen}}">
+  <view class="ad_popBg" bindtap="popCancle"></view>
+  <form bindsubmit="commentSendFn">
+    <view class="ad_popCon">
+
+      <!-- line1 -->
+      <view class="ad_popHd">
+        <button class="ad_popHdL" form-type="reset" bindtap="popClose">取消</button>
+        <button class="ad_popHdR" form-type="submit">发送</button>
+        发布评论
+      </view>
+
+      <!-- line2 -->
+      <view class="ad_popFt">
+        <textarea class="ad_popArea" name="content" bindfocus="checkauth" focus="{{isPopOpen}}" bindinput="commentTxtFn" value="{{comment.content}}" placeholder="最多输入256个字" maxlength="256" />
+      </view>
+      <view class="ad_popCout">还可输入
+        <text class="colorDanger">{{commentTxtCount}}</text>个字</view>
+    </view>
+  </form>
+</view>
+
+<!-- 分享确认 -->
+<!--
+<view class="sha_popWrap" wx:if="{{showShare}}">
+  <view class="sha_popCon">
+    <view class="sha_popHead">正在生成分享图片…</view>
+    <view class="sha_popCount">{{shareCloseSeconds}}</view>
+    <view class="sha_popTxt">长按图片或者点击右上角的三个点， 即可保存图片
+    </view>
+    <view class="sha_popFt ">
+      <view class="sha_popBtnCancel" bindtap="closeShareImg">取消</view>
+      <view class="sha_popBtnOK" bindtap="previewShareImg">直接生成图片</view>
+    </view>
+  </view>
+</view>
+-->
+<template is="deShareImg" data="{{shareImgUrl, showShareImg, shareTip, shareBtnTip}}"></template>
