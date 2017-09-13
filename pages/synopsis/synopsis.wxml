@@ -1,5 +1,5 @@
- <view class="ad_popFt">
-      <textarea class="ad_popArea" bindinput="commentTxtFn" focus="{{isPopOpen}}" name="textarea" value="{{subValue}}"/>
+<view class="ad_popFt">
+  <textarea class="ad_popArea" bindinput="commentTxtFn" focus="{{isPopOpen}}" name="textarea" value="{{subValue}}" />
 </view>
 <view class='top'>只有群主才能发布群组介绍</view>
-  <button hover-class='btn_hover' class='btn colors' bindtap='issueIntroduce'>发布</button>
+<button hover-class='btn_hover' class='btn colors' bindtap='issueIntroduce'>发布</button>

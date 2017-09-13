@@ -53,7 +53,7 @@ Page({
 
     let getUserData = {
       Action: 'GetChatroomUsers',
-      ID: 6
+      ID: id
     }
     wc.get(getUserData, (json) => {
       if (json[isSuccess] === success) {

@@ -26,7 +26,7 @@ Page({
 
     if (!that.data.chatroom_name) {
       wc.showModal('名称不能为空')
-      return 
+      return
     }
 
     let data = wc.extend(that.data, {
@@ -42,6 +42,11 @@ Page({
         }, 2000)
       }
     }, true)
+  },
+
+  // 取消
+  navigateBack: function () {
+    wc.navigateBack()
   },
 
   /**

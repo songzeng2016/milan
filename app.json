@@ -16,14 +16,14 @@
   "window": {
     "backgroundTextStyle": "light",
     "navigationBarBackgroundColor": "#393a3f",
-    "navigationBarTitleText": "觅萝",
+    "navigationBarTitleText": "觅连",
     "navigationBarTextStyle": "white"
   },
   "tabBar": {
     "list": [
       {
         "pagePath": "pages/index/index",
-        "text": "附近",
+        "text": "觅连",
         "iconPath": "image/index.png",
         "selectedIconPath": "image/indexing.png"
       },

@@ -1,6 +1,6 @@
 <view class="top">
   <icon class="seekIcon" type="search" size="14"></icon>
-  <input type='text' placeholder="搜索" class='seekInp'></input>
+  <input class='seekInp' bindinput='searchChatRoom' type='text' placeholder="搜索"></input>
 </view>
 <view>
   <navigator url="../creation/creation">
@@ -14,7 +14,7 @@
   </navigator>
 </view>
 <view class='main' wx:for="{{lists}}" wx:for-index="index" wx:key="id">
-  <view>
+  <view bindtap='navToTalk' data-id='{{item.chatroom_id}}'>
     <view class='list'>
       <view wx:if="{{item.state==1}}">
         <view class='circle'></view>

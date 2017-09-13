@@ -15,25 +15,25 @@
 <view class="empty"></view>
 
 <view class="bottom">
-<navigator  url="../groupName/groupName?id=123">
+  <navigator url="../groupName/groupName?id={{roomInfo.chatroom_id}}">
     <view class='content'>
       <text> 聊天室名称</text>
       <image src='/image/mine_path.png' class='set_imgs fr'></image>
       <text class="sc_name fr"> {{roomInfo.chatroom_name}}</text>
-   </view>
-</navigator>
+    </view>
+  </navigator>
 
   <view class='content'>
     <text> 聊天室LOGO</text>
     <image src='/image/mine_path.png' class='set_imgs fr'></image>
   </view>
-  <navigator  url="../synopsis/synopsis?id=123">
+  <navigator url="../synopsis/synopsis?id={{roomInfo.chatroom_id}}">
     <view class='intro'>
       <text class="sc_intro display">聊天室简介</text>
       <image src='/image/mine_path.png' class='set_imgs fr'></image>
-    <view class="sc_name sc_intros">{{roomInfo.chatroom_desc}}</view>
-  </view>
+      <view class="sc_name sc_intros">{{roomInfo.chatroom_desc}}</view>
+    </view>
   </navigator>
-  
+
 </view>
 <button hover-class='btn_hover' class='btn colors' bindtap='signOutRoom' data-id='{{roomInfo.chatroom_id}}'>退出聊天室</button>

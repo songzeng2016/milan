@@ -15,5 +15,5 @@
 </checkbox>
 </view> 
 <button hover-class='btn_hover' class='btn colors' bindtap='addChatRoom' >确定</button>
-<button class='btn'>取消</button>
+<button class='btn' bindtap='navigateBack'>取消</button>
 
