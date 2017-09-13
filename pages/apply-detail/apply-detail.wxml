@@ -1,0 +1,69 @@
+<!--apply-detail.wxml-->
+<view class="tip-container">
+  <view class="tip-title">提示</view>
+  <view class="tip-content">该资质需要人工考核，请随时关注您的消息信息</view>
+</view>
+
+<view class="item-container">
+  <view class="item-title">
+    请填写您的steam账号
+  </view>
+  <view class="item-content">
+    <input bindinput="gameAccountInput" value="{{gameAccount}}" class="steam-input" />
+  </view>
+</view>
+
+<view class="item-container">
+  <view class="item-title">
+    请填写您的联系方式
+  </view>
+  <view class="item-content">
+    <input bindinput="linkInput" value="{{link}}" class="steam-input" />
+  </view>
+</view>
+
+<view class="item-container">
+  <view class="item-title">
+    大神申请截图或拍照
+  </view>
+  <view class="item-content">
+    <image class="item-content-image" mode="widthFix" bindtap="getCoverUrl" mode="aspectFit" src="{{coverUrl}}"></image>
+    <view>请上传您的steam账号与游戏库截图</view>
+  </view>
+</view>
+
+<!--<view class="item-container">
+  <view class="item-title">
+    技能视频（选填）
+  </view>
+  <view class="item-content">
+    <!--<image mode="aspectFit" src="../../images/shiping_icon.png"></image>-->
+    <!--<video src="http://wxsnsdy.tc.qq.com/105/20210/snsdyvideodownload?filekey=30280201010421301f0201690402534804102ca905ce620b1241b726bc41dcff44e00204012882540400&bizid=1023&hy=SH&fileparam=302c020101042530230204136ffd93020457e3c4ff02024ef202031e8d7f02030f42400204045a320a0201000400" ></video>-->
+    <!--<view class="section tc">
+      <video src="{{videoUrl}}" controls ></video>
+      <view class="btn-area">
+        <button bindtap="getVideoEvent">添加技能视频，时长不能大于20秒</button>
+      </view>
+    </view>-->
+    <!--<view>添加技能视频，时长不能大于20秒</view>-->
+  <!--</view>
+</view>-->
+
+<!--<view class="item-container">
+  <view class="item-title">
+    技能语音（选填）
+  </view>
+  <view class="item-content">
+    <view style="justify-content: center; align-items: center; display: flex">
+      <view class="record" bindtouchstart="touchdown" bindtouchend="touchup">
+        <image style="width: 60rpx; height: 60rpx" src="{{frameAnimation}}"></image>
+      </view>
+    </view>
+    <view>点击录制一段语音介绍您的技能</view>
+    <audio wx:if="{{voiceUrlRes != ''}}" name="音频试听" author="我" src="{{voiceUrlRes}}" controls loop></audio>
+  </view>
+</view>-->
+
+<view class="button-container">
+  <button bindtap="submit">提交</button>
+</view>

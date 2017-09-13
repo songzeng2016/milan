@@ -1,0 +1,70 @@
+/* apply-detail.wxss */
+page {
+  background: #FFFFFF;
+}
+
+.tip-container {
+  font-size: 30rpx;
+  padding: 20rpx;
+  font-weight: 1200;
+}
+
+.item-container {
+  font-size: 30rpx;
+  font-weight: 1200;
+}
+
+.item-title {
+  background: #EEEEEE;
+  padding: 30rpx;
+}
+
+.item-content {
+  text-align: center;
+  padding: 30rpx;
+}
+
+.item-content-image {
+  width: 483rpx;
+  height: 294rpx;
+}
+
+.item-content view {
+  margin: 30rpx 0 20rpx;
+}
+
+.record {
+  height: 80rpx;
+  border-radius: 40rpx;
+  background: #49CEC3;
+  margin: 0 150rpx;
+  justify-content: center;
+  align-items: center;
+  display: flex;
+  width: 350rpx;
+}
+
+.button-container {
+  padding: 50rpx;
+  margin-bottom: 100rpx;
+}
+
+.button-container button {
+  color: #FFFFFF;
+  background: #82DDD1;
+}
+
+.item-content image {
+  width: 600rpx;
+  height: 400rpx;
+  justify-content: center;
+  align-items: center;
+}
+
+.steam-input {
+  text-align: left; 
+  border: 1rpx solid #82DDD1; 
+  border-radius: 5rpx; 
+  height: 80rpx; 
+  font-size: 32rpx;
+}

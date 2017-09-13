@@ -10,7 +10,8 @@
     "pages/report/report",
     "pages/chatRoom/chatRoom",
     "pages/synopsis/synopsis",
-    "pages/groupName/groupName"
+    "pages/groupName/groupName",
+    "pages/apply-detail/apply-detail"
   ],
   "window": {
     "backgroundTextStyle": "light",
