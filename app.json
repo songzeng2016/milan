@@ -11,7 +11,9 @@
     "pages/chatRoom/chatRoom",
     "pages/synopsis/synopsis",
     "pages/groupName/groupName",
-    "pages/apply-detail/apply-detail"
+    "pages/apply-detail/apply-detail",
+    "pages/setPersonName/setPersonName",
+    "pages/personalSetting/personalSetting"
   ],
   "window": {
     "backgroundTextStyle": "light",

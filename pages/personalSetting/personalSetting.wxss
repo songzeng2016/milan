@@ -1,0 +1,12 @@
+page{background: #ebebeb;}
+.bottom{background: #fff;}
+.content{height: 90rpx;background: #fff;line-height: 90rpx;border-bottom: 1rpx dashed  #c7c7c7;font-size: 30rpx; margin-left: 20rpx; }
+.set_imgs{width: 19rpx;height: 31rpx;margin: 30rpx 25rpx;}
+.empty{height: 40rpx;border-top: 1rpx solid #c7c7c7;border-bottom: 2rpx solid #c7c7c7;}
+
+.my_head{width: 70rpx;height: 70rpx; margin-top:10rpx; }
+.text_color{color: #c7c7c7;}
+.display{display: inline-block;}
+.fr{float: right;}
+.fl{float: left;}
+.shareBtn{margin-top: 22rpx;padding: 0;background: transparent;border-radius: 0;}

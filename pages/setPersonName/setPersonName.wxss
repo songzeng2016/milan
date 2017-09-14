@@ -1,0 +1,10 @@
+page{background: #ebebeb;margin:  0 auto;}
+.top{font-size: 26rpx;height: 80rpx;line-height: 80rpx; color: #999999; padding-left: 20rpx;}
+.content{height: 90rpx;background: #fff;line-height: 90rpx;font-size: 30rpx; padding-left: 20rpx;margin-top: 40rpx; }
+.btn{width: 690rpx;height: 88rpx;margin-top: 20rpx; font-size: 36rpx;}
+.colors{background-color:#94db93; color: #ffffff;}
+.bgcolor{background-color:#fff;}
+.btn_hover{background-color: #008B00}
+.btn_hovers{background-color: #ccc}
+.fr{float: right;}
+.fl{float: left;}
