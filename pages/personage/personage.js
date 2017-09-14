@@ -13,6 +13,16 @@ Page({
 
   },
 
+  // 跳转到聊天页面
+  navToTalk: function (e) {
+    wc.navigateTo('/pages/talk/talk')
+  },
+
+  // 跳转到举报页面
+  navToReport: function (e) {
+    wc.navigateTo('/pages/report/report')
+  },
+
   /**
    * 生命周期函数--监听页面加载
    */

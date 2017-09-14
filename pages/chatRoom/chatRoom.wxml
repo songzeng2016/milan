@@ -6,7 +6,9 @@
     </view>
   </view>
   <view class="display">
-    <image src='/image/add2.png' class='list_img_add'></image>
+    <button class='shareBtn' open-type='share'>
+      <image src='/image/add2.png' class='list_img_add'></image>
+    </button>
     <!-- <view class="vacancy">111</view> -->
   </view>
   <!-- <view class="more">聊天室成员列表 ></view> -->

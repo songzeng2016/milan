@@ -14,6 +14,6 @@
       <text class="addr">地区:</text>
      <text class="set_font">{{userInfo.province}} {{userInfo.city}}</text>
   </view>
-  <button hover-class='btn_hover' class='btn colors' >私聊</button>
-  <button class='btn'>举报</button>
+  <button hover-class='btn_hover' class='btn colors' bindtap='navToTalk' >私聊</button>
+  <button class='btn' bindtap='navToReport'>举报</button>
 </view>

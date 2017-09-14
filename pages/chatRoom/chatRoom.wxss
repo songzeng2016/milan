@@ -23,3 +23,4 @@ page{background: #ebebeb;}
 .display{display: inline-block;}
 .fr{float: right;}
 .fl{float: left;}
+.shareBtn{padding: 0;background: transparent;}
