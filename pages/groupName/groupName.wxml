@@ -1,5 +1,6 @@
 <view>
   <input class='content' bindinput="nameTxtFn"></input>
 </view>
-<view class='top'>在这里可以设置你的群组名称</view>
+<view class='top'>在这里可以重新设置您的昵称</view>
 <button hover-class='btn_hover' class='btn colors' bindtap='groupNameFn'>确定</button>
+<button class='btn' bindtap='navigateBack'>取消</button>

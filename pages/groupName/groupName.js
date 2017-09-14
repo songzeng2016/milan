@@ -11,6 +11,11 @@ Page({
 
   },
 
+  // 取消
+  navigateBack: function () {
+    wx.navigateBack()
+  },
+
   // 输入内容
   nameTxtFn: function (e) {
     this.setData({
@@ -28,14 +33,16 @@ Page({
     }
 
     let data = {
-      Action: 'UpdateChatroomName',
+      Action: 'UpdateInfo',
       ID: updateId,
-      chatroom_name: that.data.nameText
+      nickName: that.data.nameText,
+      sex: '1',
+      headimgurl: ''
     }
 
     wc.get(data, (json) => {
       if (json[isSuccess] === success) {
-        wc.showToast(['发布成功'])
+        wc.showToast(['修改成功'])
         setTimeout(() => {
           wc.navigateBack()
         }, 2000)

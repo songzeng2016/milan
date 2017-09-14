@@ -1,25 +1,34 @@
-
-<view class="empty"></view>
+<view class="empty">
+</view>
 
 <view class="bottom">
-  <navigator url="../groupName/groupName?id={{roomInfo.chatroom_id}}">
+  <!-- <navigator url="../groupName/groupName?id={{roomInfo.chatroom_id}}"> -->
     <view class='content'>
       <text> 头像</text>
       <image src='/image/mine_path.png' class='set_imgs fr'></image>
-      <image src='/image/1.jpg' class='my_head fr'></image>
-      <text class="sc_name fr"> {{roomInfo.chatroom_name}}</text>
+      <image src='{{userInfo.headimgurl}}' class='my_head fr'></image>
+      <!-- <text class="sc_name fr"> {{roomInfo.chatroom_name}}</text> -->
     </view>
-  </navigator>
+  <!-- </navigator> -->
 
-  <view class='content'>
+  <navigator class='content' url="../groupName/groupName?id={{userInfo.openid}}">
     <text> 用户名</text>
     <image src='/image/mine_path.png' class='set_imgs fr'></image>
-    <text class='fr text_color'>宋老湿</text>
-  </view>
-<view class='content'>
+    <text class='fr text_color'>{{userInfo.nickname}}</text>
+  </navigator>
+  <view class='content'>
     <text> 性别</text>
     <image src='/image/mine_path.png' class='set_imgs fr'></image>
-    <text class='fr text_color'>男</text>
+    <text class='fr text_color'>{{m1.getSex(userInfo.sex)}}</text>
   </view>
 
 </view>
+
+<wxs module="m1">
+  var getSex = function(sex) {
+    return sex == 1 ? '男' :
+      (sex == 0 ? '女' : '未知');
+  }
+
+  module.exports.getSex = getSex;
+</wxs>
