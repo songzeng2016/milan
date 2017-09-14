@@ -1,5 +1,5 @@
 page{background: #ebebeb;}
-.top{font-size: 26rpx;height: 300rpx;line-height: 80rpx; color: #999999; padding-left: 20rpx;background: #fff;}
+.top{display: flex;font-size: 26rpx;height: 300rpx;line-height: 80rpx; color: #999999; padding-left: 20rpx;background: #fff;}
 .list{display: inline-block;margin-top: 20rpx;padding-right: 20rpx;} 
 .list_img{width: 120rpx;height: 120rpx;display:block}
 .list_img_add{width: 120rpx;height: 120rpx;display: block;}
@@ -23,4 +23,4 @@ page{background: #ebebeb;}
 .display{display: inline-block;}
 .fr{float: right;}
 .fl{float: left;}
-.shareBtn{padding: 0;background: transparent;}
+.shareBtn{margin-top: 22rpx;padding: 0;background: transparent;border-radius: 0;}

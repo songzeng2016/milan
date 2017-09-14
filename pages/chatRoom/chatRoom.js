@@ -3,6 +3,7 @@ const app = getApp()
 const { wc } = app
 let { openId } = app
 const { data, isSuccess, success } = wc
+let chatRoomId
 
 Page({
 
@@ -37,6 +38,24 @@ Page({
   onLoad: function (options) {
     openId = wx.getStorageSync('openId')
     let id = options.id
+    chatRoomId = id
+    const that = this
+
+    let getUserData = {
+      Action: 'GetChatroomUsers',
+      ID: id
+    }
+    wc.get(getUserData, (json) => {
+      if (json[isSuccess] === success) {
+        that.setData({
+          userList: json[data]
+        })
+      }
+    })
+
+  },
+
+  getChatRoomInfo: function (id) {
     const that = this
     let getData = {
       Action: 'GetChatroomDetail',
@@ -47,18 +66,6 @@ Page({
       if (json[isSuccess] === success) {
         that.setData({
           roomInfo: json[data]
-        })
-      }
-    })
-
-    let getUserData = {
-      Action: 'GetChatroomUsers',
-      ID: id
-    }
-    wc.get(getUserData, (json) => {
-      if (json[isSuccess] === success) {
-        that.setData({
-          userList: json[data]
         })
       }
     })
@@ -75,7 +82,7 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-
+    this.getChatRoomInfo(chatRoomId)
   },
 
   /**
