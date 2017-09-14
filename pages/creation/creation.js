@@ -13,6 +13,18 @@ Page({
 
   },
 
+  // 选择位置
+  openLocation: function () {
+    const that = this
+    wx.chooseLocation({
+      success: function (res) {
+        that.setData({
+          location: res
+        })
+      },
+    })
+  },
+
   // 输入聊天室名称
   inputName: function (e) {
     this.setData({
@@ -28,10 +40,17 @@ Page({
       wc.showModal('名称不能为空')
       return
     }
+    if (!that.data.location) {
+      wc.showModal('位置不能为空')
+      return
+    }
 
     let data = wc.extend(that.data, {
       Action: 'AddChatroom',
-      OpenID: openId
+      OpenID: openId,
+      chatroom_name: that.data.chatroom_name,
+      chatroom_latitude: that.data.location.latitude,
+      chatroom_longitude: that.data.location.longitude
     })
 
     wc.get(data, (json) => {
@@ -54,16 +73,6 @@ Page({
    */
   onLoad: function (options) {
     openId = wx.getStorageSync('openId')
-    const that = this
-    // 获取 GPS 位置
-    wx.getLocation({
-      success: function (res) {
-        that.setData({
-          chatroom_latitude: res.latitude,
-          chatroom_longitude: res.longitude
-        })
-      },
-    })
   },
 
   /**
