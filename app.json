@@ -27,22 +27,22 @@
         "pagePath": "pages/index/index",
         "text": "觅连",
         "iconPath": "image/index.png",
-        "selectedIconPath": "image/indexing.png"
+        "selectedIconPath": "image/index_light.png"
       },
       {
         "pagePath": "pages/find/find",
         "text": "发现",
         "iconPath": "image/find.png",
-        "selectedIconPath": "image/finding.png"
+        "selectedIconPath": "image/find_light.png"
       },
       {
         "pagePath": "pages/mine/mine",
         "text": "我的",
         "iconPath": "image/mine.png",
-        "selectedIconPath": "image/mineing.png"
+        "selectedIconPath": "image/mine_light.png"
       }
     ],
-    "backgroundColor": "#fff",
+    "backgroundColor": "#f7f7fa",
     "color": "#807c7a",
     "selectedColor": "#09bb07",
     "borderStyle": "black"
