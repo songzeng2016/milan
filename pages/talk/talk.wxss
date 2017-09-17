@@ -136,11 +136,20 @@ page, .wrapper {
   margin: 0 10rpx;
 }
 
-.operation input {
+.operation input, .record {
   width: 530rpx;
   height: 60rpx;
   border-radius: 10rpx;
   background: #fff;
+}
+
+.record {
+  text-align: center;
+  background: #f7f7fa;
+  border: 1px solid #ccc;
+  line-height: 60rpx;
+  font-size: 30rpx;
+  color: #666
 }
 
 .choice {
@@ -177,4 +186,10 @@ page, .wrapper {
   width: 50rpx;
   height: 50rpx;
   padding: 10rpx;
+}
+
+.message image {
+  display: inline-block;
+  width: 40rpx;
+  height: 40rpx;
 }

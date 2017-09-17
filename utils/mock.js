@@ -42,7 +42,7 @@ let talk = [
   },
   {
     avatar: '',
-    name: '张晓峰',
+    name: '李诞',
     isMe: false,
     mType: 'img',
     message: '',
@@ -58,7 +58,7 @@ let talk = [
   },
   {
     avatar: '',
-    name: '张晓峰',
+    name: '狗剩',
     isMe: false,
     mType: 'img',
     message: '',

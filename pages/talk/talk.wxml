@@ -17,20 +17,20 @@
 
       <!-- 我的聊天记录 -->
       <view wx:elif='{{item.isMe}}' class='list my-list'>
-        <view class='avatar' bindtap='navToPersonage' data-open-id='{{item.openId}}'></view>
+        <view class='avatar' catchtap='navToPersonage' data-open-id='{{item.openId}}'></view>
         <text class='message'>{{item.message}}</text>
       </view>
 
       <!-- 别人的聊天记录 -->
-       <view wx:else class='list other-list'>
-        <view class='avatar' bindtap='navToPersonage' data-open-id='{{item.openId}}'></view>
+      <view wx:else class='list other-list'>
+        <view class='avatar' catchtap='navToPersonage' catchlongtap='atMessage' data-open-id='{{item.openId}}' data-name='{{item.name}}'></view>
         <view class='other-info'>
           <text class='name'>{{item.name}}</text>
           <text wx:if='{{item.mType === "text"}}' class='message'>{{item.message}}</text>
           <image wx:elif='{{item.mType === "img"}}' src='{{item.src}}'></image>
           <video wx:elif='{{item.mType === "video"}}'></video>
         </view>
-      </view> 
+      </view>
 
     </block>
   </view>
@@ -38,19 +38,20 @@
   <!-- 键盘区域 -->
   <view class='panel'>
     <view class='operation'>
-      <image src='/image/record1.png'></image>
-      <input cursor-spacing='10'></input>
-      <image src='/image/emoj1.png' catchtap='choiceEmoji'></image>
-      <image src='/image/add1.png' catchtap='choiceMedia'></image>
+      <image catchtap='showRecord' src='/image/{{record ? "record1" : "selected"}}.png'></image>
+      <input wx:if='{{record}}' class='message' bindinput='inputMessgae' value='{{message}}' focus='{{messageFocus}}' cursor-spacing='10'></input>
+      <view wx:else class='record' catchtouchstart='startRecord' catchtouchend='stopRecord'>{{recordMessgae}}</view>
+      <image catchtap='showEmoji' src='/image/{{emoji ? "emoj1" : "selected"}}.png'></image>
+      <image catchtap='showMedia' src='/image/add1.png'></image>
     </view>
 
     <!-- 图片 视频 -->
     <view class='choice' hidden='{{media}}'>
-      <view class='img view'>
+      <view class='img view' catchtap='choicePicture'>
         <image src='/image/picture.png'></image>
         <view class='text'>照片</view>
       </view>
-      <view class='video view'>
+      <view class='video view' catchtap='choiceVideo'>
         <image src='/image/video.png'></image>
         <view class='text'>拍摄</view>
       </view>
@@ -58,7 +59,7 @@
 
     <!-- 表情 -->
     <view class='emojiWrapper' hidden='{{emoji}}'>
-      <image wx:for='{{emojiList}}' wx:key='emoji' src='/image/emoji/{{item.src}}'></image>
+      <image wx:for='{{emojiList}}' wx:key='emoji' src='/image/emoji/{{item.src}}' catchtap='choiceEmoji' data-src='{{item.src}}' data-name='emoji{{index}}'></image>
     </view>
   </view>
 </view>
