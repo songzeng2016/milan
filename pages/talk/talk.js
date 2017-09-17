@@ -12,7 +12,33 @@ Page({
    * 页面的初始数据
    */
   data: {
-    talk
+    talk,
+    emoji: true,
+    media: true
+  },
+
+  // 关闭选择
+  closeChoice: function () {
+    this.setData({
+      emoji: true,
+      media: true
+    })
+  },
+
+  // 选择表情
+  choiceEmoji: function () {
+    this.setData({
+      emoji: false,
+      media: true
+    })
+  },
+
+  // 选择多媒体
+  choiceMedia: function () {
+    this.setData({
+      emoji: true,
+      media: false
+    })
   },
 
   // 跳转到详情页面
@@ -35,8 +61,18 @@ Page({
     const that = this
     let id = options.id
 
+    let emojiList = []
+
+    for (let i = 1; i < 25; i++) {
+      i < 10 && (i = '0' + i)
+      emojiList.push({
+        src: 'smiley_0' + i + '.png'
+      })
+    }
+
     that.setData({
-      id
+      id,
+      emojiList
     })
   },
 

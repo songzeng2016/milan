@@ -21,7 +21,7 @@ Page({
 
   // 删除聊天室
   deleteChatRoom: function (e) {
-    console.log(e.currentTarget.dataset.id)
+    // console.log(e.currentTarget.dataset.id)
     const that = this
     let getData = {
       Action: 'DoDelUserChatroom',

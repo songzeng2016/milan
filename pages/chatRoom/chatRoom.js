@@ -2,7 +2,7 @@
 const app = getApp()
 const { wc } = app
 let { openId } = app
-const { data, isSuccess, success } = wc
+const { host, data, isSuccess, success } = wc
 let chatRoomId
 
 Page({
@@ -12,6 +12,49 @@ Page({
    */
   data: {
 
+  },
+
+  // 更换 logo
+  changeLogo: function (e) {
+    const that = this
+    let id = e.currentTarget.dataset.id
+
+    wx.chooseImage({
+      count: 1, // 默认9
+      sizeType: ['original', 'compressed'], // 可以指定是原图还是压缩图，默认二者都有
+      sourceType: ['album', 'camera'], // 可以指定来源是相册还是相机，默认二者都有
+      success: function (res) {
+        // 返回选定照片的本地文件路径列表，tempFilePath可以作为img标签的src属性显示图片
+        let tempFilePaths = res.tempFilePaths
+
+        wx.uploadFile({
+          url: host + '?Action=UploadAttachment',
+          filePath: tempFilePaths[0],
+          name: 'coverUrl',
+          success: function (res) {
+            // console.log(res)
+            var data = JSON.parse(res.data);
+
+            let getData = {
+              Action: 'UpdateChatroomLogo',
+              ID: 6,
+              chatroom_logo: data.result
+            }
+
+            wc.get(getData, (json) => {
+              if (json[isSuccess] === success) {
+                console.log('更换成功')
+              }
+            })
+          },
+          fail: function () {
+            console.log("图片上传失败")
+          },
+          complete: function () {
+          }
+        })
+      }
+    })
   },
 
   // 退出聊天室
@@ -55,6 +98,8 @@ Page({
 
   },
 
+
+  // 获取聊天室信息
   getChatRoomInfo: function (id) {
     const that = this
     let getData = {
@@ -119,7 +164,7 @@ Page({
   onShareAppMessage: function (res) {
     if (res.from === 'button') {
       // 来自页面内转发按钮
-      console.log(res.target)
+      // console.log(res.target)
     }
     return {
       title: this.data.roomInfo.chatroom_name,

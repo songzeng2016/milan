@@ -25,7 +25,7 @@
     </view>
   </navigator>
 
-  <view class='content'>
+  <view class='content' bindtap='changeLogo' data-id='{{roomInfo.chatroom_id}}'>
     <text> 聊天室LOGO</text>
     <image src='/image/mine_path.png' class='set_imgs fr'></image>
   </view>

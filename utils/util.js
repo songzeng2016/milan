@@ -52,13 +52,27 @@ class wc {
         typeof (successed) === 'function' && successed(res.data)
       },
       complete: (res) => {
-        // if (res.data[this.isSuccess] === this.success) {
-        //   showLoading && this.hideLoding()
-        // }
 
-        // if (res.data[this.code] !== this.success && res.data[this.code] !== parseInt(this.success)) {
-        //   this.showModal(res.data[this.message])
-        // }
+      }
+    })
+  }
+
+  post(data, successed, showLoading) {
+    showLoading = showLoading || false
+    showLoading && this.showLoading()
+    wx.request({
+      url: this.host,
+      data: data || {},
+      header: {
+        'content-type': 'application/x-www-form-urlencoded'
+      },
+      method: 'POST',
+      success: (res) => {
+        // this.hideLoding()
+        typeof (successed) === 'function' && successed(res.data)
+      },
+      complete: (res) => {
+
       }
     })
   }

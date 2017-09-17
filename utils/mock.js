@@ -58,6 +58,14 @@ let talk = [
   },
   {
     avatar: '',
+    name: '张晓峰',
+    isMe: false,
+    mType: 'img',
+    message: '',
+    src: '/image/img1.png'
+  },
+  {
+    avatar: '',
     name: '',
     isMe: false,
     mType: 'message',

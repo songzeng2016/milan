@@ -7,7 +7,7 @@
   </view>
 
   <!-- 聊天列表 -->
-  <view class='list-wrapper'>
+  <view class='list-wrapper' catchtap='closeChoice' style='padding-bottom: {{(!emoji || !media) && "300rpx"}}'>
     <block wx:for='{{talk}}' wx:key='this'>
 
       <!-- 提示消息 -->
@@ -22,7 +22,7 @@
       </view>
 
       <!-- 别人的聊天记录 -->
-      <view wx:else class='list other-list'>
+       <view wx:else class='list other-list'>
         <view class='avatar' bindtap='navToPersonage' data-open-id='{{item.openId}}'></view>
         <view class='other-info'>
           <text class='name'>{{item.name}}</text>
@@ -30,7 +30,7 @@
           <image wx:elif='{{item.mType === "img"}}' src='{{item.src}}'></image>
           <video wx:elif='{{item.mType === "video"}}'></video>
         </view>
-      </view>
+      </view> 
 
     </block>
   </view>
@@ -39,9 +39,26 @@
   <view class='panel'>
     <view class='operation'>
       <image src='/image/record1.png'></image>
-      <input></input>
-      <image src='/image/emoj1.png'></image>
-      <image src='/image/add1.png'></image>
+      <input cursor-spacing='10'></input>
+      <image src='/image/emoj1.png' catchtap='choiceEmoji'></image>
+      <image src='/image/add1.png' catchtap='choiceMedia'></image>
+    </view>
+
+    <!-- 图片 视频 -->
+    <view class='choice' hidden='{{media}}'>
+      <view class='img view'>
+        <image src='/image/picture.png'></image>
+        <view class='text'>照片</view>
+      </view>
+      <view class='video view'>
+        <image src='/image/video.png'></image>
+        <view class='text'>拍摄</view>
+      </view>
+    </view>
+
+    <!-- 表情 -->
+    <view class='emojiWrapper' hidden='{{emoji}}'>
+      <image wx:for='{{emojiList}}' wx:key='emoji' src='/image/emoji/{{item.src}}'></image>
     </view>
   </view>
 </view>
