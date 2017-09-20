@@ -55,7 +55,7 @@ let talk = [
     mType: 'text',
     message: '666',
     src: ''
-  },
+  },  
   {
     avatar: '',
     name: '狗剩',

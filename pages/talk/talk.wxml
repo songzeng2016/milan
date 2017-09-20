@@ -43,6 +43,7 @@
       <view wx:else class='record' catchtouchstart='startRecord' catchtouchend='stopRecord'>{{recordMessgae}}</view>
       <image catchtap='showEmoji' src='/image/{{emoji ? "emoj1" : "selected"}}.png'></image>
       <image catchtap='showMedia' src='/image/add1.png'></image>
+      <image catchtap='sendMessage' src='/image/send.png'></image>
     </view>
 
     <!-- 图片 视频 -->

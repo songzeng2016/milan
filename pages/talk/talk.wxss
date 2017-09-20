@@ -137,7 +137,7 @@ page, .wrapper {
 }
 
 .operation input, .record {
-  width: 530rpx;
+  width: 430rpx;
   height: 60rpx;
   border-radius: 10rpx;
   background: #fff;

@@ -62,10 +62,10 @@ Page({
 
   // 输入内容
   inputMessgae: function (e) {
-    // let message = e.detail.value
-    // this.setData({
-    //   message
-    // })
+    let message = e.detail.value
+    this.setData({
+      message
+    })
   },
 
   // 选择图片
@@ -150,6 +150,16 @@ Page({
     wc.navigateTo('/pages/personage/personage?openId=' + openId)
   },
 
+  // 发送消息
+  sendMessage: function () {
+    const that = this
+    let id = that.data.id
+    let message = that.data.message
+    wx.sendSocketMessage({
+      data: '2|' + openId + '|' + id + '|1|' + message
+    })
+  },
+
   /**
    * 生命周期函数--监听页面加载
    */
@@ -170,6 +180,40 @@ Page({
     that.setData({
       id,
       emojiList
+    })
+
+    // 建立连接
+    wx.connectSocket({
+      url: "wss://sp.yangchengtech.com:8200",
+    })
+
+    //连接成功
+    wx.onSocketOpen(function (res) {
+      console.log('WebSocket连接已打开！')
+
+      wx.sendSocketMessage({
+        data: '1|' + openId + '|' + id + '|1|name已进入聊天室'
+      })
+
+      console.log('S:学生A已链接')
+    })
+    wx.onSocketError(function (res) {
+      console.log('WebSocket连接打开失败，请检查！')
+    })
+
+    wx.onSocketMessage(function (res) {
+      console.log('收到服务器内容：' + res.data)
+      // let json = JSON.parse("'" + res.data + "'")
+      // console.log('收到服务器内容：' + json)
+
+      // 清空消息盒子
+      that.setData({
+        message: ''
+      })
+      // wx.closeSocket()
+    })
+    wx.onSocketClose(function (res) {
+      console.log('WebSocket 已关闭！')
     })
   },
 
