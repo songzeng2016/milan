@@ -2,7 +2,7 @@
 const app = getApp()
 const { wc } = app
 let { openId } = app
-const { data, isSuccess, success } = wc
+const { host, data, isSuccess, success } = wc
 
 let { talk } = require('../../utils/mock.js');
 
@@ -19,8 +19,36 @@ Page({
     recordMessgae: '按住 录音'
   },
 
+  // 发送文件消息
+  uploadFile: function (tempFilePath, fileType) {
+    const that = this
+    let id = that.data.id
+
+    wx.uploadFile({
+      url: host + '?Action=UploadAttachment',
+      filePath: tempFilePath,
+      name: 'coverUrl',
+      success: function (res) {
+        var data = JSON.parse(res.data);
+
+        wx.sendSocketMessage({
+          data: '2|' + openId + '|' + id + '|' + fileType + '|' + data.result
+        })
+
+      },
+      fail: function () {
+        console.log("上传失败")
+      },
+      complete: function () {
+      }
+    })
+  },
+
   // 开始录音
   startRecord: function () {
+    const that = this
+    let id = that.data.id
+
     this.setData({
       recordMessgae: '松开 结束'
     })
@@ -29,12 +57,15 @@ Page({
       success: function (res) {
         var tempFilePath = res.tempFilePath
 
+        that.uploadFile(tempFilePath, 3)
+
         // 播放录音
-        wx.playVoice({
-          filePath: tempFilePath,
-          complete: function () {
-          }
-        })
+        // wx.playVoice({
+        //   filePath: tempFilePath,
+        //   complete: function () {
+        //   }
+        // })
+
       }
     })
   },
@@ -70,9 +101,17 @@ Page({
 
   // 选择图片
   choicePicture: function () {
+    const that = this
+    let id = that.data.id
+
     wx.chooseImage({
-      count: 1,
+      count: 9,
       success: function (res) {
+        let tempFilePaths = res.tempFilePaths
+
+        for (let i in tempFilePaths) {
+          that.uploadFile(tempFilePaths[i], 2)
+        }
 
       },
     })
@@ -80,9 +119,14 @@ Page({
 
   // 选择视频
   choiceVideo: function () {
+    const that = this
+    let id = that.data.id
+
     wx.chooseVideo({
       success: function (res) {
+        let tempFilePath = res.tempFilePath
 
+        that.uploadFile(tempFilePath, 4)
       }
     })
   },
@@ -155,6 +199,9 @@ Page({
     const that = this
     let id = that.data.id
     let message = that.data.message
+
+    if (!message) return
+
     wx.sendSocketMessage({
       data: '2|' + openId + '|' + id + '|1|' + message
     })
@@ -203,18 +250,33 @@ Page({
 
     wx.onSocketMessage(function (res) {
       console.log('收到服务器内容：' + res.data)
-      // let json = JSON.parse("'" + res.data + "'")
+      let json = JSON.parse(res.data)
       // console.log('收到服务器内容：' + json)
+
+      that.getMessage(json)
 
       // 清空消息盒子
       that.setData({
-        message: ''
+        message: '',
       })
       // wx.closeSocket()
     })
     wx.onSocketClose(function (res) {
       console.log('WebSocket 已关闭！')
     })
+  },
+  // 处理接收的消息
+  getMessage: function (json) {
+    const that = this
+    let talk = that.data.talk || []
+
+    if (json.openid === openId) {
+      json.isMe = true
+    }
+
+    talk.push(json)
+
+    that.setData({ talk })
   },
 
   /**
