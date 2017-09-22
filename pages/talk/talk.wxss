@@ -75,9 +75,10 @@ page, .wrapper {
 }
 
 .my-list .message, .other-list .message {
-  height: 75rpx;
+  /* height: 75rpx; */
+  max-width: 90%;
   padding: 0 19rpx;
-  line-height: 75rpx;
+  line-height: 56rpx;
   font-size: 30rpx;
   color: #000;
 }
@@ -91,6 +92,10 @@ page, .wrapper {
   background: #a0e75a;
 }
 
+.my-list .name {
+  margin-right: 17rpx;
+}
+
 .other-list .message {
   background: #fff;
 }
@@ -99,6 +104,10 @@ page, .wrapper {
   display: flex;
   flex-direction: column;
   margin-left: 17rpx;
+}
+
+.my-list .other-info{
+  align-items: flex-end;
 }
 
 .other-info .name {
@@ -110,6 +119,7 @@ page, .wrapper {
 .list .avatar {
   width: 75rpx;
   height: 75rpx;
+  min-width: 75rpx;
   background: #448aca;
 }
 
@@ -144,13 +154,17 @@ page, .wrapper {
   background: #fff;
 }
 
+.operation .message {
+  font-size: 30rpx;
+}
+
 .record {
   text-align: center;
   background: #f7f7fa;
   border: 1px solid #ccc;
   line-height: 60rpx;
   font-size: 30rpx;
-  color: #666
+  color: #666;
 }
 
 .choice {

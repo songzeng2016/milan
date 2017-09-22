@@ -75,7 +75,7 @@
 
     <!-- 表情 -->
     <view class='emojiWrapper' hidden='{{emoji}}'>
-      <image wx:for='{{emojiList}}' wx:key='emoji' src='/image/emoji/{{item.src}}' catchtap='choiceEmoji' data-src='{{item.src}}' data-name='emoji{{index}}'></image>
+      <image wx:for='{{emojiList}}' wx:key='emoji' src='/image/emoji/{{item.src}}' catchtap='choiceEmoji' data-src='{{item.src}}' data-name='[emoji{{index}}]'></image>
     </view>
   </view>
 </view>

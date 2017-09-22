@@ -79,21 +79,39 @@ Page({
 
   // 选择表情
   choiceEmoji: function (e) {
-    let data = e.currentTarget.dataset
-    let message = this.data.message || ''
-    let selectedEmoji = this.data.selectedEmoji || []
-    selectedEmoji.push(data)
-    message += data.name
+    // 目前只支持单个表情选择
+    // let data = e.currentTarget.dataset
+    // let emojiMessage = this.data.emojiMessage || ''
+    // let selectedEmoji = this.data.selectedEmoji || []
+    // selectedEmoji.push(data)
+    // emojiMessage += data.name
 
-    this.setData({
-      selectedEmoji,
-      message
+    // this.setData({
+    //   selectedEmoji,
+    //   emojiMessage
+    // })
+
+    const that = this
+    let id = that.data.id
+    let data = e.currentTarget.dataset
+
+    wx.sendSocketMessage({
+      data: '2|' + openId + '|' + id + '|5|' + data.name
     })
+
   },
 
   // 输入内容
   inputMessgae: function (e) {
     let message = e.detail.value
+    // let emojiMessage = this.data.emojiMessage || ''
+
+    // if (!!emojiMessage) {
+    //   this.setData({
+    //     emojiMessage: ''
+    //   })
+    //   message = ''
+    // }
     this.setData({
       message
     })
@@ -205,6 +223,11 @@ Page({
     wx.sendSocketMessage({
       data: '2|' + openId + '|' + id + '|1|' + message
     })
+
+    // 清空消息盒子
+    that.setData({
+      message: '',
+    })
   },
 
   /**
@@ -244,6 +267,7 @@ Page({
 
       console.log('S:学生A已链接')
     })
+
     wx.onSocketError(function (res) {
       console.log('WebSocket连接打开失败，请检查！')
     })
@@ -255,10 +279,6 @@ Page({
 
       that.getMessage(json)
 
-      // 清空消息盒子
-      that.setData({
-        message: '',
-      })
       // wx.closeSocket()
     })
     wx.onSocketClose(function (res) {
