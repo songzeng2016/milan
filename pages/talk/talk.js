@@ -12,11 +12,19 @@ Page({
    * 页面的初始数据
    */
   data: {
-    talk,
+    // talk,
     emoji: true,
     media: true,
     record: true,
     recordMessgae: '按住 录音'
+  },
+
+  // 预览图片
+  previewImg: function (e) {
+    let src = e.currentTarget.dataset.src
+    wx.previewImage({
+      urls: [src],
+    })
   },
 
   // 发送文件消息

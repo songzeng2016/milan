@@ -21,31 +21,32 @@
         <text class='message'>{{item.message}}</text>
       </view> -->
 
-      <view wx:elif='{{item.isMe}}' class='list my-list'>
+      <view class='list {{item.isMe ? "my-list" : "other-list"}}'>
 
         <image class='avatar' src='{{item.headimgurl}}' catchtap='navToPersonage' data-open-id='{{item.openId}}' data-name='{{item.nickname}}'></image>
         <view class='other-info'>
-          <text class='name'>{{item.nickname}}</text>
+          <text wx:if='{{!item.isMe}}' class='name'>{{item.nickname}}</text> 
           <text wx:if='{{item.chat_type == 1}}' class='message'>{{item.chat_desc}}</text>
-          <image wx:elif='{{item.chat_type == 2}}' src='{{item.chat_desc}}'></image>
+          <image wx:elif='{{item.chat_type == 2}}' class='image' src='{{item.chat_desc}}' catchtap='previewImg' data-src='{{item.chat_desc}}' mode='aspectFit'></image>
           <audio wx:elif='{{item.chat_type == 3}}' src='{{item.chat_desc}}'></audio>
           <video wx:elif='{{item.chat_type == 4}}' src='{{item.chat_desc}}'></video>
+          <image wx:elif='{{item.chat_type == 5}}' class='emoji' src='/image/emoji/{{item.chat_desc}}'></image>
         </view>
 
       </view>
 
       <!-- 别人的聊天记录 -->
-      <view wx:else class='list other-list'>
+      <!-- <view wx:else class='list other-list'>
 
-        <view class='avatar' catchtap='navToPersonage' catchlongtap='atMessage' data-open-id='{{item.openId}}' data-name='{{item.nickname}}'></view>
-        <view class='other-info'>
+         <view class='avatar' catchtap='navToPersonage' catchlongtap='atMessage' data-open-id='{{item.openId}}' data-name='{{item.nickname}}'></view> 
+         <view class='other-info'>
           <text class='name'>{{item.nickname}}</text>
           <text wx:if='{{item.chat_type == 1}}' class='message'>{{item.chat_desc}}</text>
           <image wx:elif='{{item.chat_type == 2}}' src='{{item.chat_desc}}'></image>
           <video wx:elif='{{item.chat_type == 4}}' src='{{item.chat_desc}}'></video>
-        </view>
+        </view> 
 
-      </view>
+      </view> -->
 
     </block>
   </view>
@@ -75,7 +76,7 @@
 
     <!-- 表情 -->
     <view class='emojiWrapper' hidden='{{emoji}}'>
-      <image wx:for='{{emojiList}}' wx:key='emoji' src='/image/emoji/{{item.src}}' catchtap='choiceEmoji' data-src='{{item.src}}' data-name='[emoji{{index}}]'></image>
+      <image wx:for='{{emojiList}}' wx:key='emoji' src='/image/emoji/{{item.src}}' catchtap='choiceEmoji' data-src='{{item.src}}' data-name='{{item.src}}'></image>
     </view>
   </view>
 </view>
