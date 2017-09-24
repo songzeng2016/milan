@@ -37,7 +37,7 @@ Page({
 
             let getData = {
               Action: 'UpdateChatroomLogo',
-              ID: 6,
+              ID: id,
               chatroom_logo: data.result
             }
 
