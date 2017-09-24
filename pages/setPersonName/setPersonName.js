@@ -34,10 +34,10 @@ Page({
 
     let data = {
       Action: 'UpdateInfo',
-      ID: updateId,
+      openid: updateId,
       nickName: that.data.nameText,
-      sex: '1',
-      headimgurl: ''
+      // sex: '1',
+      // headimgurl: ''
     }
 
     wc.get(data, (json) => {
