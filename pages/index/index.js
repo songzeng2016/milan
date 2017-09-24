@@ -21,17 +21,24 @@ Page({
 
   // 删除聊天室
   deleteChatRoom: function (e) {
-    // console.log(e.currentTarget.dataset.id)
     const that = this
+    let lists = this.data.lists
+    let id = e.currentTarget.dataset.id
     let getData = {
-      Action: 'DoDelUserChatroom',
+      Action: 'DelUserChatroom',
       OpenID: openId,
-      ID: e.currentTarget.dataset.id
+      ID: id
     }
 
     wc.get(getData, (json) => {
       if (json[isSuccess] === success) {
         wc.showToast(['删除成功'])
+
+        that.setData({
+          lists: lists.filter((item) => {
+            return item.id != id
+          })
+        })
       }
     }, true)
   },

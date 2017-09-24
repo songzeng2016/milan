@@ -2,7 +2,7 @@
 <view class='wrapper'>
 
   <!-- 群信息 -->
-  <view class='info' bindtap='navToChatRoom' data-id='{{id}}'>
+  <view class='info' wx:if='{{!roomType}}' bindtap='navToChatRoom' data-id='{{id}}'>
     <image src='/image/contact1.png'></image>
   </view>
 

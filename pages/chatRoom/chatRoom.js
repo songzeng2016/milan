@@ -43,7 +43,7 @@ Page({
 
             wc.get(getData, (json) => {
               if (json[isSuccess] === success) {
-                console.log('更换成功')
+                wc.showToast(['修改成功'])
               }
             })
           },

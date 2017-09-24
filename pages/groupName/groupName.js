@@ -33,11 +33,9 @@ Page({
     }
 
     let data = {
-      Action: 'UpdateInfo',
+      Action: 'UpdateChatroomName',
       ID: updateId,
-      nickName: that.data.nameText,
-      sex: '1',
-      headimgurl: ''
+      chatroom_name: that.data.nameText
     }
 
     wc.get(data, (json) => {

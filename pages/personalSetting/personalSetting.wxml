@@ -11,7 +11,7 @@
     </view>
   <!-- </navigator> -->
 
-  <navigator class='content' url="../groupName/groupName?id={{userInfo.openid}}">
+  <navigator class='content' url="../setPersonName/setPersonName?id={{userInfo.openid}}">
     <text> 用户名</text>
     <image src='/image/mine_path.png' class='set_imgs fr'></image>
     <text class='fr text_color'>{{userInfo.nickname}}</text>

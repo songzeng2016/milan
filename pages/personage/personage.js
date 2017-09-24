@@ -15,7 +15,31 @@ Page({
 
   // 跳转到聊天页面
   navToTalk: function (e) {
-    wc.navigateTo('/pages/talk/talk')
+    const that = this
+
+    wx.getLocation({
+      success: function(res) {
+        let latitude = res.latitude
+        let longitude = res.longitude
+
+        let data = {
+          Action: 'AddChatroom',
+          OpenID: openId,
+          chatroom_name: that.data.userInfo.nickname + '和我的聊天室',
+          chatroom_latitude: latitude,
+          chatroom_longitude: longitude,
+          chatroom_type: 1
+        }
+
+        wc.get(data, (json) => {
+          if (json[isSuccess] === success) {
+            wc.navigateTo('/pages/talk/talk?id=' + json.result + '&type=1')
+          }
+        })
+
+      },
+    })
+
   },
 
   // 跳转到举报页面

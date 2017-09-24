@@ -103,6 +103,8 @@ Page({
     let id = that.data.id
     let data = e.currentTarget.dataset
 
+    console.log('2|' + openId + '|' + id + '|5|' + data.name)
+
     wx.sendSocketMessage({
       data: '2|' + openId + '|' + id + '|5|' + data.name
     })
@@ -245,6 +247,7 @@ Page({
     openId = wx.getStorageSync('openId')
     const that = this
     let id = options.id
+    let roomType = options.type || false
 
     let emojiList = []
 
@@ -257,8 +260,17 @@ Page({
 
     that.setData({
       id,
-      emojiList
+      emojiList,
+      roomType,
     })
+
+    // 加入聊天室
+    let getData = {
+      Action: 'JoinChatroom',
+      ID: id,
+      OpenID: openId
+    }
+    wc.get(getData, (json) => { })
 
     // 建立连接
     wx.connectSocket({
@@ -274,6 +286,7 @@ Page({
       })
 
       console.log('S:学生A已链接')
+
     })
 
     wx.onSocketError(function (res) {
@@ -291,6 +304,11 @@ Page({
     })
     wx.onSocketClose(function (res) {
       console.log('WebSocket 已关闭！')
+
+      // 建立连接
+      wx.connectSocket({
+        url: "wss://sp.yangchengtech.com:8200",
+      })
     })
   },
   // 处理接收的消息
