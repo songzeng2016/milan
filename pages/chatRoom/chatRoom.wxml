@@ -1,6 +1,6 @@
 <view class='top'>
   <view class='lists display'>
-    <view class='list' wx:for='{{userList}}' wx:key='this'>
+    <view class='list' wx:for='{{userList}}' wx:key='this' bindtap='navToPersonage' data-id='{{item.openid}}'>
       <image src='{{item.headimgurl}}' class='list_img'></image>
       <view class="list_name">{{item.nickname}}</view>
     </view>
