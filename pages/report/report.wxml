@@ -1,6 +1,9 @@
-<view class='top'>  请选择举报该账号的原因</view>
-<view class='content'> 
-  <text> 发布不恰当内容对我造成了骚扰</text>
+<view class='top'> 请选择举报该账号的原因</view>
+<view class='content'>
+  <!-- <text> 发布不恰当内容对我造成了骚扰</text> -->
+  <picker bindchange='bindPickerChange' value='{{index}}' range='{{list}}'>
+    <text>{{list[index]}}</text>
+  </picker>
   <image src='../../image/mine_path.png' class='set_imgs fr'></image>
 </view>
-<button hover-class='btn_hover' class='btn colors' >确定</button>
+<button hover-class='btn_hover' class='btn colors' bindtap='report'>确定</button>

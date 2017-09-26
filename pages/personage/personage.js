@@ -44,7 +44,7 @@ Page({
 
   // 跳转到举报页面
   navToReport: function (e) {
-    wc.navigateTo('/pages/report/report')
+    wc.navigateTo('/pages/report/report?id=' + this.data.userInfo.openid)
   },
 
   /**

@@ -7,3 +7,5 @@ page{background: #ebebeb;margin:  0 auto;}
 .btn_hover{background-color: #008B00}
 .fr{float: right;}
 .fl{float: left;}
+
+picker{float: left; width: 90%;}
