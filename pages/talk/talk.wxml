@@ -23,7 +23,7 @@
 
       <view class='list {{item.isMe ? "my-list" : "other-list"}}'>
 
-        <image class='avatar' src='{{item.headimgurl}}' catchtap='navToPersonage' data-open-id='{{item.openId}}' data-name='{{item.nickname}}'></image>
+        <image class='avatar' src='{{item.headimgurl}}' catchtap='{{!item.isMe && "navToPersonage"}}' data-name='{{item.nickname}}' data-id='{{item.openid}}'></image>
         <view class='other-info'>
           <text wx:if='{{!item.isMe}}' class='name'>{{item.nickname}}</text> 
           <text wx:if='{{item.chat_type == 1}}' class='message'>{{item.chat_desc}}</text>
