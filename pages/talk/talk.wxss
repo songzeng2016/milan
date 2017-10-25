@@ -1,14 +1,14 @@
 /* pages/talk/talk.wxss */
 
-page, .wrapper {
-  width: 100%;
+page {
   height: 100%;
-  overflow: auto;
+  background: #e8e8e8;
 }
 
 .wrapper {
+  width: 100%;
+  min-height: 100%;
   position: relative;
-  background: #e8e8e8;
 }
 
 .info {
@@ -31,7 +31,7 @@ page, .wrapper {
 .list-wrapper {
   width: 100%;
   padding: 18rpx;
-  box-sizing:border-box;
+  box-sizing: border-box;
   padding-bottom: 100rpx;
 }
 
@@ -100,7 +100,7 @@ page, .wrapper {
 }
 
 .my-list .message {
-  padding:8rpx 19rpx;
+  padding: 8rpx 19rpx;
   background: #a0e75a;
 }
 
@@ -114,7 +114,7 @@ page, .wrapper {
   margin-left: 17rpx;
 }
 
-.my-list .other-info{
+.my-list .other-info {
   align-items: flex-end;
   margin-right: 17rpx;
 }

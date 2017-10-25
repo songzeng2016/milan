@@ -1,6 +1,6 @@
 <view class='main' wx:for="{{lists}}" wx:for-index="index" wx:key="id">
 
-  <view bindtap='navToTalk' data-id='{{item.chatroom_id}}'>
+  <view bindtap='navToTalk' data-id='{{item.chatroom_id}}' data-name='{{item.chatroom_name}}'>
     <view class='list'>
       <view wx:if="{{item.ismanage === 1}}">
         <view class='circle'></view>

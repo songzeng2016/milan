@@ -1,13 +1,13 @@
 <!--pages/talk/talk.wxml-->
-<view class='wrapper'>
+<view class='wrapper' catchtap='closeChoice'>
 
   <!-- 群信息 -->
-  <view class='info' wx:if='{{!roomType}}' bindtap='navToChatRoom' data-id='{{id}}'>
+  <view class='info' wx:if='{{!roomType}}' catchtap='navToChatRoom' data-id='{{id}}'>
     <image src='/image/contact1.png'></image>
   </view>
 
   <!-- 聊天列表 -->
-  <view class='list-wrapper' catchtap='closeChoice' style='padding-bottom: {{(!emoji || !media) && "300rpx"}}'>
+  <view class='list-wrapper' style='padding-bottom: {{(!emoji || !media) && "300rpx"}};'>
     <block wx:for='{{talk}}' wx:key='this'>
 
       <!-- 提示消息 -->
@@ -23,9 +23,9 @@
 
       <view class='list {{item.isMe ? "my-list" : "other-list"}}'>
 
-        <image class='avatar' src='{{item.headimgurl}}' catchtap='{{!item.isMe && "navToPersonage"}}' data-name='{{item.nickname}}' data-id='{{item.openid}}'></image>
+        <image class='avatar' src='{{item.headimgurl}}' catchtap='{{!item.isMe && "navToPersonage"}}' catchlongpress='{{!item.isMe && "atMessage"}}' data-name='{{item.nickname}}' data-id='{{item.openid}}'></image>
         <view class='other-info'>
-          <text wx:if='{{!item.isMe}}' class='name'>{{item.nickname}}</text> 
+          <text wx:if='{{!item.isMe}}' class='name'>{{item.nickname}}</text>
           <text wx:if='{{item.chat_type == 1}}' class='message'>{{item.chat_desc}}</text>
           <image wx:elif='{{item.chat_type == 2}}' class='image' src='{{item.chat_desc}}' catchtap='previewImg' data-src='{{item.chat_desc}}' mode='aspectFit'></image>
           <audio wx:elif='{{item.chat_type == 3}}' src='{{item.chat_desc}}'></audio>
@@ -55,7 +55,7 @@
   <view class='panel'>
     <view class='operation'>
       <image catchtap='showRecord' src='/image/{{record ? "record1" : "selected"}}.png'></image>
-      <input wx:if='{{record}}' class='message' bindinput='inputMessgae' value='{{message}}' focus='{{messageFocus}}' cursor-spacing='10'></input>
+      <input wx:if='{{record}}' class='message' bindinput='inputMessgae' bindconfirm='sendMessage' value='{{message}}' focus='{{messageFocus}}' cursor-spacing='10'></input>
       <view wx:else class='record' catchtouchstart='startRecord' catchtouchend='stopRecord'>{{recordMessgae}}</view>
       <image catchtap='showEmoji' src='/image/{{emoji ? "emoj1" : "selected"}}.png'></image>
       <image catchtap='showMedia' src='/image/add1.png'></image>
@@ -79,4 +79,5 @@
       <image wx:for='{{emojiList}}' wx:key='emoji' src='/image/emoji/{{item.src}}' catchtap='choiceEmoji' data-src='{{item.src}}' data-name='{{item.src}}'></image>
     </view>
   </view>
+
 </view>

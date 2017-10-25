@@ -173,13 +173,29 @@ Page({
 
   // 展示表情
   showEmoji: function () {
+    const that = this
+    var query = wx.createSelectorQuery()
+    query.select('.list-wrapper').boundingClientRect()
+    query.selectViewport().scrollOffset()
+    query.exec(function (res) {
+      res[0].top       // #the-id节点的上边界坐标
+      res[1].scrollTop // 显示区域的竖直滚动位置
+      console.log(res)
+      // that.setData({
+      //   scrollBottom: res[0].top
+      // })
+      // wx.pageScrollTo({
+      //   scrollTop: res[0].top,
+      // })
+    })
+
     let emoji = this.data.emoji
 
     this.setData({
       emoji: !emoji,
       media: true,
       record: true,
-      messageFocus: !emoji
+      messageFocus: !emoji,
     })
   },
 
@@ -249,6 +265,12 @@ Page({
     const that = this
     let id = options.id
     let roomType = options.type || false
+    let roomName = options.name
+
+    // 更新 title
+    wx.setNavigationBarTitle({
+      title: roomName,
+    })
 
     let emojiList = []
 
