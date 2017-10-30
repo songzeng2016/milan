@@ -29,7 +29,12 @@
           <text wx:if='{{item.chat_type == 1}}' class='message'>{{item.chat_desc}}</text>
           <image wx:elif='{{item.chat_type == 2}}' class='image' src='{{item.chat_desc}}' catchtap='previewImg' data-src='{{item.chat_desc}}' mode='aspectFit'></image>
           <audio wx:elif='{{item.chat_type == 3}}' src='{{item.chat_desc}}'></audio>
-          <video wx:elif='{{item.chat_type == 4}}' src='{{item.chat_desc}}'></video>
+
+          <view wx:elif='{{item.chat_type == 4}}'>
+            <video class='myVideo' id='myVideo{{index}}' src='{{item.chat_desc}}'></video>
+            <image class='image' src='/image/video.png' catchtap='playVideo' data-index='{{index}}' mode='aspectFit'></image>
+          </view>
+
           <image wx:elif='{{item.chat_type == 5}}' class='emoji' src='/image/emoji/{{item.chat_desc}}'></image>
         </view>
 

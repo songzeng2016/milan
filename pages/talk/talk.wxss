@@ -42,13 +42,14 @@ page {
   clear: both;
 }
 
-.list image, .list video {
+.list image {
   width: 273rpx;
   border-radius: 10rpx;
 }
 
 .list video {
-  height: 156rpx;
+  width: 0rpx;
+  height: 0rpx;
 }
 
 .list .image {

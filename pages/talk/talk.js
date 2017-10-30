@@ -19,6 +19,14 @@ Page({
     recordMessgae: '按住 录音'
   },
 
+  // 播放视频
+  playVideo: function (e) {
+    let index = e.currentTarget.dataset.index
+    let video = wx.createVideoContext('myVideo' + index)
+    video.play()
+    video.requestFullScreen()
+  },
+
   // 预览图片
   previewImg: function (e) {
     let src = e.currentTarget.dataset.src
