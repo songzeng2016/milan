@@ -353,7 +353,10 @@ Page({
 
     talk.push(json)
 
-    that.setData({ talk })
+    that.setData({
+      talk,
+      bottom: 'bottom'
+    })
   },
 
   /**
